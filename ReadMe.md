@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Application Version: 0.0.0.0
+* Application Version: 0.0.0.1
 * ReadMe Version: 1.0
 
 ##Description
@@ -11,7 +11,13 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 
 ##Updates
 
-###Version 0.0
+###Version 0.0.0.1
+* XBoard, UCI Classes started to be defined.
+* init() functions created for both protocols.
+* Unplayable, but gaining confidence that I'll learn both protocols soon.
+* Added binary files for testing purposes (included executable jars and a win-32 exe to add as an engine in GUIs!)
+
+###Version 0.0.0.0
 * Started to code.
 * Nothing there yet.
 * First Commit.
@@ -23,4 +29,4 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 
 ###Short Term
 * To finish defining Board with Squares.
-* To make an executable jar (console program) capable of communicating with Arena GUI, atleast for the first "uci" command from the GUI.
+* To make an executable jar (console program) capable of communicating with Arena GUI, for all possible commands.
