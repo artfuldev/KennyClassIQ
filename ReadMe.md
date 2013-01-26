@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Application Version: 0.0.0.1
+* Application Version: 0.0.0.2
 * ReadMe Version: 1.0
 
 ##Description
@@ -10,6 +10,12 @@ Kenny ClassIQ *(read Kenny Classic)* is something like my dream project. It is a
 Having completed it successfully, I've gained the confidence to proceed with Kenny ClassIQ, named so because it is more class-oriented than Kenny, and because I want it to be intelligent. *(A play with words landed me Kenny ClassIQ.)* Also, I used this name so that people searching for my other chess engine Kenny can also find this more advanced chess engine (okay, yes, I wanted to name my chess engine Kenny, so).
 
 ##Updates
+
+###Version 0.0.0.2
+* Modified the COmmunicationProtocol interface.
+* Worked on accepting XBoard commands, now the minimum commands to run the engine are properly read and identified.
+* Added javadoc commentary to make sure people (myself included) understand what's going on.
+* Got to know today that this engine can be 10-100 times slower than my CPP engine [Kenny](https://www.github.com/kenshinthebattosai/Kenny). Have to write better evaluation functions than in Kenny, to overcome this disadvantage.
 
 ###Version 0.0.0.1
 * XBoard, UCI Classes started to be defined.
@@ -28,5 +34,5 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 * To have a close-to-real-world representation of the game inside the program
 
 ###Short Term
-* To finish defining Board with Squares.
-* To make an executable jar (console program) capable of communicating with Arena GUI, for all possible commands.
+* To finish defining WinBoard class, CommunicationProtocol interface properly.
+* To make an executable jar (console program) capable of communicating with Arena GUI, identifying all possible xboard/winboard commands.
