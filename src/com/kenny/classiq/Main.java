@@ -15,10 +15,10 @@ public class Main
 			uciConsole.init();
 		if(protocolType.matches("xboard"))
 		{
-			protocolType=inputStream.nextLine();
-			if(protocolType.matches("uci"))
-				uciConsole.init();
-			if(protocolType.startsWith("protover"))
+//			protocolType=inputStream.nextLine();
+//			if(protocolType.matches("uci"))
+//				uciConsole.init();
+//			else
 				xboardConsole.init();
 		}
 		inputStream.close();
