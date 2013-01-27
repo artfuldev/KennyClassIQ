@@ -13,10 +13,16 @@ import java.util.Scanner;
  */
 public class XBoard implements CommunicationProtocol
 {
+	public void start()
+	{
+		init();
+		listen();
+	}
 	public void init()
 	{
 		System.out.println("xboard");
-		listen();
+		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
+				+" by "+Definitions.authorName);
 	}
 	public void listen()
 	{
@@ -37,13 +43,19 @@ public class XBoard implements CommunicationProtocol
 				cmdString[0].matches("protover")||
 				cmdString[0].matches("setboard"))
 				execute(commandString);
-			if(cmdString[0].matches("quit"))
+			else if(cmdString[0].matches("quit"))
 				break;
+			else
+				execute(Definitions.errorString+" "+commandString);
 		}
 		inputStream.close();
 	}
 	public void execute(String cmd)
 	{
-		System.out.println(cmd);
+		String[] splitString=cmd.split("\\s");
+		if(splitString[0].matches(Definitions.errorString))
+			System.out.println(Definitions.errorInCommandString+splitString[1]);
+		else
+			System.out.println(cmd);
 	}
 }

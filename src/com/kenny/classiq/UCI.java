@@ -11,16 +11,21 @@ package com.kenny.classiq;
  */
 public class UCI implements CommunicationProtocol
 {
+	public void start()
+	{
+		init();
+		listen();
+	}
 	public void init()
 	{
-		System.out.println("id name Kenny ClassIQ 0.0.0.1");
-		System.out.println("id author Kenshin Himura (Sudarsan Balaji)");
+		System.out.println("id name "+Definitions.engineName+" "
+				+Definitions.engineVersion);
+		System.out.println("id author "+Definitions.authorName);
 		System.out.println("uciok");
-		listen();
 	}
 	public void listen()
 	{
-		
+		System.out.println("Listening...");
 	}
 	public void execute(String cmd)
 	{
