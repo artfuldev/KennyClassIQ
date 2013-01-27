@@ -12,14 +12,14 @@ public class Main
 		XBoard xboardConsole=new XBoard();
 		protocolType=inputStream.nextLine();
 		if(protocolType.matches("uci"))
-			uciConsole.init();
+			uciConsole.start();
 		if(protocolType.matches("xboard"))
 		{
 //			protocolType=inputStream.nextLine();
 //			if(protocolType.matches("uci"))
-//				uciConsole.init();
+//				uciConsole.start();
 //			else
-				xboardConsole.init();
+				xboardConsole.start();
 		}
 		inputStream.close();
 	}

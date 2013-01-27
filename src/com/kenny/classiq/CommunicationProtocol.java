@@ -11,6 +11,13 @@ package com.kenny.classiq;
 public interface CommunicationProtocol
 {
 	/**
+	 * Used to start the communication protocol. Usually has the definition
+	 * of invoking the initializer, then calling the function which sets
+	 * certain features(depending upon response from GUI during initialization),
+	 * and then finally invoking the listener.
+	 */
+	public void start();
+	/**
 	 * Used to initialize the protocol listener, and start the listener
 	 * for the specified protocol.
 	 */
