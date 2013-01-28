@@ -14,14 +14,8 @@ public class Main
 		if(protocolType.matches("uci"))
 			uciConsole.start();
 		if(protocolType.matches("xboard"))
-		{
-//			protocolType=inputStream.nextLine();
-//			if(protocolType.matches("uci"))
-//				uciConsole.start();
-//			else
-				xboardConsole.start();
-		}
+			xboardConsole.start();
+		//else, create custom console or GUI
 		inputStream.close();
 	}
-
 }
