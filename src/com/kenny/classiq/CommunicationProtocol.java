@@ -33,7 +33,8 @@ public interface CommunicationProtocol
 	 * listener. It is used to check for specific cases and then call
 	 * the respective functions to execute such commands, by passing
 	 * the correct corresponding paramaters to those functions.
-	 * @param command The command to be executed.
+	 * @param commandString The full command to be executed, as a
+	 * <code>String</code>.
 	 */
-	public void execute(String command);
+	public void execute(String commandString);
 }

@@ -13,9 +13,25 @@ package com.kenny.classiq;
  */
 public class Definitions
 {
+	/**
+	 * Holds the author name of the program.
+	 */
 	public static final String authorName="Kenshin Himura (Sudarsan Balaji)";
+	/**
+	 * Holds the name of the engine.
+	 */
 	public static final String engineName="Kenny ClassIQ";
+	/**
+	 * Holds the version of the engine.
+	 */
 	public static final String engineVersion="0.0.0.3";
+	/**
+	 * Holds the error string.
+	 */
 	public static final String errorString="error";
+	/**
+	 * Holds the string to output an error in the recieved command,
+	 * usually one which is not understood by the engine.
+	 */
 	public static final String errorInCommandString="Error (unknown command): ";
 }
