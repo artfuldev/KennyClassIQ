@@ -27,7 +27,7 @@ public class UCI implements CommunicationProtocol
 	{
 		System.out.println("Listening...");
 	}
-	public void execute(String cmd)
+	public void execute(String commandString)
 	{
 		
 	}
