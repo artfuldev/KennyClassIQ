@@ -1,8 +1,8 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Application Version: 0.0.0.5
-* ReadMe Version: 1.1
+* Application Version: 0.0.0.6
+* ReadMe Version: 1.2
 
 ##Description
 Kenny ClassIQ *(read Kenny Classic)* is something like my dream project. It is a chess engine with pure object oriented programming with close-to-real-world representation of the game inside the program using OOPS. Initially I thought of doing a similar thing in C++, but after trying to develop my other chess engine [Kenny](https://www.github.com/kenshinthebattosai/Kenny) in this route, I found out that it is a difficult task, and switched to using Java for the programming instead. To learn how to do it, I created a similar, many-times-lesser-in-complexity project [KenTacToe](https://www.github.com/kenshinthebattosai/KenTacToe).
@@ -11,8 +11,14 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 
 ##Updates
 
+###Version 0.0.0.6
+* Started coding for *Game*.
+* Added *Move*, fully commented.
+* Improved *Piece*, pending comments.
+* Improved *Board.Square*, pending comments.
+
 ###Version 0.0.0.5
-* Added *Piece* commantary.
+* Added *Piece* commentary.
 * Re-organized the source into different packages.
 * Added derived classes from *Piece* representing each piece.
 * Playable versions to start from __*version 0.1*__
