@@ -1,4 +1,4 @@
-package com.kenny.classiq;
+package com.kenny.classiq.definitions;
 
 /**
  * Includes the standard definitions needed.
@@ -8,7 +8,7 @@ package com.kenny.classiq;
  * them final makes them constant, just the functionality offered by the 
  * <code>#define</code> tags. I have to include the class name, yes, but its
  * better than not having such a functionality at all!
- * @author Kenshin Himura
+ * @author Kenshin Himura (Sudarsan Balaji)
  *
  */
 public class Definitions

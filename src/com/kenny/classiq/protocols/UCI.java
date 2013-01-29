@@ -1,4 +1,6 @@
-package com.kenny.classiq;
+package com.kenny.classiq.protocols;
+
+import com.kenny.classiq.definitions.Definitions;
 
 /**
  * <code>UCI</code> is the class used to represent the Universal Chess
@@ -6,7 +8,7 @@ package com.kenny.classiq;
  * <code>CommunicationProtocol</code> interface to make use of its
  * functions, which are common to both <code>XBoard</code> and
  * <code>UCI</code> protocols.
- * @author Kenshin Himura
+ * @author Kenshin Himura (Sudarsan Balaji)
  *
  */
 public class UCI implements CommunicationProtocol

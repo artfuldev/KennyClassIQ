@@ -1,6 +1,7 @@
-package com.kenny.classiq;
+package com.kenny.classiq.protocols;
 
 import java.util.Scanner;
+import com.kenny.classiq.definitions.Definitions;
 
 /**
  * <code>XBoard</code> is the class used to represent the WinBoard
@@ -8,7 +9,7 @@ import java.util.Scanner;
  * <code>CommunicationProtocol</code> interface to make use of its
  * functions, which are common to both <code>XBoard</code> and
  * <code>UCI</code> protocols.
- * @author Kenshin Himura
+ * @author Kenshin Himura (Sudarsan Balaji)
  *
  */
 public class XBoard implements CommunicationProtocol
