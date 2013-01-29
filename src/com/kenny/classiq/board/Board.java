@@ -1,4 +1,6 @@
-package com.kenny.classiq;
+package com.kenny.classiq.board;
+
+import com.kenny.classiq.pieces.Piece;
 
 /**
  * The <code>Board</code> class is the class which represents a chess board.
@@ -36,22 +38,40 @@ public class Board
 		 */
 		private byte fileIndex;
 		/**
-		 * Holds the left Diagonal index of the Square, which tells us which
-		 * left Diagonal of the parent board, the Square belongs to. Useful
+		 * Holds the light Diagonal index of the Square, which tells us which
+		 * light Diagonal of the parent board, the Square belongs to. Useful
 		 * for returning the entire left Diagonal of the current Square.
 		 */
-		private byte leftDiagonalIndex;
+		private byte lightDiagonalIndex;
 		/**
-		 * Holds the right Diagonal index of the Square, which tells us which
-		 * right Diagonal of the parent board, the Square belongs to. Useful
+		 * Holds the dark Diagonal index of the Square, which tells us which
+		 * dark Diagonal of the parent board, the Square belongs to. Useful
 		 * for returning the entire right Diagonal of the current Square.
 		 */
-		private byte rightDiagonalIndex;
+		private byte darkDiagonalIndex;
 		/**
 		 * Holds the property of the square if it is a light square. In chess,
 		 * light and dark squares alternate, so it is important to make a
 		 * note of this shade of the square.
 		 */
 		private boolean lightSquare;
+		/**
+		 * Holds the name (description) of the square, which is nothing but
+		 * the file-rank name, like "e4".
+		 */
+		private String name;
+		/**
+		 * Holds the piece (or a reference to the piece) residing on the square.
+		 * The reference is set to null if the square is blank or empty. 
+		 */
+		private Piece piece=null;
+		/**
+		 * Modifies and overrides the toString function of the Object
+		 * superclass to implement for debug purposes. 
+		 */
+		public String toString()
+		{
+			return name;
+		}
 	}
 }
