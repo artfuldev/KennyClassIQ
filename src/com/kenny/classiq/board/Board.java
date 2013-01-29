@@ -20,7 +20,7 @@ public class Board
 	 * diagonals, all of which again contain the same 64 squares (references,
 	 * not duplicates). This represents an intricate, inter-related OOPS design,
 	 * which closely represents the real world.
-	 * @author Kenshin Himura
+	 * @author Kenshin Himura (Sudarsan Balaji)
 	 *
 	 */
 	public class Square
@@ -65,6 +65,62 @@ public class Board
 		 * The reference is set to null if the square is blank or empty. 
 		 */
 		private Piece piece=null;
+		public byte getRankIndex()
+		{
+			return rankIndex;
+		}
+		public void setRankIndex(byte rankIndex)
+		{
+			this.rankIndex = rankIndex;
+		}
+		public byte getFileIndex()
+		{
+			return fileIndex;
+		}
+		public void setFileIndex(byte fileIndex)
+		{
+			this.fileIndex = fileIndex;
+		}
+		public byte getLightDiagonalIndex()
+		{
+			return lightDiagonalIndex;
+		}
+		public void setLightDiagonalIndex(byte lightDiagonalIndex)
+		{
+			this.lightDiagonalIndex = lightDiagonalIndex;
+		}
+		public byte getDarkDiagonalIndex()
+		{
+			return darkDiagonalIndex;
+		}
+		public void setDarkDiagonalIndex(byte darkDiagonalIndex)
+		{
+			this.darkDiagonalIndex = darkDiagonalIndex;
+		}
+		public boolean isLightSquare()
+		{
+			return lightSquare;
+		}
+		public void setLightSquare(boolean lightSquare)
+		{
+			this.lightSquare = lightSquare;
+		}
+		public String getName()
+		{
+			return name;
+		}
+		public void setName(String name)
+		{
+			this.name = name;
+		}
+		public Piece getPiece()
+		{
+			return piece;
+		}
+		public void setPiece(Piece piece)
+		{
+			this.piece = piece;
+		}
 		/**
 		 * Modifies and overrides the toString function of the Object
 		 * superclass to implement for debug purposes. 
