@@ -1,8 +1,8 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Application Version: 0.0.0.4
-* ReadMe Version: 1.0
+* Application Version: 0.0.0.5
+* ReadMe Version: 1.1
 
 ##Description
 Kenny ClassIQ *(read Kenny Classic)* is something like my dream project. It is a chess engine with pure object oriented programming with close-to-real-world representation of the game inside the program using OOPS. Initially I thought of doing a similar thing in C++, but after trying to develop my other chess engine [Kenny](https://www.github.com/kenshinthebattosai/Kenny) in this route, I found out that it is a difficult task, and switched to using Java for the programming instead. To learn how to do it, I created a similar, many-times-lesser-in-complexity project [KenTacToe](https://www.github.com/kenshinthebattosai/KenTacToe).
@@ -10,6 +10,12 @@ Kenny ClassIQ *(read Kenny Classic)* is something like my dream project. It is a
 Having completed it successfully, I've gained the confidence to proceed with Kenny ClassIQ, named so because it is more class-oriented than Kenny, and because I want it to be intelligent. *(A play with words landed me Kenny ClassIQ.)* Also, I used this name so that people searching for my other chess engine Kenny can also find this more advanced chess engine (okay, yes, I wanted to name my chess engine Kenny, so).
 
 ##Updates
+
+###Version 0.0.0.5
+* Added *Piece* commantary.
+* Re-organized the source into different packages.
+* Added derived classes from *Piece* representing each piece.
+* Playable versions to start from __*version 0.1*__
 
 ###Version 0.0.0.4
 * Added *setFeatures()* function in the *XBoard* class.
@@ -22,7 +28,7 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 * Included *Definitions*.
 * Modified *CommunicationProtocol* interface, again(!).
 * Modified *XBoard* communication and included error messages.
-* All code from this version willl by default carry javadoc commentary.
+* All code from this version will by default carry javadoc commentary.
 
 ###Version 0.0.0.2
 * Modified the *CommunicationProtocol* interface.
