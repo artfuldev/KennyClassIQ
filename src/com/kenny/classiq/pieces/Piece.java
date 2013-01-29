@@ -39,6 +39,38 @@ public abstract class Piece
 	 * true.
 	 */
 	protected boolean white=true;
+	public String getShortAlgebraicNotation()
+	{
+		return shortAlgebraicNotation;
+	}
+	public void setShortAlgebraicNotation(String shortAlgebraicNotation)
+	{
+		this.shortAlgebraicNotation = shortAlgebraicNotation;
+	}
+	public int getPieceValue()
+	{
+		return pieceValue;
+	}
+	public void setPieceValue(int pieceValue)
+	{
+		this.pieceValue = pieceValue;
+	}
+	public Square getSquare()
+	{
+		return square;
+	}
+	public void setSquare(Square square)
+	{
+		this.square = square;
+	}
+	public boolean isWhite()
+	{
+		return white;
+	}
+	public void setWhite(boolean white)
+	{
+		this.white = white;
+	}
 	/**
 	 * Modifies and overrides the toString function of the Object
 	 * superclass to implement for debug purposes. 
@@ -46,5 +78,17 @@ public abstract class Piece
 	public String toString()
 	{
 		return shortAlgebraicNotation+" at "+square.toString();
+	}
+	public boolean checks()
+	{
+		//if attacking squares of piece contains king of opposite colour
+			//return true
+		return false;
+	}
+	public boolean mates()
+	{
+		//if checks(), and opponent has no legal moves
+			//return true
+		return false;
 	}
 }
