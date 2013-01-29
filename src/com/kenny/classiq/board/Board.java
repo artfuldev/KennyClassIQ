@@ -12,122 +12,61 @@ import com.kenny.classiq.pieces.Piece;
 public class Board
 {
 	/**
-	 * The <code>Square</code> class is the class which represents the
-	 * individual squares of the board in a chess game. It is a very important
-	 * part of definition, as the squares should have lots of relevent
-	 * functions to help with evaluation.
-	 * Squares are part of the board, which also has files and ranks and
-	 * diagonals, all of which again contain the same 64 squares (references,
-	 * not duplicates). This represents an intricate, inter-related OOPS design,
-	 * which closely represents the real world.
-	 * @author Kenshin Himura (Sudarsan Balaji)
-	 *
+	 * An array of <code>Square</code> objects, which holds all the squares
+	 * of the <code>Board</code>. References to these squares can belong in
+	 * the ranks, files and diagonals.
 	 */
-	public class Square
+	private Square[] square;
+	/**
+	 * An array of <code>Rank</code> objects, which holds all the rows
+	 * of the <code>Board</code>, with each <code>Rank</code> object
+	 * containing, not copies, but references, to the respective squares
+	 * of the board, thereby maintaining the integral OOPS concept,
+	 * while still not wasting memory. 
+	 */
+	private Rank[] rank;
+	/**
+	 * An array of <code>File</code> objects, which holds all the files
+	 * of the <code>Board</code>, with each <code>File</code> object
+	 * containing, not copies, but references, to the respective squares
+	 * of the board, thereby maintaining the integral OOPS concept,
+	 * while still not wasting memory. 
+	 */
+	private File[] file;
+	/**
+	 * An array of <code>Diagonal</code> objects, which holds all the light
+	 * squared diagonals of the <code>Board</code>, with each <code>Diagonal</code>
+	 * object containing, not copies, but references, to the respective squares
+	 * of the board, thereby maintaining the integral OOPS concept,
+	 * while still not wasting memory. 
+	 */
+	private Diagonal[] lightDiagonal;
+	/**
+	 * An array of <code>Diagonal</code> objects, which holds all the dark
+	 * squared diagonals of the <code>Board</code>, with each <code>Diagonal</code>
+	 * object containing, not copies, but references, to the respective squares
+	 * of the board, thereby maintaining the integral OOPS concept,
+	 * while still not wasting memory. 
+	 */
+	private Diagonal[] darkDiagonal;
+	/**
+	 * An array of <code>Piece</code> objects, representing all the pieces
+	 * currently on the <code>Board</code>. This can be modified as and when
+	 * captures are effected. Pieces removed from the board are placed on the
+	 * Piece Set.
+	 */
+	private Piece[] piece;
+	/**
+	 * The default constructor of <code>Board</code>, which creates a board
+	 * representing a new game. The constructor may also set values for its
+	 * variables or call an initialization function to do the same. Usually,
+	 * only the references and default values for the data members are set,
+	 * while the <code>Game</code> class arranges the pieces on the board,
+	 * taking the pieces from the <code>PieceSet</code> and placing them on
+	 * the <code>Board</code>.
+	 */
+	public Board()
 	{
-		/**
-		 * Holds the Rank index of the Square, which tells us which Rank of
-		 * the parent board, the Square belongs to. Useful for returning the
-		 * entire Rank of the current Square.
-		 */
-		private byte rankIndex;
-		/**
-		 * Holds the File index of the Square, which tells us which File of
-		 * the parent board, the Square belongs to. Useful for returning the
-		 * entire File of the current Square.
-		 */
-		private byte fileIndex;
-		/**
-		 * Holds the light Diagonal index of the Square, which tells us which
-		 * light Diagonal of the parent board, the Square belongs to. Useful
-		 * for returning the entire left Diagonal of the current Square.
-		 */
-		private byte lightDiagonalIndex;
-		/**
-		 * Holds the dark Diagonal index of the Square, which tells us which
-		 * dark Diagonal of the parent board, the Square belongs to. Useful
-		 * for returning the entire right Diagonal of the current Square.
-		 */
-		private byte darkDiagonalIndex;
-		/**
-		 * Holds the property of the square if it is a light square. In chess,
-		 * light and dark squares alternate, so it is important to make a
-		 * note of this shade of the square.
-		 */
-		private boolean lightSquare;
-		/**
-		 * Holds the name (description) of the square, which is nothing but
-		 * the file-rank name, like "e4".
-		 */
-		private String name;
-		/**
-		 * Holds the piece (or a reference to the piece) residing on the square.
-		 * The reference is set to null if the square is blank or empty. 
-		 */
-		private Piece piece=null;
-		public byte getRankIndex()
-		{
-			return rankIndex;
-		}
-		public void setRankIndex(byte rankIndex)
-		{
-			this.rankIndex = rankIndex;
-		}
-		public byte getFileIndex()
-		{
-			return fileIndex;
-		}
-		public void setFileIndex(byte fileIndex)
-		{
-			this.fileIndex = fileIndex;
-		}
-		public byte getLightDiagonalIndex()
-		{
-			return lightDiagonalIndex;
-		}
-		public void setLightDiagonalIndex(byte lightDiagonalIndex)
-		{
-			this.lightDiagonalIndex = lightDiagonalIndex;
-		}
-		public byte getDarkDiagonalIndex()
-		{
-			return darkDiagonalIndex;
-		}
-		public void setDarkDiagonalIndex(byte darkDiagonalIndex)
-		{
-			this.darkDiagonalIndex = darkDiagonalIndex;
-		}
-		public boolean isLightSquare()
-		{
-			return lightSquare;
-		}
-		public void setLightSquare(boolean lightSquare)
-		{
-			this.lightSquare = lightSquare;
-		}
-		public String getName()
-		{
-			return name;
-		}
-		public void setName(String name)
-		{
-			this.name = name;
-		}
-		public Piece getPiece()
-		{
-			return piece;
-		}
-		public void setPiece(Piece piece)
-		{
-			this.piece = piece;
-		}
-		/**
-		 * Modifies and overrides the toString function of the Object
-		 * superclass to implement for debug purposes. 
-		 */
-		public String toString()
-		{
-			return name;
-		}
+		
 	}
 }
