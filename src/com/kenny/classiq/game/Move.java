@@ -1,6 +1,6 @@
-package com.kenny.classiq.move;
+package com.kenny.classiq.game;
 
-import com.kenny.classiq.board.Board.Square;
+import com.kenny.classiq.board.Square;
 import com.kenny.classiq.pieces.Piece;
 
 /**
