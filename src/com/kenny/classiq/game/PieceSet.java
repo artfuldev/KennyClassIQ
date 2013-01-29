@@ -49,7 +49,9 @@ public class PieceSet
 	 */
 	public Piece getPiece(int index)
 	{
-		return piece[index];
+		Piece returnPiece=piece[index];
+		piece[index]=null;
+		return returnPiece;
 	}
 	/**
 	 * Places the piece in the piece table, calculating a specific
@@ -59,8 +61,42 @@ public class PieceSet
 	 */
 	public void setPiece(Piece piece)
 	{
-		int index=0;
-		//calculate index here
-		this.piece[index] = piece;
+		int index1=0,index2=8;
+		if(piece.getShortAlgebraicNotation()=="N")
+		{
+			index1=8;
+			index2=17;
+		}
+		if(piece.getShortAlgebraicNotation()=="B")
+		{
+			index1=18;
+			index2=27;
+		}
+		if(piece.getShortAlgebraicNotation()=="R")
+		{
+			index1=28;
+			index2=37;
+		}
+		if(piece.getShortAlgebraicNotation()=="Q")
+		{
+			index1=38;
+			index2=46;
+		}
+		if(piece.getShortAlgebraicNotation()=="K")
+		{
+			index1=47;
+			index2=47;
+		}
+		if(!piece.isWhite())
+		{
+			index1+=48;
+			index2+=48;
+		}
+		for(;index1<=index2;index1++)
+			if(this.piece[index1]==null)
+			{
+				this.piece[index1] = piece;
+				break;
+			}
 	}
 }

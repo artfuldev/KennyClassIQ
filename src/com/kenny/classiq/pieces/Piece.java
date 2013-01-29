@@ -1,6 +1,6 @@
 package com.kenny.classiq.pieces;
 
-import com.kenny.classiq.board.Board.Square;
+import com.kenny.classiq.board.Square;
 
 /**
  * The <code>Piece</code> class is the class which represents a pice of the
