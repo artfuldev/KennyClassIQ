@@ -2,6 +2,9 @@ package com.kenny.classiq;
 
 import java.util.Scanner;
 
+import com.kenny.classiq.protocols.UCI;
+import com.kenny.classiq.protocols.XBoard;
+
 public class Main
 {
 	public static void main(String[] args)

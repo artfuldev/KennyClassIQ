@@ -1,11 +1,11 @@
-package com.kenny.classiq;
+package com.kenny.classiq.protocols;
 
 /**
  * <code>CommunicationProtocol</code> is the interface implemented by
  * the <code>UCI</code> and <code>XBoard</code> classes to create a
  * communication object to communicate with the GUI with the help of
  * pipes or standard input/output from the console.
- * @author Kenshin Himura
+ * @author Kenshin Himura (Sudarsan Balaji)
  *
  */
 public interface CommunicationProtocol
