@@ -77,4 +77,5 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 * To finish defining *XBoard* class, *CommunicationProtocol* interface properly.
 * To finish defining only the necessary things for a game, ie, *Square, Piece*, etc, and atleast play random moves.
 * To finish defining *Game*.
+* To finish adding commentary to all uploaded files.
 * To make an executable jar (console program) capable of communicating with Arena GUI, identifying all possible xboard/winboard commands.
