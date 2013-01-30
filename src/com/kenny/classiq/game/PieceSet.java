@@ -1,6 +1,12 @@
 package com.kenny.classiq.game;
 
+import com.kenny.classiq.pieces.Bishop;
+import com.kenny.classiq.pieces.King;
+import com.kenny.classiq.pieces.Knight;
+import com.kenny.classiq.pieces.Pawn;
 import com.kenny.classiq.pieces.Piece;
+import com.kenny.classiq.pieces.Queen;
+import com.kenny.classiq.pieces.Rook;
 
 /**
  * The <code>PieceSet</code> class represents the piece set of the
@@ -40,6 +46,59 @@ public class PieceSet
 	 */
 	private Piece[] piece;
 	/**
+	 * Gets a <code>Piece</code> of the specified characteristics, from the
+	 * <code>PieceSet</code>.
+	 * @param colour Colour ("black" or "white") of the <code>Piece</code>.
+	 * @param pieceType Type of the <code>Piece</code>, eg.,
+	 * "knight"
+	 * @return The corresponding <code>Piece</code> from the
+	 * <code>PieceSet</code>.
+	 */
+	public Piece getPiece(String colour, String pieceType)
+	{
+		pieceType.toLowerCase();
+		Piece returnPiece=null;
+		int index1=0,index2=7;
+		if(pieceType.matches("knight"))
+		{
+			index1=8;
+			index2=17;
+		}
+		if(pieceType.matches("bishop"))
+		{
+			index1=18;
+			index2=27;
+		}
+		if(pieceType.matches("rook"))
+		{
+			index1=28;
+			index2=37;
+		}
+		if(pieceType.matches("queen"))
+		{
+			index1=38;
+			index2=46;
+		}
+		if(pieceType.matches("king"))
+		{
+			index1=47;
+			index2=47;
+		}
+		if(colour.matches("black"))
+		{
+			index1+=48;
+			index2+=48;
+		}
+		for(;index1<=index2;index1++)
+			if(piece[index1]!=null)
+			{
+				returnPiece=piece[index1];
+				piece[index1]=null;
+				break;
+			}
+		return returnPiece;
+	}
+	/**
 	 * Generic getter method to access a piece. Since the piece[] is a
 	 * private data member, it should be accessed using a public getter
 	 * method. Since getting all pieces is going to be useless, we can
@@ -49,7 +108,7 @@ public class PieceSet
 	 */
 	public Piece getPiece(int index)
 	{
-		Piece returnPiece=piece[index];
+		Piece returnPiece=piece[index].clone();
 		piece[index]=null;
 		return returnPiece;
 	}
@@ -61,7 +120,7 @@ public class PieceSet
 	 */
 	public void setPiece(Piece piece)
 	{
-		int index1=0,index2=8;
+		int index1=0,index2=7;
 		if(piece.getShortAlgebraicNotation()=="N")
 		{
 			index1=8;
@@ -95,8 +154,33 @@ public class PieceSet
 		for(;index1<=index2;index1++)
 			if(this.piece[index1]==null)
 			{
-				this.piece[index1] = piece;
+				this.piece[index1] = piece.clone();
 				break;
 			}
+	}
+	/**
+	 * This is the constructor of the <code>PieceSet</code> belonging to a
+	 * <code>Game</code>. Constructs the pieces as mentioned in {@link #piece}.
+	 */
+	public PieceSet()
+	{
+		piece=new Piece[96];
+		for(int i=0;i<piece.length;i++)
+		{
+			if((i%48)>46)
+				piece[i]=new King();
+			else if((i%48)>37)
+				piece[i]=new Queen();
+			else if((i%48)>27)
+				piece[i]=new Rook();
+			else if((i%48)>17)
+				piece[i]=new Bishop();
+			else if((i%48)>7)
+				piece[i]=new Knight();
+			else
+				piece[i]=new Pawn();
+			if(i>47)
+				piece[i].setWhite(false);
+		}
 	}
 }
