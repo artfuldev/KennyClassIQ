@@ -154,7 +154,7 @@ public class PieceSet
 		for(;index1<=index2;index1++)
 			if(this.piece[index1]==null)
 			{
-				this.piece[index1] = piece.clone();
+				this.piece[index1]=piece;
 				break;
 			}
 	}
