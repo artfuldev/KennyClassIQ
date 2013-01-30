@@ -12,6 +12,7 @@ public class Game
 	private Player currentPlayer;
 	private Move lastMove;
 	private Move[] moveStack[];
+	private PieceSet pieceSet;
 	public Game()
 	{
 		gameBoard=new Board();
