@@ -11,7 +11,7 @@ import com.kenny.classiq.board.Square;
  * @author Kenshin Himura
  *
  */
-public abstract class Piece
+public abstract class Piece implements Cloneable
 {
 	/**
 	 * Holds the short algebraic notation of a piece. Made protected, so
@@ -77,7 +77,11 @@ public abstract class Piece
 	 */
 	public String toString()
 	{
-		return shortAlgebraicNotation+" at "+square.toString();
+		String returnString;
+		returnString=shortAlgebraicNotation;
+		if(square!=null)
+			returnString+=" at "+square.toString();
+		return returnString;
 	}
 	public boolean checks()
 	{
@@ -90,5 +94,28 @@ public abstract class Piece
 		//if checks(), and opponent has no legal moves
 			//return true
 		return false;
+	}
+	/**
+	 * Overrides the clone() method in Object. Creates a clone of the
+	 * current <code>Piece</code> and returns it.
+	 */
+	public Piece clone()
+	{
+		Piece returnPiece=null;
+		if(getShortAlgebraicNotation()=="")
+			returnPiece=new Pawn();
+		if(getShortAlgebraicNotation()=="N")
+			returnPiece=new Knight();
+		if(getShortAlgebraicNotation()=="B")
+			returnPiece=new Bishop();
+		if(getShortAlgebraicNotation()=="R")
+			returnPiece=new Rook();
+		if(getShortAlgebraicNotation()=="Q")
+			returnPiece=new Queen();
+		if(getShortAlgebraicNotation()=="K")
+			returnPiece=new King();
+		returnPiece.setSquare(this.getSquare());
+		returnPiece.setWhite(this.isWhite());
+		return returnPiece;
 	}
 }
