@@ -108,7 +108,7 @@ public class PieceSet
 	 */
 	public Piece getPiece(int index)
 	{
-		Piece returnPiece=piece[index].clone();
+		Piece returnPiece=piece[index];//.clone();
 		piece[index]=null;
 		return returnPiece;
 	}
