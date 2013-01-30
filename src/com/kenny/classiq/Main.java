@@ -37,7 +37,7 @@ public class Main
 	 * or <code>XBoard</code>.
 	 * <p>
 	 * As of now, no arguments have been defined which can be passed.
-	 * @param args Arguments to the main function.
+	 * @param args Arguments to the <code>main</code> function.
 	 */
 	public static void main(String[] args)
 	{
