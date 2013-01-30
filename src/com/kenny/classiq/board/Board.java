@@ -67,6 +67,50 @@ public class Board
 	 */
 	public Board()
 	{
-		
+		square=new Square[64];
+		rank=new Rank[8];
+		file=new File[8];
+		rank[0]=new Rank("1");
+		rank[1]=new Rank("2");
+		rank[2]=new Rank("3");
+		rank[3]=new Rank("4");
+		rank[4]=new Rank("5");
+		rank[5]=new Rank("6");
+		rank[6]=new Rank("7");
+		rank[7]=new Rank("8");
+		file[0]=new File("a");
+		file[1]=new File("b");
+		file[2]=new File("c");
+		file[3]=new File("d");
+		file[4]=new File("e");
+		file[5]=new File("f");
+		file[6]=new File("g");
+		file[7]=new File("h");
+		for(int i=0;i<square.length;i++)
+		{
+			byte fileIndex=(byte)(i%8);
+			byte rankIndex=(byte)(i/8);
+			square[i]=new Square();
+			square[i].setBoard(this);
+			square[i].setFile(file[fileIndex]);
+			square[i].setRank(rank[rankIndex]);
+			rank[rankIndex].setSquare(square[i],fileIndex);
+			file[fileIndex].setSquare(square[i],rankIndex);
+			square[i].setName(square[i].getFile().getName()+square[i].getRank().getName());
+		}
+	}
+	public void printBoard()
+	{
+		for(int i=7;i>=0;i--)
+			rank[i].printRank();
+	}
+	public void setPiece(Piece piece, String squareName)
+	{
+		for(int i=0;i<square.length;i++)
+			if(square[i].getName().matches(squareName))
+			{
+				square[i].setPiece(piece);
+				break;
+			}
 	}
 }
