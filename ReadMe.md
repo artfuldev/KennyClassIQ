@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Application Version: 0.0.0.7
+* Application Version: 0.0.0.8
 * ReadMe Version: 1.2
 
 ##Description
@@ -10,6 +10,12 @@ Kenny ClassIQ *(read Kenny Classic)* is something like my dream project. It is a
 Having completed it successfully, I've gained the confidence to proceed with Kenny ClassIQ, named so because it is more class-oriented than Kenny, and because I want it to be intelligent. *(A play with words landed me Kenny ClassIQ.)* Also, I used this name so that people searching for my other chess engine Kenny can also find this more advanced chess engine (okay, yes, I wanted to name my chess engine Kenny, so).
 
 ##Updates
+
+###Version 0.0.0.8
+* Complete *PieceSet*, with full commentary.
+* Improved *Diagonals, Ranks, Files, Board*.
+* Added commentary and re-organized *Main*.
+* Solved issues #20, #21, #22.
 
 ###Version 0.0.0.7
 * Removed nesting of *Square* in *Board*.
@@ -69,6 +75,6 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 
 ###Short Term
 * To finish defining *XBoard* class, *CommunicationProtocol* interface properly.
-* To finish defining *Piece*, *Board*.
-* To figure out if classes derived from *Piece* should be nested within *Board*.
+* To finish defining *Piece, Board, Square, Diagonal, Rank, File*, etc.
+* To finish defining *Game*.
 * To make an executable jar (console program) capable of communicating with Arena GUI, identifying all possible xboard/winboard commands.
