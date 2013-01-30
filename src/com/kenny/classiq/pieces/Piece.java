@@ -1,6 +1,6 @@
 package com.kenny.classiq.pieces;
 
-import com.kenny.classiq.board.Board.Square;
+import com.kenny.classiq.board.Square;
 
 /**
  * The <code>Piece</code> class is the class which represents a pice of the
@@ -77,7 +77,11 @@ public abstract class Piece
 	 */
 	public String toString()
 	{
-		return shortAlgebraicNotation+" at "+square.toString();
+		String returnString;
+		returnString=shortAlgebraicNotation;
+		if(square!=null)
+			returnString+=" at "+square.toString();
+		return returnString;
 	}
 	public boolean checks()
 	{
