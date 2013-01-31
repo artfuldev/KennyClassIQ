@@ -5,6 +5,12 @@ public class Diagonal
 	private Square[] square;
 	private Board board;
 	private String name;
+	public Diagonal(String name)
+	{
+		setName(name);
+		//variable, calculate first
+		square=new Square[8];
+	}
 	public Square getSquare(String squareName)
 	{
 		for(int i=0;i<square.length;i++)

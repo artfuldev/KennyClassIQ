@@ -5,6 +5,11 @@ public class Rank
 	private Square[] square;
 	private Board board;
 	private String name;
+	public Rank(String name)
+	{
+		setName(name);
+		square=new Square[8];
+	}
 	public Square getSquare(String squareName)
 	{
 		for(int i=0;i<square.length;i++)
@@ -31,5 +36,22 @@ public class Rank
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+	public void printRank()
+	{
+		String printString;
+		for(int i=0;i<8;i++)
+		{
+			if(square[i].getPiece()!=null)
+			{
+				printString=square[i].getPiece().getShortAlgebraicNotation();
+				if(!square[i].getPiece().isWhite())
+				printString=printString.toLowerCase();
+			}
+			else
+				printString="-";
+			System.out.print(printString+"  ");
+		}
+		System.out.print("\n");
 	}
 }
