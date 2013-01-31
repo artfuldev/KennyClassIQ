@@ -67,9 +67,11 @@ public class Board
 	 */
 	public Board()
 	{
+		//Create 64 squares, 8 ranks, and 8 files
 		square=new Square[64];
 		rank=new Rank[8];
 		file=new File[8];
+		//name each rank and file during construction
 		rank[0]=new Rank("1");
 		rank[1]=new Rank("2");
 		rank[2]=new Rank("3");
@@ -86,6 +88,7 @@ public class Board
 		file[5]=new File("f");
 		file[6]=new File("g");
 		file[7]=new File("h");
+		//create and set individual square properties
 		for(int i=0;i<square.length;i++)
 		{
 			byte fileIndex=(byte)(i%8);
@@ -96,14 +99,33 @@ public class Board
 			square[i].setRank(rank[rankIndex]);
 			rank[rankIndex].setSquare(square[i],fileIndex);
 			file[fileIndex].setSquare(square[i],rankIndex);
-			square[i].setName(square[i].getFile().getName()+square[i].getRank().getName());
+			square[i].setName(square[i].getFile().getName()
+					+square[i].getRank().getName());
+			//Every alternate square is a dark square, starting from a1.
+			if((i%2)==0)
+				square[i].setLight(false);
 		}
 	}
+	/**
+	 * Prints the <code>Board</code>, <code>Rank</code>-wise, from rank 8
+	 * to rank 1, so that the <code>Board</code> is printed from
+	 * <code>White's<code> point of view. for debug purposes,
+	 * later may be used to display to user.
+	 */
 	public void printBoard()
 	{
 		for(int i=7;i>=0;i--)
 			rank[i].printRank();
 	}
+	/**
+	 * Sets a <code>Piece</code> at a specific <code>Square</code> of
+	 * the <code>Board</code>. This function is called so that a
+	 * <code>Board</code> can be setup for a new <code>Game</code>
+	 * position, or based on a FEN string.
+	 * @param piece <code>Piece</code> to be placed.
+	 * @param squareName name of <code>Square</code> on which to place
+	 * the <code>Piece</code>, eg., "a4"
+	 */
 	public void setPiece(Piece piece, String squareName)
 	{
 		for(int i=0;i<square.length;i++)
@@ -112,5 +134,19 @@ public class Board
 				square[i].setPiece(piece);
 				break;
 			}
+	}
+	/**
+	 * Sets a <code>Piece</code> at a specific <code>Square</code> of
+	 * the <code>Board</code>, by taking the index value of the
+	 * <code>Square</code> in the <code>Board<code>. This function
+	 * is called so that a <code>Board</code> can be setup for a new
+	 * <code>Game</code> position, or based on a FEN string.
+	 * @param piece <code>Piece</code> to be placed.
+	 * @param index index of <code>Square</code> on which to place
+	 * the <code>Piece</code>, eg., 0 for "a1", 63 for "h8".
+	 */
+	public void setPiece(Piece piece, byte index)
+	{
+		square[index].setPiece(piece);
 	}
 }
