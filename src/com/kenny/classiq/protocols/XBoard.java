@@ -56,6 +56,7 @@ public class XBoard implements CommunicationProtocol
 		while(true)
 		{
 			commandString=inputStream.nextLine();
+			commandString=commandString.toLowerCase();
 			cmdString=commandString.split("\\s");
 			if(	cmdString[0].matches("new")||
 				cmdString[0].matches("post")||
