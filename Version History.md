@@ -1,13 +1,17 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.00.05.00 build 253
-* Latest Stable Version: -.--
-* Version History Document Version: 1.1
+* Latest Application Version: 0.00.05.01 build 256
+* Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md))*
+* Version History Document Version: 1.2
 
 ##Version History
 
-######Version 0.00.05.00 (253)
+######Version 0.00.05.01 (256)
+* Fixed issue #69
+* Corrected *GUI, User* registering as *AI*.
+
+#####Version 0.00.05.00 (253)
 * Added *AI* from *Player*.
 * Added *User* from *Player*.
 * Added *GUI* from *Player*.
