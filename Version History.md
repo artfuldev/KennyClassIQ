@@ -1,11 +1,16 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.5.1 build 256
+* Latest Application Version: 0.0.5.2 build 264
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.4
 
 ##Version History
+
+######Version 0.0.05.2 (264)
+* Removed *KennyClassIQ.exe*
+* Added x86 exe.
+* Added x64 exe.
 
 ######Version 0.0.5.1 (256)
 * Fixed issue #69
