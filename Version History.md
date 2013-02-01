@@ -13,6 +13,8 @@
 * Implemented a lot of ways to construct a *Move*.
 * Fixed issue #77
 * Added jUnit test for *Move*. Worked great!
+* Improved *Game*.
+* Greatly improved *Board*.
 
 ######Version 0.0.05.3 (266)
 * Added messages before start.
