@@ -1,15 +1,21 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.04.04 build 225
+* Latest Application Version: 0.00.05.00 build 253
 * Latest Stable Version: -.--
 * Version History Document Version: 1.1
 
 ##Version History
 
+######Version 0.00.05.00 (253)
+* Added *AI* from *Player*.
+* Added *User* from *Player*.
+* Added *GUI* from *Player*.
+* Reorganized *com.kenny.classiq.players*
+* Reorganized *com.kenny.classiq.game*
+
 ######Version 0.00.04.04 (225)
 * Added *halfMoveNumber* to take care of turns in *Game*.
-
 
 ######Version 0.00.04.03 (221)
 * Fixed issues #44, #45.

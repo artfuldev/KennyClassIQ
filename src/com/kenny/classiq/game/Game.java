@@ -2,6 +2,9 @@ package com.kenny.classiq.game;
 
 import com.kenny.classiq.board.Board;
 import com.kenny.classiq.pieces.Piece;
+import com.kenny.classiq.players.AI;
+import com.kenny.classiq.players.GUI;
+import com.kenny.classiq.players.Player;
 
 /**
  * The <code>Game</code> class holds the information regarding the game, and
@@ -79,8 +82,8 @@ public class Game
 	{
 		gameBoard=new Board(this);
 		lastMovedPiece=null;
-		playerOne=new Player(this,"white","gui");
-		playerTwo=new Player(this,"black","ai");
+		playerOne=new GUI(this,"white");
+		playerTwo=new AI(this,"black");
 		currentPlayer=playerOne;
 		pieceSet=new PieceSet();
 		setupBoard();
