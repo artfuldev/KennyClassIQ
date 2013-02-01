@@ -1,5 +1,6 @@
 package com.kenny.classiq.game;
 
+import com.kenny.classiq.board.Board;
 import com.kenny.classiq.board.Square;
 import com.kenny.classiq.pieces.Piece;
 
@@ -42,11 +43,28 @@ public class Move
 	 */
 	private String moveString;
 	/**
+	 * Holds a reference to the <code>Board</code> on which the
+	 * <code>Move</code> is made.
+	 */
+	private Board board;
+	/**
 	 * Default Constructor of <code>Move</code>.
 	 */
 	public Move()
 	{
 		
+	}
+	/**
+	 * This is the constructor of <code>Mode</code> which sets a
+	 * reference to the <code>Board</code> on which the <code>Move</code>
+	 * is made. This is necessary if the references to the
+	 * <code>Square</code>s making up the <code>Move</code> are unavailable,
+	 * as the reference to the <code>Board</code> through them is also
+	 * lost. 
+	 */
+	public Move(Board boardReference)
+	{
+		setBoard(boardReference);
 	}
 	/**
 	 * Constructor of the <code>Move</code> class. Gets a reference to two
@@ -62,6 +80,8 @@ public class Move
 		setToSquare(toSquare);
 		setPieceMoved(fromSquare.getPiece());
 		setMoveString(fromSquare.getName()+toSquare.getName());
+		setPieceMoved(fromSquare.getPiece());
+		setBoard(fromSquare.getBoard());
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -104,6 +124,12 @@ public class Move
 	public void setFromSquare(Square fromSquare)
 	{
 		this.fromSquare = fromSquare;
+		moveString="";
+		moveString+=fromSquare.getName();
+		if(toSquare!=null)
+			moveString+=toSquare.getName();
+		setPieceMoved(fromSquare.getPiece());
+		setBoard(fromSquare.getBoard());
 	}
 	/**
 	 * Generic getter method to access the private member toSquare.
@@ -125,6 +151,10 @@ public class Move
 	public void setToSquare(Square toSquare)
 	{
 		this.toSquare = toSquare;
+		moveString="";
+		if(fromSquare!=null)
+			moveString+=fromSquare.getName();
+		moveString+=toSquare.getName();
 	}
 	/**
 	 * Generic getter method used to access the value of
@@ -148,6 +178,31 @@ public class Move
 	public void setMoveString(String moveString)
 	{
 		this.moveString = moveString;
+		for(byte i=0;i<64;i++)
+		{
+			if(moveString.startsWith(getBoard().getSquare(i).getName()))
+				setFromSquare(getBoard().getSquare(i));
+			if(moveString.endsWith(getBoard().getSquare(i).getName()))
+				setToSquare(getBoard().getSquare(i));
+		}
+	}
+	/**
+	 * Generic getter method used to access the private data member
+	 * board of the <code>Move</code> class.
+	 * @return The <code>Board</code> on which the <code>Move</code> is made.
+	 */
+	public Board getBoard()
+	{
+		return board;
+	}
+	/**
+	 * Generic setter method used to set the private data member
+	 * board of the <code>Move</code> class.
+	 * @param board The <code>Board</code> on which the <code>Move</code> is made.
+	 */
+	public void setBoard(Board board)
+	{
+		this.board = board;
 	}
 	/**
 	 * Returns the string to be displayed to the user as a description
@@ -179,18 +234,20 @@ public class Move
 			if(pieceMoved.getShortAlgebraicNotation().toUpperCase()!="P")
 				returnString=pieceMoved.getShortAlgebraicNotation().toUpperCase();
 			//for captures
-			if(toSquare.getPiece().isWhite()!=fromSquare.getPiece().isWhite())
-				returnString+="x";
+			if(toSquare.getPiece()!=null)	
+				if(toSquare.getPiece().isWhite()!=fromSquare.getPiece().isWhite())
+					returnString+="x";
 			//add destination square either way
 			returnString+=toSquare.toString();
 			//for checking and mating moves
-			if(toSquare.getPiece().checks())
-			{
-				if(toSquare.getPiece().mates())
-					returnString+="#";
-				else
-					returnString+="+";
-			}
+			if(toSquare.getPiece()!=null)
+				if(toSquare.getPiece().checks())
+				{
+					if(toSquare.getPiece().mates())
+						returnString+="#";
+					else
+						returnString+="+";
+				}
 		}
 		return returnString;
 	}

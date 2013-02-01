@@ -1,11 +1,20 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.5.3 build 266
+* Latest Application Version: 0.0.6 build 317
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.4
 
 ##Version History
+
+#####Version 0.0.6 (317)
+* Greatly enhanced *Move*.
+* Added full commentary to *Move*.
+* Implemented a lot of ways to construct a *Move*.
+* Fixed issue #77
+* Added jUnit test for *Move*. Worked great!
+* Improved *Game*.
+* Greatly improved *Board*.
 
 ######Version 0.0.05.3 (266)
 * Added messages before start.
