@@ -1,6 +1,7 @@
 package com.kenny.classiq.players;
 
 import com.kenny.classiq.game.Game;
+import com.kenny.classiq.game.Move;
 
 /**
  * The <code>Player</code> class represents a chess player in the
@@ -115,5 +116,17 @@ public abstract class Player
 	public void setGame(Game game)
 	{
 		this.game = game;
+	}
+	/**
+	 * Used to get the <code>Move</code> played by this <code>Player</code>.
+	 * Varies in execution, as each type of <code>Player</code> may process
+	 * the returnMove differently (<code>AI</code> calculates, <code>User</code>
+	 * thinks, and <code>GUI</code> provides). 
+	 * @return The <code>Move</code> this <code>Player</code> wants to play.
+	 */
+	public Move getMove()
+	{
+		Move returnMove=null;
+		return returnMove;
 	}
 }
