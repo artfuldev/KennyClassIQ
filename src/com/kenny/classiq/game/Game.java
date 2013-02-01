@@ -89,6 +89,15 @@ public class Game
 		setupBoard();
 	}
 	/**
+	 * Generic getter method used to access the private data member
+	 * gameBoard. Useful in many cases like move generation.
+	 * @return The <code>Board</code> of this <code>Game</code>.
+	 */
+	public Board getGameBoard()
+	{
+		return gameBoard;
+	}
+	/**
 	 * This method is used to set up a "new game" position. <code>Board</code>
 	 * positions are reset, and the references are changed. Called
 	 * from the default <code>Game</code> constructor.
