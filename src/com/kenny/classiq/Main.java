@@ -2,6 +2,7 @@ package com.kenny.classiq;
 
 import java.util.Scanner;
 
+import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.protocols.UCI;
 import com.kenny.classiq.protocols.XBoard;
 
@@ -43,6 +44,8 @@ public class Main
 	{
 		UCI uciConsole=new UCI();
 		XBoard xboardConsole=new XBoard();
+		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
+				+"\nby "+Definitions.authorName);
 		protocolType=inputStream.nextLine();
 		if(protocolType.matches("uci"))
 			uciConsole.start();
