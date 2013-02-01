@@ -41,7 +41,11 @@ public abstract class Piece
 	protected boolean white=true;
 	public String getShortAlgebraicNotation()
 	{
-		return shortAlgebraicNotation;
+		String returnString;
+		returnString=shortAlgebraicNotation;
+		if(white==false)
+			returnString=returnString.toLowerCase();
+		return returnString;
 	}
 	public void setShortAlgebraicNotation(String shortAlgebraicNotation)
 	{
@@ -78,7 +82,7 @@ public abstract class Piece
 	public String toString()
 	{
 		String returnString;
-		returnString=shortAlgebraicNotation;
+		returnString=getShortAlgebraicNotation();
 		if(square!=null)
 			returnString+=" at "+square.toString();
 		return returnString;
