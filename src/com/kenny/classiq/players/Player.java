@@ -1,4 +1,6 @@
-package com.kenny.classiq.game;
+package com.kenny.classiq.players;
+
+import com.kenny.classiq.game.Game;
 
 /**
  * The <code>Player</code> class represents a chess player in the
@@ -8,7 +10,7 @@ package com.kenny.classiq.game;
  * @author Kenshin Himura (Sudarsan Balaji)
  *
  */
-public class Player
+public abstract class Player
 {
 	/**
 	 * Holds a reference to the game that this player is a part of. Simply
@@ -21,7 +23,7 @@ public class Player
 	 * place of a boolean, because AI and User are not the only two types of
 	 * player. In the case of chess engines, a player may be a GUI.
 	 * The three accepted String values for this data member are: "ai", "user"
-	 * and "gui". "user" values are not used as of now (version 0.0.0.7).
+	 * and "gui". "user" values are not used as of now (version 0.04.04.04).
 	 */
 	private String playerType;
 	/**
@@ -29,6 +31,14 @@ public class Player
 	 * chess board of a <code>Player</code>. Default value is true.
 	 */
 	private boolean white=true;
+	/**
+	 * Default contsructor of the <code>Player</code> class. Does absolutely
+	 * nothing.
+	 */
+	public Player()
+	{
+		
+	}
 	/**
 	 * This constructor is used in the <code>Game</code> class to construct two
 	 * new players of the game, with colour and type.
@@ -42,6 +52,7 @@ public class Player
 		if(colour.matches("black"))
 			setWhite(false);
 		setPlayerType(playerType);
+		setGame(gameReference);
 	}
 	/**
 	 * Generic getter method of the variable playerType. As it is a private

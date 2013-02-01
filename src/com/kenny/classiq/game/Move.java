@@ -42,6 +42,13 @@ public class Move
 	 */
 	private String moveString;
 	/**
+	 * Default Constructor of <code>Move</code>.
+	 */
+	public Move()
+	{
+		
+	}
+	/**
 	 * Constructor of the <code>Move</code> class. Gets a reference to two
 	 * square objects, which may or may not be of the same <code>Board</code>,
 	 * but represent the squares from and to which the piece moved in the
