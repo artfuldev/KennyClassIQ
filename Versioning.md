@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Versioning Document Version: 1.4
+* Versioning Document Version: 1.5
 
 ##Versioning
 Starting 1st February, 2013, the versioning convention of __*Kenny ClassIQ*__ has changed. While previously we had a Versioning of 0.0.0.x arbitarily, it has been recently understood that such a system of arbitary versioning will not help in the long run.
@@ -27,6 +27,6 @@ It is a 2-digit number representing the number of minor version changes. A chang
 ###Major Revision Number (MaRN)
 It is a 2-digit number representing the number of major revisions. A change in the *Major Revision Number* denotes a major change in the smaller sections of the program, which incorporate major differences in the functioning or structure of certain sections of the binaries of the compiled code. This may include changes in code for certain functions, minor bugfixes, or other changes categorized as minor revisions to the source code by me (the author). Also, a change in the MaVN resets the MiRN to 0, and it need not be specified.
 ###Minor Revision Number (MiRN)
-It is a 2-digit number representing the number of minor revisions. A change in the *Minor Revision Number* denotes a major change in the smaller sections of the program, which incorporate major differences in the functioning or structure of certain sections of the binaries of the compiled code. This may include changes in code for certain functions, minor bugfixes, or other changes categorized as minor revisions to the source code by me (the author).
+It is a 2-digit number representing the number of minor revisions. A change in the *Minor Revision Number* denotes a major change in the smaller sections of the program, which incorporate major differences in the functioning or structure of certain sections of the binaries of the compiled code. This may include changes in code for the implest of reasons without heavily affecting the binary, like fixing spelling errors, display messages, or other changes categorized as minor revisions to the source code by me (the author).
 ###Build Number (BN)
 It is a number representing the total number of build changes made to a project since its inception. *For a github repository, this may be equal to or greater than the number of commits, as not all build changes are committed and documented.* It is never reset. Optional.
