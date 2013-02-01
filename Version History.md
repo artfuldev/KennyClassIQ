@@ -2,8 +2,8 @@
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
 * Latest Application Version: 0.0.04.03 build 221
-* Latest Stable Version: -
-* ReadMe Version: 1.0
+* Latest Stable Version: -.--
+* Version History Document Version: 1.1
 
 ##Version History
 ###Version 0.00.04.03 (221)
