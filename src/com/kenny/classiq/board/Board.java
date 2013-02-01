@@ -1,5 +1,6 @@
 package com.kenny.classiq.board;
 
+import com.kenny.classiq.game.Game;
 import com.kenny.classiq.pieces.Piece;
 
 /**
@@ -11,6 +12,13 @@ import com.kenny.classiq.pieces.Piece;
  */
 public class Board
 {
+	/**
+	 * Holds a reference to the <code>Game</code> this <code>Board</code>
+	 * belongs to. Useful in retrieveing information such as last move
+	 * and current player from the <code>Game</code>, when updating
+	 * FEN Strings.
+	 */
+	private Game game;
 	/**
 	 * An array of <code>Square</code> objects, which holds all the squares
 	 * of the <code>Board</code>. References to these squares can belong in
@@ -50,13 +58,6 @@ public class Board
 	 */
 	private Diagonal[] darkDiagonal;
 	/**
-	 * An array of <code>Piece</code> objects, representing all the pieces
-	 * currently on the <code>Board</code>. This can be modified as and when
-	 * captures are effected. Pieces removed from the board are placed on the
-	 * Piece Set.
-	 */
-	private Piece[] piece;
-	/**
 	 * The default constructor of <code>Board</code>, which creates a board
 	 * representing a new game. The constructor may also set values for its
 	 * variables or call an initialization function to do the same. Usually,
@@ -67,6 +68,62 @@ public class Board
 	 */
 	public Board()
 	{
+		//Create 64 squares, 8 ranks, and 8 files
+		square=new Square[64];
+		rank=new Rank[8];
+		file=new File[8];
+		//name each rank and file during construction
+		rank[0]=new Rank("1");
+		rank[1]=new Rank("2");
+		rank[2]=new Rank("3");
+		rank[3]=new Rank("4");
+		rank[4]=new Rank("5");
+		rank[5]=new Rank("6");
+		rank[6]=new Rank("7");
+		rank[7]=new Rank("8");
+		file[0]=new File("a");
+		file[1]=new File("b");
+		file[2]=new File("c");
+		file[3]=new File("d");
+		file[4]=new File("e");
+		file[5]=new File("f");
+		file[6]=new File("g");
+		file[7]=new File("h");
+		//create and set individual square properties
+		for(int i=0;i<square.length;i++)
+		{
+			byte fileIndex=(byte)(i%8);
+			byte rankIndex=(byte)(i/8);
+			square[i]=new Square();
+			square[i].setBoard(this);
+			square[i].setFile(file[fileIndex]);
+			square[i].setRank(rank[rankIndex]);
+			rank[rankIndex].setSquare(square[i],fileIndex);
+			file[fileIndex].setSquare(square[i],rankIndex);
+			square[i].setName(square[i].getFile().getName()
+					+square[i].getRank().getName());
+			//Every alternate square is a dark square, starting from a1.
+			if((i%2)==0)
+				square[i].setLight(false);
+		}
+	}
+	/**
+	 * The default constructor of <code>Board</code> is of no use, now that
+	 * we wish to have a reference to <code>Game</code>. Hence this parameterised
+	 * constructor, which creates a board representing a new game, and sets a
+	 * reference to the <code>Game</code> of which this <code>Board</code> is a
+	 * part.
+	 * <p>
+	 * The constructor may also set values for its variables or call an
+	 * initialization function to do the same. Usually, only the references
+	 * and default values for the data members are set, while the
+	 * <code>Game</code> class arranges the pieces on the board,
+	 * taking the pieces from the <code>PieceSet</code> and placing them on
+	 * the <code>Board</code>.
+	 */
+	public Board(Game game)
+	{
+		this.game=game;
 		//Create 64 squares, 8 ranks, and 8 files
 		square=new Square[64];
 		rank=new Rank[8];
