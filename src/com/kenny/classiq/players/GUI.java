@@ -8,7 +8,7 @@ public class GUI extends Player
 	{
 		if(colour.matches("black"))
 			setWhite(false);
-		setPlayerType("ai");
+		setPlayerType("gui");
 		setGame(gameReference);
 	}
 }
