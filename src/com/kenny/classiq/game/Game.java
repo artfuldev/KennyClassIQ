@@ -53,7 +53,16 @@ public class Game
 	 * Holds the list of <code>Move</code>s made in the game. May be used to
 	 * replay the <code>Game</code>, if such features are necessary later.
 	 */
-	private Move[] moveList[];
+	private Move[] moveList;
+	/**
+	 * Holds the number of half-<code>Move</code>s made in the game.
+	 * When divided by 2, gives the number of <code>Move</code>s made.
+	 * Incremented on every <code>Move</code>, and decremented for every
+	 * undo. If %2 of this is 1, it is black's turn, else it is white's.
+	 * Hence used to keep a record of the turn number. Incidentally it is
+	 * also equal to <code>moveList.length</code>.
+	 */
+	int halfMoveNumber=1;
 	/**
 	 * The <code>PieceSet</code> of the <code>Game</code>, which holds all
 	 * the pieces necessary to play the <code>Game</code>. <code>Piece</code>s
@@ -72,7 +81,7 @@ public class Game
 		lastMovedPiece=null;
 		playerOne=new Player(this,"white","gui");
 		playerTwo=new Player(this,"black","ai");
-		currentPlayer=playerTwo;
+		currentPlayer=playerOne;
 		pieceSet=new PieceSet();
 		setupBoard();
 	}
