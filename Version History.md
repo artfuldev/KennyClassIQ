@@ -3,7 +3,7 @@
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
 * Latest Application Version: 0.0.6 build 317
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
-* Version History Document Version: 1.4
+* Version History Document Version: 1.5
 
 ##Version History
 
@@ -16,10 +16,10 @@
 * Improved *Game*.
 * Greatly improved *Board*.
 
-######Version 0.0.05.3 (266)
+######Version 0.0.5.3 (266)
 * Added messages before start.
 
-######Version 0.0.05.2 (264)
+######Version 0.0.5.2 (264)
 * Removed *KennyClassIQ.exe*
 * Added x86 exe.
 * Added x64 exe.
