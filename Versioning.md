@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Versioning Document Version: 1.0
+* Versioning Document Version: 1.1
 
 ##Versioning
 Starting 1st February, 2013, the versioning convention of __*Kenny ClassIQ*__ has changed. While previously we had a Versioning of 0.0.0.x arbitarily, it has been recently understood that such a system of arbitary versioning will not help in the long run.
@@ -10,9 +10,7 @@ Henceforth, I have decided to have my own versioning convention, as there seems 
 
 ##Version Description
 
-*MaVN__.__MiVN__.__MaRN__.__MiRN (BN)* **or** *MaVN__.__MiVN__.__MaRN__.__MiRN build BN*
-
-eg: 2.33.27.96 (5876) **or** 2.33.27.96 build 5876
+*MaVN__.__MiVN__.__MaRN__.__MiRN (BN)* **or** *MaVN__.__MiVN__.__MaRN__.__MiRN build BN* (eg:) 2.33.27.96 (5876) **or** 2.33.27.96 build 5876, while stable versions are usually represented as *MaVN__.__MiVN* without the other version numbers, as stable versions represent builds with *MaRN* and *MiRN* as 0.
 
 ###Major Version Number (MaVN)
 It is a number representing the number of major version changes since its inception. A change in the *Major Version Number* denotes a major change in the program, which incorporate major differences *(new and bug-free functionality)* in the binaries of the compiled code. This may include changes in code architecture or other changes categorized as major changes to the program by me (the author). Also, a change in the MaVN resets the MiVN, MaRN and MiRN.
