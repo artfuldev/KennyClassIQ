@@ -206,4 +206,29 @@ public class Board
 	{
 		square[index].setPiece(piece);
 	}
+	/**
+	 * Used to get a specific <code>Square</code> of this <code>Board</code>,
+	 * when the name of the <code>Square</code> is known.
+	 * @param squareName The name of the <code>Square</code> as a String, eg.
+	 * "e2".
+	 * @return The specified <code>Square</code>. 
+	 */
+	public Square getSquare(String squareName)
+	{
+		for(int i=0;i<square.length;i++)
+			if(square[i].getName().matches(squareName))
+				return square[i];
+		return null;
+	}
+
+	/**
+	 * Used to get a specific <code>Square</code> of this <code>Board</code>,
+	 * when the index of the <code>Square</code> is known.
+	 * @param index The index of the <code>Square</code> as a byte, 0-64.
+	 * @return The specified <code>Square</code>. 
+	 */
+	public Square getSquare(byte index)
+	{
+		return square[index];
+	}
 }
