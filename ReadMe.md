@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.5.3 build 266 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
+* Latest Application Version: 0.0.6 build 317 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * ReadMe Version: 1.9
 
@@ -15,6 +15,7 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 (Words in italics represent class names)
 
 * Unplayable.
+* Better *Move* system.
 * Other features yet to come! :D
 
 ##Branching
