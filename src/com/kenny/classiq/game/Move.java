@@ -169,7 +169,8 @@ public class Move
 		else
 		{
 			//for pawn and other pieces, as for pawn, it is ""
-			returnString=pieceMoved.getShortAlgebraicNotation();
+			if(pieceMoved.getShortAlgebraicNotation().toUpperCase()!="P")
+				returnString=pieceMoved.getShortAlgebraicNotation().toUpperCase();
 			//for captures
 			if(toSquare.getPiece().isWhite()!=fromSquare.getPiece().isWhite())
 				returnString+="x";
