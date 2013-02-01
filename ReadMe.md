@@ -1,9 +1,9 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: *([Version History]())*
-* Latest Stable Version: *([Versioning]())*
-* ReadMe Version: 1.3
+* Latest Application Version: 0.0.04.03 build 221 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md))*
+* Latest Stable Version: -.-- *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md))*
+* ReadMe Version: 1.4
 
 ##Description
 
