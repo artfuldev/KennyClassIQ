@@ -1,4 +1,4 @@
-package com.kenny.classiq.protocols;
+package com.kenny.classiq.console;
 
 /**
  * <code>CommunicationProtocol</code> is the interface implemented by

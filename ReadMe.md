@@ -1,9 +1,9 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.6.1 build 323 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
+* Latest Application Version: 0.0.7.3 build 511 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
-* ReadMe Version: 1.9
+* ReadMe Version: 2.0
 
 ##Description
 
@@ -16,13 +16,14 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 
 * Unplayable.
 * Better *Move* system.
+* Better *XBoard* command parsing.
 * Other features yet to come! :D
 
 ##Branching
-* *[master](https://github.com/kenshinthebattosai/KennyClassIQ)* contains the latest code.
-* *[stable](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable)* contains the latest stable code *(x.xx)*.
+* *[master](https://github.com/kenshinthebattosai/KennyClassIQ)* contains the latest minor revision.
 * *[majrev](https://github.com/kenshinthebattosai/KennyClassIQ/tree/majrev)* contains the latest major revision.
-* *[minrev](https://github.com/kenshinthebattosai/KennyClassIQ/tree/minrev)* contains the latest minor revision.
+* *[stable](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable)* contains the latest stable code *(minor version)*.
+* *[working](https://github.com/kenshinthebattosai/KennyClassIQ/tree/minrev)* contains the latest code.
 
 ##Goals
 

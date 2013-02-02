@@ -1,4 +1,4 @@
-package com.kenny.classiq.protocols;
+package com.kenny.classiq.console;
 
 import com.kenny.classiq.definitions.Definitions;
 
@@ -11,7 +11,7 @@ import com.kenny.classiq.definitions.Definitions;
  * @author Kenshin Himura (Sudarsan Balaji)
  *
  */
-public class UCI implements CommunicationProtocol
+public class UCI extends GUIConsole
 {
 	public void start()
 	{
