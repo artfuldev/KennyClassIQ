@@ -1,4 +1,4 @@
-package com.kenny.classiq.protocols;
+package com.kenny.classiq.console;
 
 import java.util.Scanner;
 import com.kenny.classiq.definitions.Definitions;
@@ -11,13 +11,13 @@ import com.kenny.classiq.definitions.Definitions;
  * <code>UCI</code> protocols.
  * @author Kenshin Himura (Sudarsan Balaji)
  */
-public class XBoard implements CommunicationProtocol
+public class XBoard extends GUIConsole
 {
 	/**
 	 * Holds the protocol version of the XBoard protocol. The default
-	 * value is 1.
+	 * protocol version Kenny ClassIQ uses is 2.
 	 */
-	private byte protocolVersion=1;
+	private byte protocolVersion=2;
 	/**
 	 * Holds an object of class <code>UCI</code>. In the case of automatic
 	 * detection of protocol, sometimes the command <code>"uci"</code>
@@ -36,18 +36,8 @@ public class XBoard implements CommunicationProtocol
 	 */
 	Scanner inputStream;
 	/**
-	 * Holds the commands sent by the GUI in <code>XBoard</code> protocol, and
-	 * obtained by the listener.
-	 */
-	String commandString;
-	/**
 	 * Holds an array of Strings, with each String representing a single word
 	 * of the command sent by the GUI and received by the listener. 
-	 */
-	String[] cmdString;
-	/**
-	 * Default constructor of <code>XBoard</code>, overridden to create a reference
-	 * to the <code>UCI</code> object, {@link #uciConsole}
 	 */
 	public XBoard()
 	{
@@ -56,50 +46,54 @@ public class XBoard implements CommunicationProtocol
 	}
 	public void start()
 	{
+		run();
 		init();
 		listen();
 	}
 	public void init()
 	{
 		System.out.println("xboard");
+		if(commandString.startsWith("protover"))
+			execute(commandString);
+		else if(commandString.startsWith("uci"))
+			uciConsole.start();
+		else
+		{
+			System.out.println("defaulting to protover "+protocolVersion);
+			setFeatures();
+			validate();
+		}
 	}
 	public void listen()
 	{
 		while(true)
 		{
-			commandString=inputStream.nextLine();
-			commandString=commandString.toLowerCase();
-			cmdString=commandString.split("\\s");
-			if(	
-				cmdString[0].matches("protover")||
-				cmdString[0].matches("new")||
-				cmdString[0].matches("post")||
-				cmdString[0].matches("go")||
-				cmdString[0].matches("force")||
-				cmdString[0].matches("INPUT MOVES")||
-				cmdString[0].matches("level")||
-				cmdString[0].matches("time")||
-				cmdString[0].matches("ping")||
-				cmdString[0].matches("usermove")||
-				cmdString[0].matches("setboard")||
-				cmdString[0].matches("random"))
-				execute(commandString);
-			else if(cmdString[0].matches("uci"))
-			{
-				uciConsole.start();
-				break;
-			}
-			else if(cmdString[0].matches("accepted")||
-					cmdString[0].matches("rejected"))
-			{
-				//ignore
-			}
-			else if(cmdString[0].matches("quit"))
-				break;
-			else
-				execute(Definitions.errorString+" "+commandString);
+			validate();
 		}
-		inputStream.close();
+	}
+	public void validate()
+	{
+		if(	commandString.startsWith("new")||
+			commandString.startsWith("post")||
+			commandString.startsWith("go")||
+			commandString.startsWith("force")||
+			commandString.startsWith("INPUT MOVES")||
+			commandString.startsWith("level")||
+			commandString.startsWith("time")||
+			commandString.startsWith("ping")||
+			commandString.startsWith("usermove")||
+			commandString.startsWith("setboard"))
+			execute(commandString);
+		else if(commandString.startsWith("quit"))
+			System.exit(0);
+		else if(commandString.startsWith("random")||
+				commandString.startsWith("accepted")||
+				commandString.startsWith("rejected"))
+		{
+			//ignore
+		}
+		else
+			execute(Definitions.errorString+" "+commandString);
 	}
 	public void execute(String commandString)
 	{
@@ -110,26 +104,14 @@ public class XBoard implements CommunicationProtocol
 		{
 			if(splitString[0].matches("protover"))
 			{
-				protocolVersion=Byte.parseByte(splitString[1]);
+				if(splitString.length>1)
+					protocolVersion=Byte.parseByte(splitString[1]);
 				System.out.println("protocol version "+protocolVersion+" accepted");
 				setFeatures();
 			}
 			else if(splitString[0].matches("ping"))
 			{
 				System.out.println("pong "+splitString[1]);
-			}
-			else if(splitString[0].matches("new"))
-			{
-				//create new game
-				System.out.println("New Game Created");
-			}
-			else if(splitString[0].matches("post"))
-			{
-				//send output
-			}
-			else if(splitString[0].matches("random"))
-			{
-				//ignore, or add random value to evaluation.
 			}
 			else if(splitString[0].matches("level"))
 			{
@@ -141,8 +123,8 @@ public class XBoard implements CommunicationProtocol
 				System.out.println("Level set to "+movesPerSide+"/"+baseMinutes+
 						"/"+incrementSeconds);
 			}
-			else
-				System.out.println(commandString);
+			//else ignore
+				//System.out.println("ignored "+commandString);
 		}
 	}
 	/**
@@ -153,23 +135,18 @@ public class XBoard implements CommunicationProtocol
 	 */
 	private void setFeatures()
 	{
-		//start setting features, make engine wait
-		System.out.println("feature done=0");
-		//set features here
-		System.out.println("feature analyze=0");
-		System.out.println("feature usermove=1");
-		System.out.println("feature setboard=1");
-		System.out.println("feature time=0");
-		System.out.println("feature sigint=0");
-		System.out.println("feature sigterm=0");
-		System.out.println("feature colors=0");
-		System.out.println("feature ping=1");
-		System.out.println("feature draw=0");
-		System.out.println("feature pause=0");
-		System.out.println("feature variants=normal");
-		System.out.println("feature myname="+Definitions.engineName+
-				" "+Definitions.engineVersion);
-		//feature setting done
-		System.out.println("feature done=1");
+		if(protocolVersion>1)
+		{
+			//start setting features, make engine wait
+			System.out.println("feature done=0");
+			//set features here
+			System.out.println("feature analyze=0 usermove=1 setboard=1 "
+								+"time=0 sigint=0 sigterm=0 feature colors=0 "
+								+"feature ping=1 feature draw=0 pause=0 "
+								+"variants=normal myname="+Definitions.engineName
+								+" "+Definitions.engineVersion);
+			//feature setting done
+			System.out.println("feature done=1");
+		}
 	}
 }
