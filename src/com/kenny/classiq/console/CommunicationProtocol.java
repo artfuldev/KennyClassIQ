@@ -28,13 +28,4 @@ public interface CommunicationProtocol
 	 * properly parsed commands to the <code>execute()</code> function.
 	 */
 	public void listen();
-	/**
-	 * It is the function which executes the commands parsed by the
-	 * listener. It is used to check for specific cases and then call
-	 * the respective functions to execute such commands, by passing
-	 * the correct corresponding paramaters to those functions.
-	 * @param commandString The full command to be executed, as a
-	 * <code>String</code>.
-	 */
-	public void execute(String commandString);
 }
