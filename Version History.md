@@ -1,11 +1,21 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.8 build 693
+* Latest Application Version: 0.0.8.3 build 712
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.5
 
 ##Version History
+
+######Version 0.0.8.1 (697) - 0.0.8.3 (712)
+* Added *Executor* commentary.
+* Added *UCIExecutor* commentary.
+* Added *XBoardExecutor* commentary.
+* Added *Listener* commentary.
+* Added *InputThread* commentary.
+* Added *GUIConsole* commentary.
+* Improved *XBoard* and *UCI*.
+* Fixed issue #4.
 
 #####Version 0.0.8 (693)
 * Fixed issues #84,#85,#87
