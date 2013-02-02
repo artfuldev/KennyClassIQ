@@ -9,6 +9,8 @@
 
 #####Version 0.0.8 (693)
 * Fixed issues #84,#85,#87
+* Rewrote large volumes of code to implement new console interaction.
+* Added *InputThread, Listener, Executor, GUIConsole*.
 
 ######Version 0.0.7.1 (482) - 0.0.7.3 (511)
 * Modified *start()* of *XBoard* to allow for listening.
