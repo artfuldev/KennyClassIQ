@@ -2,9 +2,10 @@ package com.kenny.classiq;
 
 import java.util.Scanner;
 
+import com.kenny.classiq.console.GUIConsole;
+import com.kenny.classiq.console.UCI;
+import com.kenny.classiq.console.XBoard;
 import com.kenny.classiq.definitions.Definitions;
-import com.kenny.classiq.protocols.UCI;
-import com.kenny.classiq.protocols.XBoard;
 
 /**
  * The <code>Main</code> class serves just like a main() function
@@ -21,7 +22,7 @@ public class Main
 	 * A <code>Scanner</code> object representing the input stream
 	 * of the console, or the pipe, in case of GUI communication.
 	 */
-	private static Scanner inputStream=new Scanner(System.in);
+	public static Scanner inputStream=new Scanner(System.in);
 	/**
 	 * A <code>String</code> representing the protocol type, as
 	 * obtained through the <code>Scanner</code> object. As of now,
@@ -42,16 +43,15 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		UCI uciConsole=new UCI();
-		XBoard xboardConsole=new XBoard();
+		GUIConsole guiConsole=null;
 		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
-				+"\nby "+Definitions.authorName);
+				+" by "+Definitions.authorName);
 		protocolType=inputStream.nextLine();
 		if(protocolType.matches("uci"))
-			uciConsole.start();
+			guiConsole=new UCI();
 		if(protocolType.matches("xboard"))
-			xboardConsole.start();
+			guiConsole=new XBoard();
+		guiConsole.start();
 		//else, create custom console or GUI
-		inputStream.close();
 	}
 }
