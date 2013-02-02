@@ -9,6 +9,7 @@ import com.kenny.classiq.pieces.Piece;
  * also members of objects of classes <code>Rank</code>, <code>File</code>,
  * and <code>Diagonal</code>.
  * @author Kenshin Himura (Sudarsan Balaji)
+ * 
  */
 public class Board
 {
