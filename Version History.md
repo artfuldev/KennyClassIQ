@@ -1,11 +1,31 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.6.1 build 323
+* Latest Application Version: 0.0.7.3 build 511
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.5
 
 ##Version History
+
+######Version 0.0.7.1 (482) - 0.0.7.3 (511)
+* Modified *start()* of *XBoard* to allow for listening.
+* Various optimizations.
+* Inputs from console still buggy.
+* Stilll missing certain commands from console, raised issue.
+
+#####Version 0.0.7 (476)
+* Changed *System.console().readLine()* to *BuffereedReader* reading.
+* Major code revisions on implementation of *input reading* from the console.
+* Added *validate()* to validate input commands from the console.
+* Improved *listen()* of *XBoard*.
+* Re-organized *com.kenny.classiq.protocols*
+* Wrote *GUIConsole*
+* Wrote *InputThread*
+
+######Versions 0.0.6.2 (342) - 0.0.6.5 (397)
+* Modified *Xboard* to properly read *protover 2*.
+* Changed *Scanner.nextLine()* to *System.console().readLine()*.
+* Fixed various memory leaks and redundant input-console-read issues.
 
 ######Version 0.0.6.1 (323)
 * Made *Scanner* a member of *Xboard*.
