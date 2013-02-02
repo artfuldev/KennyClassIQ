@@ -15,6 +15,8 @@ public class UCI extends GUIConsole
 {
 	public void start()
 	{
+		executorRun=new UCIExecutor();
+		executor=new Thread(executorRun);
 		init();
 		listen();
 	}
@@ -24,13 +26,6 @@ public class UCI extends GUIConsole
 				+Definitions.engineVersion);
 		System.out.println("id author "+Definitions.authorName);
 		System.out.println("uciok");
-	}
-	public void listen()
-	{
-		System.out.println("Listening...");
-	}
-	public void execute(String commandString)
-	{
-		
+		System.exit(0);
 	}
 }
