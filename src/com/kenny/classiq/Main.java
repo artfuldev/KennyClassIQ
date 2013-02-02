@@ -2,9 +2,9 @@ package com.kenny.classiq;
 
 import java.util.Scanner;
 
+import com.kenny.classiq.console.UCI;
+import com.kenny.classiq.console.XBoard;
 import com.kenny.classiq.definitions.Definitions;
-import com.kenny.classiq.protocols.UCI;
-import com.kenny.classiq.protocols.XBoard;
 
 /**
  * The <code>Main</code> class serves just like a main() function
@@ -45,7 +45,7 @@ public class Main
 		UCI uciConsole=new UCI();
 		XBoard xboardConsole=new XBoard();
 		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
-				+"\nby "+Definitions.authorName);
+				+" by "+Definitions.authorName);
 		protocolType=inputStream.nextLine();
 		if(protocolType.matches("uci"))
 			uciConsole.start();
