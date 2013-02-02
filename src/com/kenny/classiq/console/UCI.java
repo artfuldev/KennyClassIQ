@@ -7,12 +7,17 @@ import com.kenny.classiq.definitions.Definitions;
  * Interface(UCI) communication protocol. It implements the
  * <code>CommunicationProtocol</code> interface to make use of its
  * functions, which are common to both <code>XBoard</code> and
- * <code>UCI</code> protocols.
+ * <code>UCI</code> protocols. Not fully defined yet. It extends <code>
+ * GUIConsole</code>.
  * @author Kenshin Himura (Sudarsan Balaji)
- *
+ * 
  */
 public class UCI extends GUIConsole
 {
+	/**
+	 * Overrides the start() of <code>Thread</code>. Constructs an <code>
+	 * UCIExecutor</code>, initializes the protocol, and listens.
+	 */
 	public void start()
 	{
 		executorRun=new UCIExecutor();
@@ -20,6 +25,11 @@ public class UCI extends GUIConsole
 		init();
 		listen();
 	}
+	/**
+	 * Initialization function of the <code>UCI</code> protocol. Not
+	 * defined as of now. Should be expanded later to include the
+	 * processing after "isready" command.
+	 */
 	public void init()
 	{
 		System.out.println("id name "+Definitions.engineName+" "
