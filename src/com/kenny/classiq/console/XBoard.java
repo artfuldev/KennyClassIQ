@@ -1,6 +1,8 @@
 package com.kenny.classiq.console;
 
 import java.util.Scanner;
+
+import com.kenny.classiq.Main;
 import com.kenny.classiq.definitions.Definitions;
 
 /**
@@ -15,9 +17,9 @@ public class XBoard extends GUIConsole
 {
 	/**
 	 * Holds the protocol version of the XBoard protocol. The default
-	 * protocol version Kenny ClassIQ uses is 2.
+	 * protocol version Kenny ClassIQ uses is 1.
 	 */
-	private byte protocolVersion=2;
+	private byte protocolVersion=1;
 	/**
 	 * Holds an object of class <code>UCI</code>. In the case of automatic
 	 * detection of protocol, sometimes the command <code>"uci"</code>
@@ -42,90 +44,37 @@ public class XBoard extends GUIConsole
 	public XBoard()
 	{
 		uciConsole=new UCI();
-		inputStream=new Scanner(System.in);
 	}
 	public void start()
 	{
-		run();
+		executorRun=new XBoardExecutor();
+		executor=new Thread(executorRun);
 		init();
 		listen();
 	}
 	public void init()
 	{
 		System.out.println("xboard");
+		commandString=Main.inputStream.nextLine();
 		if(commandString.startsWith("protover"))
-			execute(commandString);
-		else if(commandString.startsWith("uci"))
-			uciConsole.start();
-		else
 		{
-			System.out.println("defaulting to protover "+protocolVersion);
-			setFeatures();
-			validate();
+			String[] split=commandString.split("\\s");
+			if(split.length>1)
+				protocolVersion=Byte.parseByte(split[1]);
 		}
-	}
-	public void listen()
-	{
-		while(true)
-		{
-			validate();
-		}
-	}
-	public void validate()
-	{
-		if(	commandString.startsWith("new")||
-			commandString.startsWith("post")||
-			commandString.startsWith("go")||
-			commandString.startsWith("force")||
-			commandString.startsWith("INPUT MOVES")||
-			commandString.startsWith("level")||
-			commandString.startsWith("time")||
-			commandString.startsWith("ping")||
-			commandString.startsWith("usermove")||
-			commandString.startsWith("setboard"))
-			execute(commandString);
-		else if(commandString.startsWith("quit"))
-			System.exit(0);
-		else if(commandString.startsWith("random")||
-				commandString.startsWith("accepted")||
-				commandString.startsWith("rejected"))
-		{
-			//ignore
-		}
-		else
-			execute(Definitions.errorString+" "+commandString);
-	}
-	public void execute(String commandString)
-	{
-		String[] splitString=commandString.split("\\s");
-		if(splitString[0].matches(Definitions.errorString))
-			System.out.println(Definitions.errorInCommandString+splitString[1]);
-		else
-		{
-			if(splitString[0].matches("protover"))
-			{
-				if(splitString.length>1)
-					protocolVersion=Byte.parseByte(splitString[1]);
-				System.out.println("protocol version "+protocolVersion+" accepted");
-				setFeatures();
-			}
-			else if(splitString[0].matches("ping"))
-			{
-				System.out.println("pong "+splitString[1]);
-			}
-			else if(splitString[0].matches("level"))
-			{
-				byte movesPerSide=0, baseMinutes=0, incrementSeconds=0;
-				movesPerSide=Byte.parseByte(splitString[1]);
-				baseMinutes=Byte.parseByte(splitString[2]);
-				incrementSeconds=Byte.parseByte(splitString[3]);
-				//Pass arguments to proper function
-				System.out.println("Level set to "+movesPerSide+"/"+baseMinutes+
-						"/"+incrementSeconds);
-			}
-			//else ignore
-				//System.out.println("ignored "+commandString);
-		}
+		System.out.println("accepted protover "+protocolVersion);
+		setFeatures();
+		String[] knownCommands={"new",
+								"post",
+								"go",
+								"force",
+								"INPUT MOVES",
+								"level",
+								"time",
+								"ping",
+								"usermove",
+								"setboard"};
+		listenerRun.setKnownCommands(knownCommands);
 	}
 	/**
 	 * This is the function which sets the features depending upon the
@@ -140,7 +89,7 @@ public class XBoard extends GUIConsole
 			//start setting features, make engine wait
 			System.out.println("feature done=0");
 			//set features here
-			System.out.println("feature analyze=0 usermove=1 setboard=1 "
+			System.out.println(	 "feature analyze=0 usermove=1 setboard=1 "
 								+"time=0 sigint=0 sigterm=0 feature colors=0 "
 								+"feature ping=1 feature draw=0 pause=0 "
 								+"variants=normal myname="+Definitions.engineName

@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.7.3 build 511 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
+* Latest Application Version: 0.0.8 build 693 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * ReadMe Version: 2.0
 
@@ -16,7 +16,7 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 
 * Unplayable.
 * Better *Move* system.
-* Better *XBoard* command parsing.
+* Better-than-ever *Console* implementation.
 * Other features yet to come! :D
 
 ##Branching
