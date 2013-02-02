@@ -7,11 +7,13 @@ import com.kenny.classiq.definitions.Definitions;
 
 /**
  * <code>XBoard</code> is the class used to represent the WinBoard
- * or XBoard communication protocol. It implements the
- * <code>CommunicationProtocol</code> interface to make use of its
+ * or XBoard communication protocol. It implements the <code>
+ * CommunicationProtocol</code> interface to make use of its
  * functions, which are common to both <code>XBoard</code> and
- * <code>UCI</code> protocols.
+ * <code>UCI</code> protocols. Extends <code>GUIConsole</code> for
+ * obvious reasons.
  * @author Kenshin Himura (Sudarsan Balaji)
+ * 
  */
 public class XBoard extends GUIConsole
 {
@@ -45,6 +47,10 @@ public class XBoard extends GUIConsole
 	{
 		uciConsole=new UCI();
 	}
+	/**
+	 * Overrides the start() of <code>Thread</code>. Constructs a <code>
+	 * XBoardExecutor</code>, initializes the protocol, and listens.
+	 */
 	public void start()
 	{
 		executorRun=new XBoardExecutor();
@@ -52,6 +58,11 @@ public class XBoard extends GUIConsole
 		init();
 		listen();
 	}
+	/**
+	 * This function is used to initialize the various parameters and
+	 * variables of the protocol. In addition to calling the setFeatures()
+	 * method, it also sends the known commands to the listener thread.
+	 */
 	public void init()
 	{
 		System.out.println("xboard");
