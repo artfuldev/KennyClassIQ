@@ -30,12 +30,29 @@ public class XBoard implements CommunicationProtocol
 	 */
 	UCI uciConsole;
 	/**
+	 * Holds the object of <code>Scanner</code> used to represent the input
+	 * stream of the application. Console in the case of console program, or
+	 * pipes in the case of GUI interaction.
+	 */
+	Scanner inputStream;
+	/**
+	 * Holds the commands sent by the GUI in <code>XBoard</code> protocol, and
+	 * obtained by the listener.
+	 */
+	String commandString;
+	/**
+	 * Holds an array of Strings, with each String representing a single word
+	 * of the command sent by the GUI and received by the listener. 
+	 */
+	String[] cmdString;
+	/**
 	 * Default constructor of <code>XBoard</code>, overridden to create a reference
 	 * to the <code>UCI</code> object, {@link #uciConsole}
 	 */
 	public XBoard()
 	{
 		uciConsole=new UCI();
+		inputStream=new Scanner(System.in);
 	}
 	public void start()
 	{
@@ -45,20 +62,17 @@ public class XBoard implements CommunicationProtocol
 	public void init()
 	{
 		System.out.println("xboard");
-		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
-				+" by "+Definitions.authorName);
 	}
 	public void listen()
 	{
-		Scanner inputStream=new Scanner(System.in);
-		String commandString;
-		String[] cmdString;
 		while(true)
 		{
 			commandString=inputStream.nextLine();
 			commandString=commandString.toLowerCase();
 			cmdString=commandString.split("\\s");
-			if(	cmdString[0].matches("new")||
+			if(	
+				cmdString[0].matches("protover")||
+				cmdString[0].matches("new")||
 				cmdString[0].matches("post")||
 				cmdString[0].matches("go")||
 				cmdString[0].matches("force")||
@@ -67,7 +81,6 @@ public class XBoard implements CommunicationProtocol
 				cmdString[0].matches("time")||
 				cmdString[0].matches("ping")||
 				cmdString[0].matches("usermove")||
-				cmdString[0].matches("protover")||
 				cmdString[0].matches("setboard")||
 				cmdString[0].matches("random"))
 				execute(commandString);
@@ -140,7 +153,7 @@ public class XBoard implements CommunicationProtocol
 	 */
 	private void setFeatures()
 	{
-		//start setting features
+		//start setting features, make engine wait
 		System.out.println("feature done=0");
 		//set features here
 		System.out.println("feature analyze=0");
