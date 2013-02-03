@@ -1,11 +1,18 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.9.2 build 797
+* Latest Application Version: 0.0.10 build 853
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.5
 
 ##Version History
+
+#####Version 0.0.10 (853)
+* Added *makeMove()*.
+* Added *unMakeMove()*.
+* Improved *Game*.
+* Improved *Board*.
+* Fixed issue #62.
 
 ######Version 0.0.9.2 (797)
 * Updated *UCI*.
