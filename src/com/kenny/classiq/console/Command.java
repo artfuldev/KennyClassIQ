@@ -1,5 +1,7 @@
 package com.kenny.classiq.console;
 
+import java.util.ArrayList;
+
 /**
  * The <code>Command</code> class is used simple to provide for
  * something equivalent to a global variable, whose value can be
@@ -15,17 +17,22 @@ public class Command
 	/**
 	 * Holds the previous command string, used to check if it has changed
 	 * between the time it was last checked for change by the threads which
-	 * access it.
+	 * access it. Made volatile so multiple threads can access it
+	 * simultaneously.
 	 */
-	protected static String previousCommandString=null;
+	protected static volatile String previousCommandString=null;
 	/**
 	 * Holds the command string, which is the line absorbed from
 	 * the console in the case of a user, or the pipe in case of a GUI.
+	 * Made volatile so multiple threads can access it simultaneously.
 	 */
-	protected static String commandString=null;
+	protected static volatile String commandString=null;
 	/**
-	 * Used to know if the command is a new command, and if it is a command
-	 * that the listener understands at all, for each protocol.
+	 * Holds the commands from the GUI as an <code>ArrayList</code> of 
+	 * <code>String</code>s. Used to capture and execute all command inputs,
+	 * without missing even one. Solves a lot of issues. Also removes the
+	 * necessity of using a boolean newCommand. Made volatile so that multiple
+	 * threads can access it simultaneously.
 	 */
-	protected static boolean newCommand=false;
+	protected static volatile ArrayList<String> commandArray=new ArrayList<String>();
 }
