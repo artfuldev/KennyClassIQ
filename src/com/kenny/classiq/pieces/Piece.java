@@ -87,16 +87,4 @@ public abstract class Piece
 			returnString+=" at "+square.toString();
 		return returnString;
 	}
-	public boolean checks()
-	{
-		//if attacking squares of piece contains king of opposite colour
-			//return true
-		return false;
-	}
-	public boolean mates()
-	{
-		//if checks(), and opponent has no legal moves
-			//return true
-		return false;
-	}
 }

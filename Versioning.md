@@ -1,12 +1,12 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Versioning Document Version: 1.5
+* Versioning Document Version: 1.6
 
 ##Versioning
 Starting 1st February, 2013, the versioning convention of __*Kenny ClassIQ*__ has changed. While previously we had a Versioning of 0.0.0.x arbitarily, it has been recently understood that such a system of arbitary versioning will not help in the long run.
 
-Henceforth, I have decided to have my own versioning convention, as there seems to be no standard one, to use with this, and future products which will require versioning.
+Henceforth, I have decided to have my own versioning convention, as there seems to be no standard one, to use with this, and future projects which will require versioning.
 
 ##Version Description
 
