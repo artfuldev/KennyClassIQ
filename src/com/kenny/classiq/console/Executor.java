@@ -29,10 +29,10 @@ public abstract class Executor extends Command implements Runnable
 			try
 			{
 				Thread.sleep(50);
-				if(newCommand)
+				while(commandArray.size()>0)
 				{
-					execute(commandString);
-					newCommand=false;
+					execute(commandArray.get(0));
+					commandArray.remove(0);
 				}
 		    }
 			catch(Exception ex)

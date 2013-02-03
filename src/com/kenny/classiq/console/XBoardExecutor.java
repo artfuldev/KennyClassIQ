@@ -1,5 +1,7 @@
 package com.kenny.classiq.console;
 
+import com.kenny.classiq.definitions.Definitions;
+
 /**
  * The <code>XBoardExecutor</code> class extends <code>Executor</code> and
  * thus inherits its run() method by default. All that remains is to define
@@ -23,21 +25,17 @@ public class XBoardExecutor extends Executor
 	public void execute(String commandString)
 	{
 		String[] splitString=commandString.split("\\s");
-		if(splitString[0].matches("ping"))
-		{
-			System.out.println("pong "+splitString[1]);
-		}
-		else if(splitString[0].matches("level"))
-		{
-			byte movesPerSide=0, baseMinutes=0, incrementSeconds=0;
-			movesPerSide=Byte.parseByte(splitString[1]);
-			baseMinutes=Byte.parseByte(splitString[2]);
-			incrementSeconds=Byte.parseByte(splitString[3]);
-			//Pass arguments to proper function
-			System.out.println("Level set to "+movesPerSide+"/"+baseMinutes+
-					"/"+incrementSeconds);
-		}
+		if(commandString.startsWith("quit"))
+			System.exit(0);
 		else
-			System.out.println("ignored "+splitString[0]);
+		{
+			//implemented commands
+			if(commandString.startsWith("ping"))
+				System.out.println("pong "+splitString[1]);
+			//commands not yet implemented properly
+			else
+				System.out.println(Definitions.debugMessage+"received "
+									+splitString[0]);
+		}
 	}
 }

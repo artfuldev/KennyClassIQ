@@ -1,11 +1,17 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.9 build 748
+* Latest Application Version: 0.0.9.1 build 773
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.5
 
 ##Version History
+
+######Version 0.0.9.1 (773)
+* Fixed issue #91.
+* Deleted *newCommand* and added *commandArray*.
+* Greatly improved *XBoard* driver implementation.
+* Added debug messages when unimplemented commands are met with.
 
 #####Version 0.0.9 (748)
 * Reopened issue #64.

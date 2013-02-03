@@ -34,6 +34,11 @@ public class Main
 	 */
 	private static String protocolType;
 	/**
+	 * A <code>GUIConsole</code> representing the GUI console. It can
+	 * be of either protocol, so is instantiated later.
+	 */
+	public static GUIConsole guiConsole=null;
+	/**
 	 * The main function of the <code>Main</code> class is declared as
 	 * a static function so that it can be called without an instance
 	 * of the <code>Main</code> class. It gets inputs and then starts
@@ -45,7 +50,6 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		GUIConsole guiConsole=null;
 		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
 				+" by "+Definitions.authorName);
 		protocolType=inputStream.nextLine();
