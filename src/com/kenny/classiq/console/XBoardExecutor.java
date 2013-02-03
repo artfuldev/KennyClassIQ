@@ -37,5 +37,7 @@ public class XBoardExecutor extends Executor
 			System.out.println("Level set to "+movesPerSide+"/"+baseMinutes+
 					"/"+incrementSeconds);
 		}
+		else
+			System.out.println("ignored "+splitString[0]);
 	}
 }
