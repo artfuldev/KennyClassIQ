@@ -129,4 +129,32 @@ public abstract class Player
 		Move returnMove=null;
 		return returnMove;
 	}
+	/**
+	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
+	 * which this <code>Player</code> is a part.
+	 * @param moveToMake The <code>Move</code> to be made.
+	 */
+	public void makeMove(Move moveToMake)
+	{
+		if(moveToMake.isCapturingMove())
+			moveToMake.getBoard().getGame().getPieceSet().setPiece(
+							moveToMake.getCapturedPiece());
+		moveToMake.getFromSquare().setPiece(null);
+		moveToMake.getToSquare().setPiece(moveToMake.getPieceMoved());
+	}
+	/**
+	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
+	 * which this <code>Player</code> is a part.
+	 * @param moveToUnMake The <code>Move</code> to be un-made.
+	 */
+	public void unMakeMove(Move moveToUnMake)
+	{
+		moveToUnMake.getFromSquare().setPiece(moveToUnMake.getPieceMoved());
+		moveToUnMake.getFromSquare().getPiece().setSquare(
+											moveToUnMake.getFromSquare());
+		if(!moveToUnMake.isCapturingMove())
+			moveToUnMake.getToSquare().setPiece(null);
+		else
+			moveToUnMake.getToSquare().setPiece(moveToUnMake.getCapturedPiece());
+	}
 }

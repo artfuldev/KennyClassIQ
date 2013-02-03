@@ -133,4 +133,24 @@ public class Game
 	{
 		gameBoard.printBoard();
 	}
+	public PieceSet getPieceSet()
+	{
+		return pieceSet;
+	}
+	public Player getCurrentPlayer()
+	{
+		return currentPlayer;
+	}
+	public void setCurrentPlayer(Player currentPlayer)
+	{
+		this.currentPlayer = currentPlayer;
+	}
+	public Player getPlayerOne()
+	{
+		return playerOne;
+	}
+	public Player getPlayerTwo()
+	{
+		return playerTwo;
+	}
 }

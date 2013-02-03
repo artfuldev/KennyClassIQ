@@ -124,7 +124,7 @@ public class Board
 	 */
 	public Board(Game game)
 	{
-		this.game=game;
+		this.setGame(game);
 		//Create 64 squares, 8 ranks, and 8 files
 		square=new Square[64];
 		rank=new Rank[8];
@@ -231,5 +231,13 @@ public class Board
 	public Square getSquare(byte index)
 	{
 		return square[index];
+	}
+	public Game getGame()
+	{
+		return game;
+	}
+	public void setGame(Game game)
+	{
+		this.game = game;
 	}
 }
