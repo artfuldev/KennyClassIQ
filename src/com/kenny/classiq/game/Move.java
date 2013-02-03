@@ -23,6 +23,13 @@ public class Move
 	 */
 	private Piece pieceMoved;
 	/**
+	 * Holds the piece which was captured in the current move (half-move).
+	 * This is used to transfer the <code>Piece</code> from the <code>Board
+	 * </code> to the <code>PieceSet</code> during makeMove(), and then back
+	 * during unmakeMove().
+	 */
+	private Piece capturedPiece=null;
+	/**
 	 * Holds the square from which the piece was moved in the current
 	 * move (half-move). Since no move in chess can be made without
 	 * moving a piece from one square to the next, this is important.
@@ -48,6 +55,22 @@ public class Move
 	 */
 	private Board board;
 	/**
+	 * Holds a boolean value specifying if the move is a checking move,
+	 * or not. Calculated during of after construction. Default value is 
+	 * <code>True</code>.
+	 */
+	private boolean legalMove=true;
+	/**
+	 * Holds a boolean value specifying if the move is a checking move,
+	 * or not. Calculated during of after construction.
+	 */
+	private boolean checkingMove=false;
+	/**
+	 * Holds a boolean value specifying if the move is a mating move,
+	 * or not. Calculated during of after construction.
+	 */
+	private boolean matingMove=false;
+	/**
 	 * Default Constructor of <code>Move</code>.
 	 */
 	public Move()
@@ -64,7 +87,7 @@ public class Move
 	 */
 	public Move(Board boardReference)
 	{
-		setBoard(boardReference);
+		this.board=boardReference;
 	}
 	/**
 	 * Constructor of the <code>Move</code> class. Gets a reference to two
@@ -76,12 +99,17 @@ public class Move
 	 */
 	public Move(Square fromSquare,Square toSquare)
 	{
-		setFromSquare(fromSquare);
-		setToSquare(toSquare);
-		setPieceMoved(fromSquare.getPiece());
-		setMoveString(fromSquare.getName()+toSquare.getName());
-		setPieceMoved(fromSquare.getPiece());
-		setBoard(fromSquare.getBoard());
+		this.fromSquare=fromSquare;
+		this.toSquare=toSquare;
+		pieceMoved=fromSquare.getPiece();
+		moveString=fromSquare.getName()+toSquare.getName();
+		board=fromSquare.getBoard();
+		capturedPiece=toSquare.getPiece();
+		if(pieceMoved==null)
+			legalMove=false;
+		else if(capturedPiece!=null)
+			if(capturedPiece.isWhite()==pieceMoved.isWhite())
+				legalMove=false;
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -102,6 +130,27 @@ public class Move
 	public void setPieceMoved(Piece pieceMoved)
 	{
 		this.pieceMoved = pieceMoved;
+	}
+	/**
+	 * Generic getter method of the variable pieceMoved. Since its a
+	 * private variable, a public getter method has to be used to access
+	 * it. Stays true to the concept of data abstraction.
+	 * @return The <code>Piece</code> captured during the move.
+	 */
+	public Piece getCapturedPiece()
+	{
+		return capturedPiece;
+	}
+	/**
+	 * Generic setter method of the variable pieceMoved. Since its a
+	 * private variable, a public getter method has to be used to access
+	 * it. Stays true to the concept of data abstraction. It is used to
+	 * restore the board during unmakeMove().
+	 * @param capturedPiece The <code>Piece</code> captured.
+	 */
+	public void setCapturedPiece(Piece capturedPiece)
+	{
+		this.capturedPiece = capturedPiece;
 	}
 	/**
 	 * Generic getter method to access the private member fromSquare.
@@ -126,10 +175,18 @@ public class Move
 		this.fromSquare = fromSquare;
 		moveString="";
 		moveString+=fromSquare.getName();
+		pieceMoved=fromSquare.getPiece();
 		if(toSquare!=null)
+		{
 			moveString+=toSquare.getName();
-		setPieceMoved(fromSquare.getPiece());
-		setBoard(fromSquare.getBoard());
+			capturedPiece=toSquare.getPiece();
+			if(pieceMoved==null)
+				legalMove=false;
+			else if(capturedPiece!=null)
+				if(capturedPiece.isWhite()==pieceMoved.isWhite())
+					legalMove=false;
+		}
+		board=fromSquare.getBoard();
 	}
 	/**
 	 * Generic getter method to access the private member toSquare.
@@ -152,9 +209,41 @@ public class Move
 	{
 		this.toSquare = toSquare;
 		moveString="";
+		capturedPiece=toSquare.getPiece();
 		if(fromSquare!=null)
+		{
 			moveString+=fromSquare.getName();
+			if(pieceMoved==null)
+				legalMove=false;
+			else if(capturedPiece!=null)
+				if(capturedPiece.isWhite()==pieceMoved.isWhite())
+					legalMove=false;
+		}
 		moveString+=toSquare.getName();
+	}
+	public boolean isLegalMove()
+	{
+		return legalMove;
+	}
+	public void setLegalMove(boolean legalMove)
+	{
+		this.legalMove = legalMove;
+	}
+	public boolean isCheckingMove()
+	{
+		return checkingMove;
+	}
+	public void setCheckingMove(boolean checkingMove)
+	{
+		this.checkingMove = checkingMove;
+	}
+	public boolean isMatingMove()
+	{
+		return matingMove;
+	}
+	public void setMatingMove(boolean matingMove)
+	{
+		this.matingMove = matingMove;
 	}
 	/**
 	 * Generic getter method used to access the value of
@@ -211,7 +300,7 @@ public class Move
 	 * captures, checks or mate. Overrides the toString() method in
 	 * <code>Object</code> superclass.
 	 * @return String representing the move, as should be displayed to
-	 * the user.
+	 * the user, "Illegal Move "+toString() if illegal move.
 	 */
 	public String toString()
 	{
@@ -230,24 +319,22 @@ public class Move
 		}
 		else
 		{
+			//if illegal move
+			if(!legalMove)
+				returnString+="Illegal Move ";
 			//for pawn and other pieces, as for pawn, it is ""
 			if(pieceMoved.getShortAlgebraicNotation().toUpperCase()!="P")
 				returnString=pieceMoved.getShortAlgebraicNotation().toUpperCase();
 			//for captures
-			if(toSquare.getPiece()!=null)	
-				if(toSquare.getPiece().isWhite()!=fromSquare.getPiece().isWhite())
-					returnString+="x";
+			if(capturedPiece!=null)
+				returnString+="x";
 			//add destination square either way
 			returnString+=toSquare.toString();
 			//for checking and mating moves
-			if(toSquare.getPiece()!=null)
-				if(toSquare.getPiece().checks())
-				{
-					if(toSquare.getPiece().mates())
-						returnString+="#";
-					else
-						returnString+="+";
-				}
+			if(matingMove)
+				returnString+="#";
+			else if(checkingMove)
+				returnString+="+";
 		}
 		return returnString;
 	}
