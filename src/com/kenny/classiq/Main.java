@@ -1,7 +1,6 @@
 package com.kenny.classiq;
 
 import java.util.Scanner;
-
 import com.kenny.classiq.console.GUIConsole;
 import com.kenny.classiq.console.UCI;
 import com.kenny.classiq.console.XBoard;
@@ -15,12 +14,15 @@ import com.kenny.classiq.definitions.Definitions;
  * the difference between GUI and a user. The commands received from
  * the GUI are used to play the game (internally).
  * @author Kenshin Himura (Sudarsan Balaji)
+ * 
  */
 public class Main
 {
 	/**
 	 * A <code>Scanner</code> object representing the input stream
 	 * of the console, or the pipe, in case of GUI communication.
+	 * Made public so that the <code>Scanner</code> may be used by
+	 * threads other than the main thread.
 	 */
 	public static Scanner inputStream=new Scanner(System.in);
 	/**
