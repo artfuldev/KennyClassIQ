@@ -62,13 +62,8 @@ public class Listener extends Command implements Runnable
 	public void validate()
 	{
 		previousCommandString=commandString;
-		newCommand=false;
 		for(byte i=0;i<knownCommands.length;i++)
 			if(commandString.startsWith(knownCommands[i].toLowerCase()))
-				newCommand=true;
-		if(newCommand)
-			System.out.println(commandString);
-		if(commandString.matches("quit"))
-			System.exit(0);
+				commandArray.add(commandString);
 	}
 }

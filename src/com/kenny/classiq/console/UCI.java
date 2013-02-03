@@ -26,9 +26,8 @@ public class UCI extends GUIConsole
 		listen();
 	}
 	/**
-	 * Initialization function of the <code>UCI</code> protocol. Not
-	 * defined as of now. Should be expanded later to include the
-	 * processing after "isready" command.
+	 * Initialization function of the <code>UCI</code> protocol. Sends
+	 * the required messages
 	 */
 	public void init()
 	{
@@ -36,6 +35,14 @@ public class UCI extends GUIConsole
 				+Definitions.engineVersion);
 		System.out.println("id author "+Definitions.authorName);
 		System.out.println("uciok");
-		System.exit(0);
+		String[] knownCommands={"go",
+								"isready",
+								"ucinewgame",
+								"debug",
+								"stop",
+								"ponderhit",
+								"quit",
+								"position"};
+		listenerRun.setKnownCommands(knownCommands);
 	}
 }
