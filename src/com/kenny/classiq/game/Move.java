@@ -56,12 +56,6 @@ public class Move
 	private Board board;
 	/**
 	 * Holds a boolean value specifying if the move is a checking move,
-	 * or not. Calculated during of after construction. Default value is 
-	 * <code>True</code>.
-	 */
-	private boolean legalMove=true;
-	/**
-	 * Holds a boolean value specifying if the move is a checking move,
 	 * or not. Calculated during of after construction.
 	 */
 	private boolean checkingMove=false;
@@ -70,6 +64,11 @@ public class Move
 	 * or not. Calculated during of after construction.
 	 */
 	private boolean matingMove=false;
+	/**
+	 * Holds a boolean value specifying if the move is a move involving
+	 * the capture of an opponent piece or not.
+	 */
+	private boolean capturingMove=false;
 	/**
 	 * Default Constructor of <code>Move</code>.
 	 */
@@ -105,11 +104,8 @@ public class Move
 		moveString=fromSquare.getName()+toSquare.getName();
 		board=fromSquare.getBoard();
 		capturedPiece=toSquare.getPiece();
-		if(pieceMoved==null)
-			legalMove=false;
-		else if(capturedPiece!=null)
-			if(capturedPiece.isWhite()==pieceMoved.isWhite())
-				legalMove=false;
+		if(capturedPiece!=null)
+			setCapturingMove(true);
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -180,11 +176,8 @@ public class Move
 		{
 			moveString+=toSquare.getName();
 			capturedPiece=toSquare.getPiece();
-			if(pieceMoved==null)
-				legalMove=false;
-			else if(capturedPiece!=null)
-				if(capturedPiece.isWhite()==pieceMoved.isWhite())
-					legalMove=false;
+			if(capturedPiece!=null)
+				setCapturingMove(true);
 		}
 		board=fromSquare.getBoard();
 	}
@@ -210,40 +203,78 @@ public class Move
 		this.toSquare = toSquare;
 		moveString="";
 		capturedPiece=toSquare.getPiece();
+		if(capturedPiece!=null)
+			setCapturingMove(true);
 		if(fromSquare!=null)
-		{
 			moveString+=fromSquare.getName();
-			if(pieceMoved==null)
-				legalMove=false;
-			else if(capturedPiece!=null)
-				if(capturedPiece.isWhite()==pieceMoved.isWhite())
-					legalMove=false;
-		}
 		moveString+=toSquare.getName();
 	}
-	public boolean isLegalMove()
-	{
-		return legalMove;
-	}
-	public void setLegalMove(boolean legalMove)
-	{
-		this.legalMove = legalMove;
-	}
+	/**
+	 * This method is used to access the private data member hence
+	 * defined as a simple getter method. Tells us if the move is a
+	 * move which checks the opponent <code>King</code> or not.
+	 * @return <code>true</code> if a checking move, false otherwise.
+	 */
 	public boolean isCheckingMove()
 	{
 		return checkingMove;
 	}
+	/**
+	 * This method is used to access the private data member hence
+	 * defined as a simple getter method. Used to tell the <code>Move
+	 * </code> class if the move is a move which checks the opponent
+	 * <code>King</code> or not. Since the defualt value is <code>false
+	 * </code>, it should be called only during setting.
+	 * @param checkingMove <code>true</code> if a checking move
+	 */
 	public void setCheckingMove(boolean checkingMove)
 	{
 		this.checkingMove = checkingMove;
 	}
+	/**
+	 * This method is used to access the private data member hence
+	 * defined as a simple getter method. Tells us if the move is a
+	 * move which checkmates the opponent or not.
+	 * @return <code>true</code> if a mating move, false otherwise.
+	 */
 	public boolean isMatingMove()
 	{
 		return matingMove;
 	}
+	/**
+	 * This method is used to access the private data member hence
+	 * defined as a simple getter method. Used to tell the <code>Move
+	 * </code> class if the move is a move which checkmates the opponent
+	 * <code>King</code> and ends the <code>Game</code>, or not. Since
+	 * the defualt value is <code>false</code>, it should be called only
+	 * during setting.
+	 * @param matingMove <code>true</code> if a mating move
+	 */
 	public void setMatingMove(boolean matingMove)
 	{
 		this.matingMove = matingMove;
+	}
+	/**
+	 * This method is used to access the private data member hence
+	 * defined as a simple getter method. Tells us if the move is a
+	 * move which captures an opponent <code>Piece</code> or not.
+	 * @return <code>true</code> if a capturing move, false otherwise.
+	 */
+	public boolean isCapturingMove()
+	{
+		return capturingMove;
+	}
+	/**
+	 * This method is used to access the private data member hence
+	 * defined as a simple getter method. Used to tell the <code>Move
+	 * </code> class if the move is a move which captures an opponent
+	 * <code>Piece</code> or not. Since the defualt value is <code>false
+	 * </code>, it should be called only during setting.
+	 * @param checkingMove <code>true</code> if a checking move
+	 */
+	public void setCapturingMove(boolean capturingMove)
+	{
+		this.capturingMove = capturingMove;
 	}
 	/**
 	 * Generic getter method used to access the value of
@@ -266,14 +297,20 @@ public class Move
 	 */
 	public void setMoveString(String moveString)
 	{
-		this.moveString = moveString;
+		this.moveString=moveString;
 		for(byte i=0;i<64;i++)
 		{
-			if(moveString.startsWith(getBoard().getSquare(i).getName()))
-				setFromSquare(getBoard().getSquare(i));
-			if(moveString.endsWith(getBoard().getSquare(i).getName()))
-				setToSquare(getBoard().getSquare(i));
+			if(moveString.startsWith(board.getSquare(i).getName()))
+				fromSquare=board.getSquare(i);
+			if(moveString.endsWith(board.getSquare(i).getName()))
+				toSquare=board.getSquare(i);
+			if((fromSquare!=null)&&(toSquare!=null))
+				break;
 		}
+		pieceMoved=fromSquare.getPiece();
+		capturedPiece=toSquare.getPiece();
+		if(capturedPiece!=null)
+			setCapturingMove(true);
 	}
 	/**
 	 * Generic getter method used to access the private data member
@@ -319,15 +356,17 @@ public class Move
 		}
 		else
 		{
-			//if illegal move
-			if(!legalMove)
-				returnString+="Illegal Move ";
 			//for pawn and other pieces, as for pawn, it is ""
 			if(pieceMoved.getShortAlgebraicNotation().toUpperCase()!="P")
 				returnString=pieceMoved.getShortAlgebraicNotation().toUpperCase();
 			//for captures
 			if(capturedPiece!=null)
+			{
+				//if pawn captures, add file of pawn
+				if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P")
+					returnString+=fromSquare.getFile().getName();
 				returnString+="x";
+			}
 			//add destination square either way
 			returnString+=toSquare.toString();
 			//for checking and mating moves
