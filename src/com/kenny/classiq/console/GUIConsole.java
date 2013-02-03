@@ -3,13 +3,13 @@ package com.kenny.classiq.console;
 /**
  * The <code>GUI</code> class represents a Console which will accept
  * commands from the GUI and send appropriate replies. Hence it implements
- * the <code>>CommunicationProtocol</code> interface. It extends the <code>
+ * the <code>CommunicationProtocol</code> interface. It extends the <code>
  * Command</code> class to have access to the inherited static data member
  * <code>commandString</code>. It contains an inputReader, a listener and
  * an executor. Additionally, it defines the listen() inherited from the
  * interface.
  * <p>
- * It is defined as n abstract class because the <code>UCI</code> and
+ * It is defined as an abstract class because the <code>UCI</code> and
  * <code>XBoard</code> classes alone will have objects.
  * @author Kenshin Himura (Sudarsan Balaji)
  *
@@ -58,8 +58,8 @@ public abstract class GUIConsole extends Command implements CommunicationProtoco
 	 */
 	public void listen()
 	{
-			inputReader.start();
-			listener.start();
-			executor.start();
+		inputReader.start();
+		listener.start();
+		executor.start();
 	}
 }

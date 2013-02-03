@@ -23,17 +23,6 @@ public class XBoard extends GUIConsole
 	 */
 	private byte protocolVersion=1;
 	/**
-	 * Holds an object of class <code>UCI</code>. In the case of automatic
-	 * detection of protocol, sometimes the command <code>"uci"</code>
-	 * is sent after the command <code>"xboard"</code>. This is done by the
-	 * GUI in order to check which of the two protocols the engine supports.
-	 * In such cases, we go with <code>UCI</code> when both are
-	 * supported, and with <code>XBoard</code> when only <code>XBoard</code>
-	 * is supported by the GUI. Hence, a uciConsole is necessary, even from
-	 * within <code>XBoard</code>.
-	 */
-	UCI uciConsole;
-	/**
 	 * Holds the object of <code>Scanner</code> used to represent the input
 	 * stream of the application. Console in the case of console program, or
 	 * pipes in the case of GUI interaction.
@@ -45,7 +34,7 @@ public class XBoard extends GUIConsole
 	 */
 	public XBoard()
 	{
-		uciConsole=new UCI();
+		
 	}
 	/**
 	 * Overrides the start() of <code>Thread</code>. Constructs a <code>
@@ -72,19 +61,25 @@ public class XBoard extends GUIConsole
 			String[] split=commandString.split("\\s");
 			if(split.length>1)
 				protocolVersion=Byte.parseByte(split[1]);
+			System.out.println("accepted protover "+protocolVersion);
+			setFeatures();
 		}
-		System.out.println("accepted protover "+protocolVersion);
-		setFeatures();
+		else
+			System.out.println("defaulted to protover "+protocolVersion);
 		String[] knownCommands={"new",
 								"post",
 								"go",
 								"force",
+								"hard",
+								"random",
+								"easy",
 								"INPUT MOVES",
 								"level",
 								"time",
 								"ping",
 								"usermove",
-								"setboard"};
+								"setboard",
+								"quit"};
 		listenerRun.setKnownCommands(knownCommands);
 	}
 	/**
