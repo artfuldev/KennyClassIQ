@@ -30,7 +30,8 @@ public class XBoard extends GUIConsole
 	 * In such cases, we go with <code>UCI</code> when both are
 	 * supported, and with <code>XBoard</code> when only <code>XBoard</code>
 	 * is supported by the GUI. Hence, a uciConsole is necessary, even from
-	 * within <code>XBoard</code>.
+	 * within <code>XBoard</code>. This means that <code>UCI</code> is our
+	 * preferred protocol for communication.
 	 */
 	UCI uciConsole;
 	/**
@@ -72,19 +73,27 @@ public class XBoard extends GUIConsole
 			String[] split=commandString.split("\\s");
 			if(split.length>1)
 				protocolVersion=Byte.parseByte(split[1]);
+			System.out.println("accepted protover "+protocolVersion);
+			setFeatures();
 		}
-		System.out.println("accepted protover "+protocolVersion);
-		setFeatures();
+		else if(commandString.startsWith("uci"))
+			uciConsole.start();
+		else
+			System.out.println("defaulted to protover "+protocolVersion);
 		String[] knownCommands={"new",
 								"post",
 								"go",
 								"force",
+								"hard",
+								"random",
+								"easy",
 								"INPUT MOVES",
 								"level",
 								"time",
 								"ping",
 								"usermove",
-								"setboard"};
+								"setboard",
+								"quit"};
 		listenerRun.setKnownCommands(knownCommands);
 	}
 	/**

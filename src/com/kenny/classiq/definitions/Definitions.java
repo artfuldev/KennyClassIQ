@@ -24,7 +24,7 @@ public class Definitions
 	/**
 	 * Holds the version of the engine.
 	 */
-	public static final String engineVersion="0.0.9 build 748";
+	public static final String engineVersion="0.0.9.1 build 773";
 	/**
 	 * Holds the error string.
 	 */
@@ -34,4 +34,8 @@ public class Definitions
 	 * usually one which is not understood by the engine.
 	 */
 	public static final String errorInCommandString="Error (unknown command): ";
+	/**
+	 * Holds the string to output a debug message.
+	 */
+	public static final String debugMessage="##debugMsg: ";
 }
