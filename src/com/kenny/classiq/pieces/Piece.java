@@ -8,7 +8,7 @@ import com.kenny.classiq.board.Square;
  * classes derived from this superclass. Enhances the OOPS concept
  * implementation. An abstract class, because no objects will be created of
  * <code>Piece</code> type.
- * @author Kenshin Himura
+ * @author Kenshin Himura (Sudarsan Balaji)
  *
  */
 public abstract class Piece
