@@ -1,5 +1,7 @@
 package com.kenny.classiq.console;
 
+import com.kenny.classiq.definitions.Definitions;
+
 /**
  * The <code>UCIExecutor</code> class extends <code>Executor</code> and thus
  * inherits its run() method by default. All that remains is to define its
@@ -14,12 +16,24 @@ public class UCIExecutor extends Executor
 	 * listener. It is used to check for specific cases and then call
 	 * the respective functions to execute such commands, by passing
 	 * the correct corresponding paramaters to those functions, according
-	 * to the <code>UCI</code> protocol. It is yet to be defined.
+	 * to the <code>UCI</code> protocol.
 	 * @param commandString The full command to be executed, as a
 	 * <code>String</code>.
 	 */
 	public void execute(String commandString)
 	{
-		
+		String[] splitString=commandString.split("\\s");
+		if(commandString.startsWith("quit"))
+			System.exit(0);
+		else
+		{
+			//implemented commands
+			if(commandString.startsWith("isready"))
+				System.out.println("readyok");
+			else
+			//commands not implemented properly
+				System.out.println(Definitions.debugMessage+"received "
+									+splitString[0]);
+		}
 	}
 }
