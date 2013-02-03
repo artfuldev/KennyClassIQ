@@ -1,9 +1,9 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.8 build 693 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
+* Latest Application Version: 0.0.9 build 748 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
-* ReadMe Version: 2.0
+* ReadMe Version: 2.1
 
 ##Description
 
@@ -31,8 +31,7 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 * To have a close-to-real-world representation of the game inside the program
 
 ###Short Term
-* To finish defining *XBoard* class, *CommunicationProtocol* interface properly.
 * To finish defining only the necessary things for a game, ie, *Square, Piece*, etc, and atleast play random moves.
+* To do move generation and legal move checking.
 * To finish defining *Game*.
 * To finish adding commentary to all uploaded files.
-* To make an executable jar (console program) capable of communicating with Arena GUI, identifying all possible xboard/winboard commands.

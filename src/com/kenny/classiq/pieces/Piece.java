@@ -8,7 +8,7 @@ import com.kenny.classiq.board.Square;
  * classes derived from this superclass. Enhances the OOPS concept
  * implementation. An abstract class, because no objects will be created of
  * <code>Piece</code> type.
- * @author Kenshin Himura
+ * @author Kenshin Himura (Sudarsan Balaji)
  *
  */
 public abstract class Piece
@@ -86,17 +86,5 @@ public abstract class Piece
 		if(square!=null)
 			returnString+=" at "+square.toString();
 		return returnString;
-	}
-	public boolean checks()
-	{
-		//if attacking squares of piece contains king of opposite colour
-			//return true
-		return false;
-	}
-	public boolean mates()
-	{
-		//if checks(), and opponent has no legal moves
-			//return true
-		return false;
 	}
 }
