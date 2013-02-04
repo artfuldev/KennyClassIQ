@@ -96,10 +96,10 @@ public class XBoard extends GUIConsole
 			System.out.println("feature done=0");
 			//set features here
 			System.out.println(	 "feature analyze=0 usermove=1 setboard=1 "
-								+"time=0 sigint=0 sigterm=0 feature colors=0 "
-								+"feature ping=1 feature draw=0 pause=0 "
-								+"variants=normal myname="+Definitions.engineName
-								+" "+Definitions.engineVersion);
+								+"time=0 sigint=0 sigterm=0 colors=0 ping=1 "
+								+"draw=0 pause=0 variants=normal myname="
+								+Definitions.engineName+" "
+								+Definitions.engineVersion);
 			//feature setting done
 			System.out.println("feature done=1");
 		}
