@@ -1,11 +1,16 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.10.1 build 876
+* Latest Application Version: 0.0.10.2 build 892
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.5
 
 ##Version History
+
+######Version 0.0.10.2 (892)
+* Corrected *setFeatures* output.
+* Removed redundant "feature" output.
+* Changed when *Executor* executes.
 
 ######Version 0.0.10.1 (876)
 * Improved *moveList* of *Game*, made it an *ArrayList*.
