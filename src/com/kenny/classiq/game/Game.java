@@ -65,9 +65,9 @@ public class Game
 	 * Incremented on every <code>Move</code>, and decremented for every
 	 * undo. If %2 of this is 1, it is black's turn, else it is white's.
 	 * Hence used to keep a record of the turn number. Incidentally it is
-	 * also equal to <code>moveList.length</code>.
+	 * also equal to <code>moveList.size()</code>.
 	 */
-	int halfMoveNumber=1;
+	int halfMoveNumber=0;
 	/**
 	 * The <code>PieceSet</code> of the <code>Game</code>, which holds all
 	 * the pieces necessary to play the <code>Game</code>. <code>Piece</code>s
@@ -159,5 +159,27 @@ public class Game
 	public ArrayList<Move> getMoveList()
 	{
 		return moveList;
+	}
+	public int getHalfMoveNumber()
+	{
+		return halfMoveNumber;
+	}
+	public void setHalfMoveNumber(int halfMoveNumber)
+	{
+		this.halfMoveNumber = halfMoveNumber;
+	}
+	public void printMainLine()
+	{
+		if(moveList.isEmpty())
+			System.out.print("No moves");
+		else
+			for(int i=0;i<moveList.size();i++)
+			{
+				if(i%2==0)
+					System.out.print(i+1);
+				System.out.print(" ");
+				System.out.print(moveList.get(i));
+			}
+		System.out.println();
 	}
 }
