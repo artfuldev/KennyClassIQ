@@ -1,11 +1,17 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.10.3 build 911
+* Latest Application Version: 0.0.11 build 930
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.5
 
 ##Version History
+
+#####Version 0.0.11 (930)
+* Added *halfMoveClock* for FEN and 50-Moves Rule.
+* Improved *Move*.
+* Improved *makeMove() and unMakeMove()* to work with the change.
+* Added *HalfMoveTest*.
 
 ######Version 0.0.10.3 (911)
 * Improved *halfMoveNumber* of *Game*.
