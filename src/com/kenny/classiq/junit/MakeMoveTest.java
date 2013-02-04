@@ -1,7 +1,5 @@
 package com.kenny.classiq.junit;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import com.kenny.classiq.game.Game;
@@ -16,19 +14,23 @@ public class MakeMoveTest
 		Move moveToMake=new Move(chessGame.getGameBoard());
 		moveToMake.setMoveString("e2d7");
 		chessGame.showBoard();
-		System.out.println();
+		System.out.println("Making move "+moveToMake.getMoveString());
 		chessGame.getPlayerOne().makeMove(moveToMake);
 		chessGame.showBoard();
-		System.out.println();
+		chessGame.printMainLine();
 		Move secondMoveToMake=new Move(chessGame.getGameBoard());
 		secondMoveToMake.setMoveString("d7d8");
+		System.out.println("Making move "+secondMoveToMake.getMoveString());
 		chessGame.getPlayerTwo().makeMove(secondMoveToMake);
 		chessGame.showBoard();
-		System.out.println();
+		chessGame.printMainLine();
+		System.out.println("UnMaking move "+secondMoveToMake.getMoveString());
 		chessGame.getPlayerTwo().unMakeMove(secondMoveToMake);
 		chessGame.showBoard();
-		System.out.println();
+		chessGame.printMainLine();
+		System.out.println("UnMaking move "+moveToMake.getMoveString());
 		chessGame.getPlayerOne().unMakeMove(moveToMake);
 		chessGame.showBoard();
+		chessGame.printMainLine();
 	}
 }

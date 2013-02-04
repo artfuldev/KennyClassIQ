@@ -1,11 +1,34 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.10 build 853
+* Latest Application Version: 0.0.11 build 930
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.5
 
 ##Version History
+
+#####Version 0.0.11 (930)
+* Added *halfMoveClock* for FEN and 50-Moves Rule.
+* Improved *Move*.
+* Improved *makeMove() and unMakeMove()* to work with the change.
+* Added *HalfMoveTest*.
+
+######Version 0.0.10.3 (911)
+* Improved *halfMoveNumber* of *Game*.
+* Fixed issue #104.
+* Added ability of players to change the *halfMoveNumber* when they make a  *Move*.
+* Improved *MakeMoveTest*, the *jUnit Test Case*.
+* Added *printMainLine* to *Game*.
+
+######Version 0.0.10.2 (892)
+* Corrected *setFeatures* output.
+* Removed redundant "feature" output.
+* Changed when *Executor* executes.
+
+######Version 0.0.10.1 (876)
+* Improved *moveList* of *Game*, made it an *ArrayList*.
+* Implemented updation of *moveList* in *Game* with every *makeMove()* and *unMakeMove()* of *Player*.
+* Made jUnit Test Case *MakeMoveTest* capable of testing this updation.
 
 #####Version 0.0.10 (853)
 * Added *makeMove()*.
