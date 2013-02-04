@@ -17,6 +17,7 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 * Unplayable.
 * Better *Move* system *(Players make Moves in the Game)*.
 * Automatic *MoveList* of *Game* updation.
+* Better *printMainLine()* implementation.
 * Better-than-ever *Console* implementation, with reader, listener and executor threads.
 * Other features yet to come! :D
 
