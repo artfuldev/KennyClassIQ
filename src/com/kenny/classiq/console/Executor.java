@@ -29,7 +29,7 @@ public abstract class Executor extends Command implements Runnable
 			try
 			{
 				Thread.sleep(50);
-				while(commandArray.size()>0)
+				while(!commandArray.isEmpty())
 				{
 					execute(commandArray.get(0));
 					commandArray.remove(0);
