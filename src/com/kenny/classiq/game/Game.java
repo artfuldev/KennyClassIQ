@@ -69,6 +69,14 @@ public class Game
 	 */
 	int halfMoveNumber=0;
 	/**
+	 * Holds the number of half-<code>Move</code>s made in the <code>Game</code>
+	 * since the last <code>Pawn</code> advance or capture. This is used to
+	 * determine if a draw can be claimed under the fifty-move rule, and is used
+	 * in the generation and use of the FEN String. Declared as a byte because the
+	 * maximum value it can take is 50.
+	 */
+	byte halfMoveClock=0;
+	/**
 	 * The <code>PieceSet</code> of the <code>Game</code>, which holds all
 	 * the pieces necessary to play the <code>Game</code>. <code>Piece</code>s
 	 * are taken from the <code>PieceSet</code> and placed on the
@@ -167,6 +175,14 @@ public class Game
 	public void setHalfMoveNumber(int halfMoveNumber)
 	{
 		this.halfMoveNumber = halfMoveNumber;
+	}
+	public byte getHalfMoveClock()
+	{
+		return halfMoveClock;
+	}
+	public void setHalfMoveClock(byte halfMoveClock)
+	{
+		this.halfMoveClock = halfMoveClock;
 	}
 	public void printMainLine()
 	{
