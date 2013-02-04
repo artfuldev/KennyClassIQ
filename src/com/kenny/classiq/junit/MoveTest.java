@@ -3,6 +3,8 @@ package com.kenny.classiq.junit;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
 
@@ -11,7 +13,7 @@ public class MoveTest
 	@Test
 	public void test()
 	{
-		Game game=new Game();
+		Game game=new Game(Definitions.startPositionFEN);
 		Move moveOne=new Move(game.getGameBoard());
 		Move moveTwo=new Move(game.getGameBoard().getSquare("d2"),
 				game.getGameBoard().getSquare("e7"));

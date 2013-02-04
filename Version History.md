@@ -1,11 +1,22 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.11 build 930
+* Latest Application Version: 0.0.12 build 990
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * Version History Document Version: 1.5
 
 ##Version History
+
+#####Version 0.0.12 (990)
+* Yep, a major jump! Added *FEN* implementation, fixed issue #51.
+* Updated *Game* construction to use FEN strings.
+* Removed defualt *Game* constructor.
+* Removed *setupBoard()* from *Game*.
+* Removed *halfMoveNumber* from *Game*.
+* Added *moveNumber, enPassantSquare, and castlingRights* to *Game*.
+* Added *startPositionFEN* to *Definitions*.
+* Updated *Player* to support *moveNumber* instead of *halfMoveNumber*.
+* Added *FENTest* jUnit Test Case, to showcase FEN implementation.
 
 #####Version 0.0.11 (930)
 * Added *halfMoveClock* for FEN and 50-Moves Rule.
