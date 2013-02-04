@@ -141,6 +141,7 @@ public abstract class Player
 							moveToMake.getCapturedPiece());
 		moveToMake.getFromSquare().setPiece(null);
 		moveToMake.getToSquare().setPiece(moveToMake.getPieceMoved());
+		moveToMake.getBoard().getGame().getMoveList().add(moveToMake);
 	}
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
@@ -156,5 +157,6 @@ public abstract class Player
 			moveToUnMake.getToSquare().setPiece(null);
 		else
 			moveToUnMake.getToSquare().setPiece(moveToUnMake.getCapturedPiece());
+		moveToUnMake.getBoard().getGame().getMoveList().remove(moveToUnMake);
 	}
 }
