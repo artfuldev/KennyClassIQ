@@ -12,6 +12,7 @@
 * Fixed issue #104.
 * Added ability of players to change the *halfMoveNumber* when they make a  *Move*.
 * Improved *MakeMoveTest*, the *jUnit Test Case*.
+* Added *printMainLine* to *Game*.
 
 ######Version 0.0.10.2 (892)
 * Corrected *setFeatures* output.
