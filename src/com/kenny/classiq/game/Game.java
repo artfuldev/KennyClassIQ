@@ -3,6 +3,7 @@ package com.kenny.classiq.game;
 import java.util.ArrayList;
 
 import com.kenny.classiq.board.Board;
+import com.kenny.classiq.board.Square;
 import com.kenny.classiq.pieces.Piece;
 import com.kenny.classiq.players.AI;
 import com.kenny.classiq.players.GUI;
@@ -60,14 +61,11 @@ public class Game
 	 */
 	private ArrayList<Move> moveList;
 	/**
-	 * Holds the number of half-<code>Move</code>s made in the game.
-	 * When divided by 2, gives the number of <code>Move</code>s made.
-	 * Incremented on every <code>Move</code>, and decremented for every
-	 * undo. If %2 of this is 1, it is black's turn, else it is white's.
-	 * Hence used to keep a record of the turn number. Incidentally it is
-	 * also equal to <code>moveList.size()</code>.
+	 * Holds the number of <code>Move</code>s made in the game.
+	 * Incremented on every black <code>Move</code>, and decremented for every
+	 * undo.
 	 */
-	int halfMoveNumber=0;
+	int moveNumber=0;
 	/**
 	 * Holds the number of half-<code>Move</code>s made in the <code>Game</code>
 	 * since the last <code>Pawn</code> advance or capture. This is used to
@@ -77,6 +75,39 @@ public class Game
 	 */
 	byte halfMoveClock=0;
 	/**
+	 * Holds the FEN String representing this <code>Game</code>. Is updated
+	 * whenever the <code>Board</code> is updated, or whenever it is queried.
+	 */
+	private String fenString;
+	/**
+	 * Holds a boolean representing whether it is white's turn to move.
+	 * May be used by the <code>Player</code>s, or may be used to generate
+	 * the FEN String of this <code>Game</code>. Has a default value of
+	 * <code>true</code>.
+	 */
+	boolean whiteToMove=true;
+	/**
+	 * Holds a boolean representing whether white can castle kingside.
+	 */
+	boolean whiteCastleKingside=false;
+	/**
+	 * Holds a boolean representing whether white can castle queenside.
+	 */
+	boolean whiteCastleQueenside=false;
+	/**
+	 * Holds a boolean representing whether black can castle kingside.
+	 */
+	boolean blackCastleKingside=false;
+	/**
+	 * Holds a boolean representing whether black can castle queenside.
+	 */
+	boolean blackCastleQueenside=false;
+	/**
+	 * Holds a reference to the curent en-passant <code>Square</code> of
+	 * the <code>Game</code>.
+	 */
+	private Square enPassantSquare;
+	/**
 	 * The <code>PieceSet</code> of the <code>Game</code>, which holds all
 	 * the pieces necessary to play the <code>Game</code>. <code>Piece</code>s
 	 * are taken from the <code>PieceSet</code> and placed on the
@@ -85,10 +116,11 @@ public class Game
 	 */
 	private PieceSet pieceSet;
 	/**
-	 * Default constructor of <code>Game</code>. Creates all objects within the
-	 * <code>Game</code> and initializes them.
+	 * This is the newer constructor of <code>Game</code> which takes a
+	 * FEN String as a parameter in order to setup a new game that way.
+	 * @param fenString The FEN String of the <code>Game</code> to be setup.
 	 */
-	public Game()
+	public Game(String fenString)
 	{
 		gameBoard=new Board(this);
 		lastMovedPiece=null;
@@ -97,7 +129,62 @@ public class Game
 		currentPlayer=playerOne;
 		pieceSet=new PieceSet();
 		moveList=new ArrayList<Move>();
-		setupBoard();
+		this.fenString=fenString;
+		String[] fenTokens=fenString.split("\\s");
+		char[] positionString=fenTokens[0].toCharArray();
+		for(byte i=0,rankIndex=7,fileIndex=0;i<positionString.length;i++)
+		{
+			byte index=(byte)((rankIndex*8)+fileIndex);
+			if(positionString[i]=='k')
+				gameBoard.setPiece(pieceSet.getPiece("black","king"),index);
+			else if(positionString[i]=='K')
+				gameBoard.setPiece(pieceSet.getPiece("white","king"),index);
+			else if(positionString[i]=='q')
+				gameBoard.setPiece(pieceSet.getPiece("black","queen"),index);
+			else if(positionString[i]=='Q')
+				gameBoard.setPiece(pieceSet.getPiece("white","queen"),index);
+			else if(positionString[i]=='b')
+				gameBoard.setPiece(pieceSet.getPiece("black","bishop"),index);
+			else if(positionString[i]=='B')
+				gameBoard.setPiece(pieceSet.getPiece("white","bishop"),index);
+			else if(positionString[i]=='n')
+				gameBoard.setPiece(pieceSet.getPiece("black","knight"),index);
+			else if(positionString[i]=='N')
+				gameBoard.setPiece(pieceSet.getPiece("white","knight"),index);
+			else if(positionString[i]=='r')
+				gameBoard.setPiece(pieceSet.getPiece("black","rook"),index);
+			else if(positionString[i]=='R')
+				gameBoard.setPiece(pieceSet.getPiece("white","rook"),index);
+			else if(positionString[i]=='p')
+				gameBoard.setPiece(pieceSet.getPiece("black","pawn"),index);
+			else if(positionString[i]=='P')
+				gameBoard.setPiece(pieceSet.getPiece("queen","pawn"),index);
+			else if(positionString[i]=='/')
+			{
+				rankIndex--;
+				fileIndex=-1;
+			}
+			else
+			{
+				String tempString=positionString[i]+"";
+				fileIndex+=Byte.parseByte(tempString)-1;
+			}
+			fileIndex++;
+		}
+		if(fenTokens[1]!="w")
+			whiteToMove=false;
+		if(fenTokens[2].contains("K"))
+			whiteCastleKingside=true;
+		if(fenTokens[2].contains("Q"))
+			whiteCastleQueenside=true;
+		if(fenTokens[2].contains("k"))
+			blackCastleKingside=true;
+		if(fenTokens[2].contains("q"))
+			blackCastleQueenside=true;
+		if(fenTokens[3]!="-")
+			setEnPassantSquare(gameBoard.getSquare(fenTokens[3]));
+		halfMoveClock=Byte.parseByte(fenTokens[4]);
+		moveNumber=Integer.parseInt(fenTokens[5]);
 	}
 	/**
 	 * Generic getter method used to access the private data member
@@ -107,34 +194,6 @@ public class Game
 	public Board getGameBoard()
 	{
 		return gameBoard;
-	}
-	/**
-	 * This method is used to set up a "new game" position. <code>Board</code>
-	 * positions are reset, and the references are changed. Called
-	 * from the default <code>Game</code> constructor.
-	 */
-	public void setupBoard()
-	{
-		for(byte i=8;i<16;i++)
-			gameBoard.setPiece(pieceSet.getPiece("white","pawn"),i);
-		for(byte i=48;i<56;i++)
-			gameBoard.setPiece(pieceSet.getPiece("black","pawn"),i);
-		gameBoard.setPiece(pieceSet.getPiece("white","rook"),"a1");
-		gameBoard.setPiece(pieceSet.getPiece("white","rook"),"h1");
-		gameBoard.setPiece(pieceSet.getPiece("black","rook"),"a8");
-		gameBoard.setPiece(pieceSet.getPiece("black","rook"),"h8");
-		gameBoard.setPiece(pieceSet.getPiece("white","knight"),"b1");
-		gameBoard.setPiece(pieceSet.getPiece("white","knight"),"g1");
-		gameBoard.setPiece(pieceSet.getPiece("black","knight"),"b8");
-		gameBoard.setPiece(pieceSet.getPiece("black","knight"),"g8");
-		gameBoard.setPiece(pieceSet.getPiece("white","bishop"),"c1");
-		gameBoard.setPiece(pieceSet.getPiece("white","bishop"),"f1");
-		gameBoard.setPiece(pieceSet.getPiece("black","bishop"),"c8");
-		gameBoard.setPiece(pieceSet.getPiece("black","bishop"),"f8");
-		gameBoard.setPiece(pieceSet.getPiece("white","queen"),"d1");
-		gameBoard.setPiece(pieceSet.getPiece("white","king"),"e1");
-		gameBoard.setPiece(pieceSet.getPiece("black","queen"),"d8");
-		gameBoard.setPiece(pieceSet.getPiece("black","king"),"e8");
 	}
 	/**
 	 * Used to display the <code>Board</code> of the <code>Game</code>.
@@ -168,13 +227,13 @@ public class Game
 	{
 		return moveList;
 	}
-	public int getHalfMoveNumber()
+	public int getMoveNumber()
 	{
-		return halfMoveNumber;
+		return moveNumber;
 	}
-	public void setHalfMoveNumber(int halfMoveNumber)
+	public void setMoveNumber(int moveNumber)
 	{
-		this.halfMoveNumber = halfMoveNumber;
+		this.moveNumber = moveNumber;
 	}
 	public byte getHalfMoveClock()
 	{
@@ -183,6 +242,22 @@ public class Game
 	public void setHalfMoveClock(byte halfMoveClock)
 	{
 		this.halfMoveClock = halfMoveClock;
+	}
+	public String getFenString()
+	{
+		return fenString;
+	}
+	public void setFenString(String fenString)
+	{
+		this.fenString = fenString;
+	}
+	public Square getEnPassantSquare()
+	{
+		return enPassantSquare;
+	}
+	public void setEnPassantSquare(Square enPassantSquare)
+	{
+		this.enPassantSquare = enPassantSquare;
 	}
 	public void printMainLine()
 	{
