@@ -1,5 +1,7 @@
 package com.kenny.classiq.game;
 
+import java.util.ArrayList;
+
 import com.kenny.classiq.board.Board;
 import com.kenny.classiq.pieces.Piece;
 import com.kenny.classiq.players.AI;
@@ -56,7 +58,7 @@ public class Game
 	 * Holds the list of <code>Move</code>s made in the game. May be used to
 	 * replay the <code>Game</code>, if such features are necessary later.
 	 */
-	private Move[] moveList;
+	private ArrayList<Move> moveList;
 	/**
 	 * Holds the number of half-<code>Move</code>s made in the game.
 	 * When divided by 2, gives the number of <code>Move</code>s made.
@@ -86,6 +88,7 @@ public class Game
 		playerTwo=new AI(this,"black");
 		currentPlayer=playerOne;
 		pieceSet=new PieceSet();
+		moveList=new ArrayList<Move>();
 		setupBoard();
 	}
 	/**
@@ -152,5 +155,9 @@ public class Game
 	public Player getPlayerTwo()
 	{
 		return playerTwo;
+	}
+	public ArrayList<Move> getMoveList()
+	{
+		return moveList;
 	}
 }
