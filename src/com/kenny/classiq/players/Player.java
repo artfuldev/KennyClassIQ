@@ -141,6 +141,14 @@ public abstract class Player
 							moveToMake.getCapturedPiece());
 		moveToMake.getFromSquare().setPiece(null);
 		moveToMake.getToSquare().setPiece(moveToMake.getPieceMoved());
+		moveToMake.getBoard().getGame().getMoveList().add(moveToMake);
+		moveToMake.getBoard().getGame().setHalfMoveNumber(
+				moveToMake.getBoard().getGame().getHalfMoveNumber()+1);
+		if(moveToMake.getHalfMoveClock()!=0)
+			moveToMake.getBoard().getGame().setHalfMoveClock((byte)0);
+		else
+			moveToMake.getBoard().getGame().setHalfMoveClock((byte)
+					(moveToMake.getBoard().getGame().getHalfMoveClock()+1));
 	}
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
@@ -156,5 +164,14 @@ public abstract class Player
 			moveToUnMake.getToSquare().setPiece(null);
 		else
 			moveToUnMake.getToSquare().setPiece(moveToUnMake.getCapturedPiece());
+		moveToUnMake.getBoard().getGame().getMoveList().remove(moveToUnMake);
+		moveToUnMake.getBoard().getGame().setHalfMoveNumber(
+				moveToUnMake.getBoard().getGame().getHalfMoveNumber()-1);
+		if(moveToUnMake.getHalfMoveClock()!=0)
+			moveToUnMake.getBoard().getGame().setHalfMoveClock(moveToUnMake.
+				getHalfMoveClock());
+		else
+			moveToUnMake.getBoard().getGame().setHalfMoveClock((byte)
+					(moveToUnMake.getBoard().getGame().getHalfMoveClock()-1));
 	}
 }

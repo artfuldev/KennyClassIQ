@@ -1,5 +1,7 @@
 package com.kenny.classiq.game;
 
+import java.util.ArrayList;
+
 import com.kenny.classiq.board.Board;
 import com.kenny.classiq.pieces.Piece;
 import com.kenny.classiq.players.AI;
@@ -56,16 +58,24 @@ public class Game
 	 * Holds the list of <code>Move</code>s made in the game. May be used to
 	 * replay the <code>Game</code>, if such features are necessary later.
 	 */
-	private Move[] moveList;
+	private ArrayList<Move> moveList;
 	/**
 	 * Holds the number of half-<code>Move</code>s made in the game.
 	 * When divided by 2, gives the number of <code>Move</code>s made.
 	 * Incremented on every <code>Move</code>, and decremented for every
 	 * undo. If %2 of this is 1, it is black's turn, else it is white's.
 	 * Hence used to keep a record of the turn number. Incidentally it is
-	 * also equal to <code>moveList.length</code>.
+	 * also equal to <code>moveList.size()</code>.
 	 */
-	int halfMoveNumber=1;
+	int halfMoveNumber=0;
+	/**
+	 * Holds the number of half-<code>Move</code>s made in the <code>Game</code>
+	 * since the last <code>Pawn</code> advance or capture. This is used to
+	 * determine if a draw can be claimed under the fifty-move rule, and is used
+	 * in the generation and use of the FEN String. Declared as a byte because the
+	 * maximum value it can take is 50.
+	 */
+	byte halfMoveClock=0;
 	/**
 	 * The <code>PieceSet</code> of the <code>Game</code>, which holds all
 	 * the pieces necessary to play the <code>Game</code>. <code>Piece</code>s
@@ -86,6 +96,7 @@ public class Game
 		playerTwo=new AI(this,"black");
 		currentPlayer=playerOne;
 		pieceSet=new PieceSet();
+		moveList=new ArrayList<Move>();
 		setupBoard();
 	}
 	/**
@@ -152,5 +163,39 @@ public class Game
 	public Player getPlayerTwo()
 	{
 		return playerTwo;
+	}
+	public ArrayList<Move> getMoveList()
+	{
+		return moveList;
+	}
+	public int getHalfMoveNumber()
+	{
+		return halfMoveNumber;
+	}
+	public void setHalfMoveNumber(int halfMoveNumber)
+	{
+		this.halfMoveNumber = halfMoveNumber;
+	}
+	public byte getHalfMoveClock()
+	{
+		return halfMoveClock;
+	}
+	public void setHalfMoveClock(byte halfMoveClock)
+	{
+		this.halfMoveClock = halfMoveClock;
+	}
+	public void printMainLine()
+	{
+		if(moveList.isEmpty())
+			System.out.print("No moves");
+		else
+			for(int i=0;i<moveList.size();i++)
+			{
+				if(i%2==0)
+					System.out.print(i+1);
+				System.out.print(" ");
+				System.out.print(moveList.get(i));
+			}
+		System.out.println();
 	}
 }

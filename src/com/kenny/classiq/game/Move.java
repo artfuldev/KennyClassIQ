@@ -42,6 +42,14 @@ public class Move
 	 */
 	private Square toSquare;
 	/**
+	 * Holds the number of half-<code>Move</code>s made in the <code>Game</code>
+	 * since the last <code>Pawn</code> advance or capture. This is used to
+	 * determine if a draw can be claimed under the fifty-move rule, and is used
+	 * during unMakeMove to restore the previous value. Declared as a byte
+	 * because the maximum value it can take is 50.
+	 */
+	private byte halfMoveClock=0;
+	/**
 	 * Holds the string which represents the move in simple WinBoard
 	 * notation, eg, "e2e4". This should be sent to the GUI as a command,
 	 * if the engine wants to play this move.
@@ -105,7 +113,10 @@ public class Move
 		board=fromSquare.getBoard();
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
-			setCapturingMove(true);
+			capturingMove=true;
+		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+			capturingMove)
+			halfMoveClock=board.getGame().getHalfMoveClock();
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -177,9 +188,12 @@ public class Move
 			moveString+=toSquare.getName();
 			capturedPiece=toSquare.getPiece();
 			if(capturedPiece!=null)
-				setCapturingMove(true);
+				this.capturingMove=true;
 		}
 		board=fromSquare.getBoard();
+		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+				capturingMove)
+				halfMoveClock=board.getGame().getHalfMoveClock();
 	}
 	/**
 	 * Generic getter method to access the private member toSquare.
@@ -204,10 +218,13 @@ public class Move
 		moveString="";
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
-			setCapturingMove(true);
+			capturingMove=true;
 		if(fromSquare!=null)
 			moveString+=fromSquare.getName();
 		moveString+=toSquare.getName();
+		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+				capturingMove)
+				halfMoveClock=board.getGame().getHalfMoveClock();
 	}
 	/**
 	 * This method is used to access the private data member hence
@@ -310,7 +327,10 @@ public class Move
 		pieceMoved=fromSquare.getPiece();
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
-			setCapturingMove(true);
+			capturingMove=true;
+		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+				capturingMove)
+				halfMoveClock=board.getGame().getHalfMoveClock();
 	}
 	/**
 	 * Generic getter method used to access the private data member
@@ -329,6 +349,26 @@ public class Move
 	public void setBoard(Board board)
 	{
 		this.board = board;
+	}
+	/**
+	 * Generic getter method used to access the private variable halfMovesClock.
+	 * Since it is private, public getter is used to gain access.
+	 * @return The half move (50-moves-rule) clock before the move.
+	 */
+	public byte getHalfMoveClock()
+	{
+		return halfMoveClock;
+	}
+	/**
+	 * Used to set the halfMoveClock of the <code>Move</code>. Generally
+	 * not used except during construction, but defined here as good
+	 * programming practice.
+	 * @param halfMovesClock The no. of half moves made to account for the
+	 * 50 moves rule, before the <code>Move</code>.
+	 */
+	public void setHalfMoveClock(byte halfMoveClock)
+	{
+		this.halfMoveClock = halfMoveClock;
 	}
 	/**
 	 * Returns the string to be displayed to the user as a description
