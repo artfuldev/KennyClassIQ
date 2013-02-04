@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.11 build 930 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
+* Latest Application Version: 0.0.12 build 990 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md#version-history))*
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md#versioning))*
 * ReadMe Version: 2.3
 
@@ -18,6 +18,7 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 * Better *Move* system *(Players make Moves in the Game)*.
 * Automatic *MoveList* of *Game* updation.
 * Better *printMainLine()* implementation.
+* Better *FEN* implementation.
 * Better-than-ever *Console* implementation, with reader, listener and executor threads.
 * Other features yet to come! :D
 

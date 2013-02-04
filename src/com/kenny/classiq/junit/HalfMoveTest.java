@@ -2,6 +2,7 @@ package com.kenny.classiq.junit;
 
 import org.junit.Test;
 
+import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
 
@@ -10,7 +11,7 @@ public class HalfMoveTest
 	@Test
 	public void test()
 	{
-		Game chessGame=new Game();
+		Game chessGame=new Game(Definitions.startPositionFEN);
 		Move moveOne=new Move(chessGame.getGameBoard());
 		moveOne.setMoveString("g1f3");
 		chessGame.getCurrentPlayer().makeMove(moveOne);
