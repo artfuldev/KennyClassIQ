@@ -79,6 +79,7 @@ public class XBoard extends GUIConsole
 								"ping",
 								"usermove",
 								"setboard",
+								"?",
 								"quit"};
 		listenerRun.setKnownCommands(knownCommands);
 	}
