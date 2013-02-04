@@ -17,20 +17,20 @@ public class MakeMoveTest
 		System.out.println("Making move "+moveToMake.getMoveString());
 		chessGame.getPlayerOne().makeMove(moveToMake);
 		chessGame.showBoard();
-		System.out.println(chessGame.getMoveList());
+		chessGame.printMainLine();
 		Move secondMoveToMake=new Move(chessGame.getGameBoard());
 		secondMoveToMake.setMoveString("d7d8");
 		System.out.println("Making move "+secondMoveToMake.getMoveString());
 		chessGame.getPlayerTwo().makeMove(secondMoveToMake);
 		chessGame.showBoard();
-		System.out.println(chessGame.getMoveList());
+		chessGame.printMainLine();
 		System.out.println("UnMaking move "+secondMoveToMake.getMoveString());
 		chessGame.getPlayerTwo().unMakeMove(secondMoveToMake);
 		chessGame.showBoard();
-		System.out.println(chessGame.getMoveList());
+		chessGame.printMainLine();
 		System.out.println("UnMaking move "+moveToMake.getMoveString());
 		chessGame.getPlayerOne().unMakeMove(moveToMake);
 		chessGame.showBoard();
-		System.out.println(chessGame.getMoveList());
+		chessGame.printMainLine();
 	}
 }
