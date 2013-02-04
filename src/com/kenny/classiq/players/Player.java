@@ -142,8 +142,9 @@ public abstract class Player
 		moveToMake.getFromSquare().setPiece(null);
 		moveToMake.getToSquare().setPiece(moveToMake.getPieceMoved());
 		moveToMake.getBoard().getGame().getMoveList().add(moveToMake);
-		moveToMake.getBoard().getGame().setHalfMoveNumber(
-				moveToMake.getBoard().getGame().getHalfMoveNumber()+1);
+		if(!moveToMake.getPieceMoved().isWhite())
+			moveToMake.getBoard().getGame().setMoveNumber(
+				moveToMake.getBoard().getGame().getMoveNumber()+1);
 		if(moveToMake.getHalfMoveClock()!=0)
 			moveToMake.getBoard().getGame().setHalfMoveClock((byte)0);
 		else
@@ -165,8 +166,9 @@ public abstract class Player
 		else
 			moveToUnMake.getToSquare().setPiece(moveToUnMake.getCapturedPiece());
 		moveToUnMake.getBoard().getGame().getMoveList().remove(moveToUnMake);
-		moveToUnMake.getBoard().getGame().setHalfMoveNumber(
-				moveToUnMake.getBoard().getGame().getHalfMoveNumber()-1);
+		if(!moveToUnMake.getPieceMoved().isWhite())
+			moveToUnMake.getBoard().getGame().setMoveNumber(
+				moveToUnMake.getBoard().getGame().getMoveNumber()-1);
 		if(moveToUnMake.getHalfMoveClock()!=0)
 			moveToUnMake.getBoard().getGame().setHalfMoveClock(moveToUnMake.
 				getHalfMoveClock());

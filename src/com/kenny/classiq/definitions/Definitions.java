@@ -24,7 +24,7 @@ public class Definitions
 	/**
 	 * Holds the version of the engine.
 	 */
-	public static final String engineVersion="0.0.11 build 930";
+	public static final String engineVersion="0.0.12 build 990";
 	/**
 	 * Holds the error string.
 	 */
@@ -38,4 +38,10 @@ public class Definitions
 	 * Holds the string to output a debug message.
 	 */
 	public static final String debugMessage="##debugMsg: ";
+	/**
+	 * Holds the string representinng the FEN String of the starting
+	 * position. Used in the construction of a new <code>Game</code>.
+	 */
+	public static final String startPositionFEN="rnbqkbnr/pppppppp/8/8/8/8/"
+			+"PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 }
