@@ -178,6 +178,18 @@ public abstract class Player
 				if(moveToMake.getMoveString().startsWith("a8"))
 					moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
 		}
+		if(moveToMake.getPieceMoved().getShortAlgebraicNotation().matches("P"))
+			if(Integer.parseInt(moveToMake.getFromSquare().getRank().getName())==2)
+				if(Integer.parseInt(moveToMake.getToSquare().getRank().getName())
+						==4)
+					moveToMake.getBoard().getGame().setEnPassantSquare(moveToMake.getBoard().getSquare
+						(moveToMake.getFromSquare().getFile().getName()+"3"));
+		if(moveToMake.getPieceMoved().getShortAlgebraicNotation().matches("p"))
+			if(Integer.parseInt(moveToMake.getFromSquare().getRank().getName())==7)
+				if(Integer.parseInt(moveToMake.getToSquare().getRank().getName())
+						==5)
+					moveToMake.getBoard().getGame().setEnPassantSquare(moveToMake.getBoard().getSquare
+						(moveToMake.getFromSquare().getFile().getName()+"6"));
 	}
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
@@ -239,5 +251,7 @@ public abstract class Player
 					moveToUnMake.getBoard().getGame().setWhiteCastleQueenside(
 						moveToUnMake.isBlackCastleQueenside());
 		}
+		moveToUnMake.getBoard().getGame().setEnPassantSquare(
+			moveToUnMake.getEnPassantSquare());
 	}
 }
