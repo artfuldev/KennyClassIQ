@@ -1,11 +1,17 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.12 build 990
+* Latest Application Version: 0.0.12.1 build 1004
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+######Version 0.0.12.1 (1004)
+* Fixed issue #112.
+* *makeMove() and unMakeMove()* now set and reset *castlingRights* of *Game*.
+* Improved *Move, Player and Game*.
+* Improved *MakeMoveTest* jUnit Test Case.
 
 #####Version 0.0.12 (990)
 * Yep, a major jump! Added *FEN* implementation, fixed issue #51.
