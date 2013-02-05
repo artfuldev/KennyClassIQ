@@ -150,6 +150,34 @@ public abstract class Player
 		else
 			moveToMake.getBoard().getGame().setHalfMoveClock((byte)
 					(moveToMake.getBoard().getGame().getHalfMoveClock()+1));
+		if(moveToMake.getPieceMoved().isWhite())
+		{
+			if(moveToMake.getMoveString().startsWith("e1"))
+			{
+				moveToMake.getBoard().getGame().setWhiteCastleKingside(false);
+				moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
+			}
+			if(moveToMake.getBoard().getGame().isWhiteCastleKingside())
+				if(moveToMake.getMoveString().startsWith("h1"))
+					moveToMake.getBoard().getGame().setWhiteCastleKingside(false);
+			if(moveToMake.getBoard().getGame().isWhiteCastleQueenside())
+				if(moveToMake.getMoveString().startsWith("a1"))
+					moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
+		}
+		else
+		{
+			if(moveToMake.getMoveString().startsWith("e8"))
+			{
+				moveToMake.getBoard().getGame().setBlackCastleKingside(false);
+				moveToMake.getBoard().getGame().setBlackCastleQueenside(false);
+			}
+			if(moveToMake.getBoard().getGame().isBlackCastleKingside())
+				if(moveToMake.getMoveString().startsWith("h8"))
+					moveToMake.getBoard().getGame().setWhiteCastleKingside(false);
+			if(moveToMake.getBoard().getGame().isWhiteCastleQueenside())
+				if(moveToMake.getMoveString().startsWith("a8"))
+					moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
+		}
 	}
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
@@ -175,5 +203,41 @@ public abstract class Player
 		else
 			moveToUnMake.getBoard().getGame().setHalfMoveClock((byte)
 					(moveToUnMake.getBoard().getGame().getHalfMoveClock()-1));
+		if(moveToUnMake.getPieceMoved().isWhite())
+		{
+			if(moveToUnMake.getMoveString().startsWith("e1"))
+			{
+				moveToUnMake.getBoard().getGame().setWhiteCastleKingside(
+					moveToUnMake.isWhiteCastleKingside());
+				moveToUnMake.getBoard().getGame().setWhiteCastleQueenside(
+					moveToUnMake.isWhiteCastleQueenside());
+			}
+			if(!moveToUnMake.getBoard().getGame().isWhiteCastleKingside())
+				if(moveToUnMake.getMoveString().startsWith("h1"))
+					moveToUnMake.getBoard().getGame().setWhiteCastleKingside(
+						moveToUnMake.isWhiteCastleKingside());
+			if(!moveToUnMake.getBoard().getGame().isWhiteCastleQueenside())
+				if(moveToUnMake.getMoveString().startsWith("a1"))
+					moveToUnMake.getBoard().getGame().setWhiteCastleQueenside(
+						moveToUnMake.isWhiteCastleQueenside());
+		}
+		else
+		{
+			if(moveToUnMake.getMoveString().startsWith("e8"))
+			{
+				moveToUnMake.getBoard().getGame().setBlackCastleKingside(
+					moveToUnMake.isBlackCastleKingside());
+				moveToUnMake.getBoard().getGame().setBlackCastleQueenside(
+					moveToUnMake.isBlackCastleQueenside());
+			}
+			if(!moveToUnMake.getBoard().getGame().isBlackCastleKingside())
+				if(moveToUnMake.getMoveString().startsWith("h8"))
+					moveToUnMake.getBoard().getGame().setWhiteCastleKingside(
+						moveToUnMake.isBlackCastleKingside());
+			if(!moveToUnMake.getBoard().getGame().isWhiteCastleQueenside())
+				if(moveToUnMake.getMoveString().startsWith("a8"))
+					moveToUnMake.getBoard().getGame().setWhiteCastleQueenside(
+						moveToUnMake.isBlackCastleQueenside());
+		}
 	}
 }
