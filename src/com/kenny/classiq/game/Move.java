@@ -70,6 +70,12 @@ public class Move
 	 */
 	boolean blackCastleQueenside=false;
 	/**
+	 * Holds the en-passant <code>Square</code> of the <code>Game</code>
+	 * before this <code>Move</code>, so that it can be restored during
+	 * unMakeMove.
+	 */
+	private Square enPassantSquare=null;
+	/**
 	 * Holds the string which represents the move in simple WinBoard
 	 * notation, eg, "e2e4". This should be sent to the GUI as a command,
 	 * if the engine wants to play this move.
@@ -134,7 +140,7 @@ public class Move
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
 			capturingMove=true;
-		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+		if(pieceMoved.getClass().getName().matches("Pawn")||
 			capturingMove)
 			halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
@@ -215,13 +221,14 @@ public class Move
 				this.capturingMove=true;
 		}
 		board=fromSquare.getBoard();
-		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+		if(pieceMoved.getClass().getName().matches("Pawn")||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		enPassantSquare=board.getGame().getEnPassantSquare();
 	}
 	/**
 	 * Generic getter method to access the private member toSquare.
@@ -250,7 +257,7 @@ public class Move
 		if(fromSquare!=null)
 			moveString+=fromSquare.getName();
 		moveString+=toSquare.getName();
-		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+		if(pieceMoved.getClass().getName().matches("Pawn")||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
@@ -360,7 +367,7 @@ public class Move
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
 			capturingMove=true;
-		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+		if(pieceMoved.getClass().getName().matches("Pawn")||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
@@ -406,29 +413,45 @@ public class Move
 	{
 		this.halfMoveClock = halfMoveClock;
 	}
-	public boolean isWhiteCastleKingside() {
+	public boolean isWhiteCastleKingside()
+	{
 		return whiteCastleKingside;
 	}
-	public void setWhiteCastleKingside(boolean whiteCastleKingside) {
+	public void setWhiteCastleKingside(boolean whiteCastleKingside)
+	{
 		this.whiteCastleKingside = whiteCastleKingside;
 	}
-	public boolean isWhiteCastleQueenside() {
+	public boolean isWhiteCastleQueenside()
+	{
 		return whiteCastleQueenside;
 	}
-	public void setWhiteCastleQueenside(boolean whiteCastleQueenside) {
+	public void setWhiteCastleQueenside(boolean whiteCastleQueenside)
+	{
 		this.whiteCastleQueenside = whiteCastleQueenside;
 	}
-	public boolean isBlackCastleKingside() {
+	public boolean isBlackCastleKingside()
+	{
 		return blackCastleKingside;
 	}
-	public void setBlackCastleKingside(boolean blackCastleKingside) {
+	public void setBlackCastleKingside(boolean blackCastleKingside)
+	{
 		this.blackCastleKingside = blackCastleKingside;
 	}
-	public boolean isBlackCastleQueenside() {
+	public boolean isBlackCastleQueenside()
+	{
 		return blackCastleQueenside;
 	}
-	public void setBlackCastleQueenside(boolean blackCastleQueenside) {
+	public void setBlackCastleQueenside(boolean blackCastleQueenside)
+	{
 		this.blackCastleQueenside = blackCastleQueenside;
+	}
+	public Square getEnPassantSquare()
+	{
+		return enPassantSquare;
+	}
+	public void setEnPassantSquare(Square enPassantSquare)
+	{
+		this.enPassantSquare = enPassantSquare;
 	}
 	/**
 	 * Returns the string to be displayed to the user as a description
@@ -443,7 +466,7 @@ public class Move
 	{
 		String returnString="";
 		//if the piece moved is a King
-		if(pieceMoved.getShortAlgebraicNotation()=="K")
+		if(pieceMoved.getClass().getName().matches("King"))
 		{
 			//for short castle
 			if(	moveString.matches("e1g1")||
@@ -457,13 +480,13 @@ public class Move
 		else
 		{
 			//for pawn and other pieces, as for pawn, it is ""
-			if(pieceMoved.getShortAlgebraicNotation().toUpperCase()!="P")
+			if(pieceMoved.getClass().getName().matches("Pawn"))
 				returnString=pieceMoved.getShortAlgebraicNotation().toUpperCase();
 			//for captures
 			if(capturedPiece!=null)
 			{
 				//if pawn captures, add file of pawn
-				if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P")
+				if(pieceMoved.getClass().getName().matches("Pawn"))
 					returnString+=fromSquare.getFile().getName();
 				returnString+="x";
 			}
