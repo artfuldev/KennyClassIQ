@@ -85,23 +85,23 @@ public class Game
 	 * the FEN String of this <code>Game</code>. Has a default value of
 	 * <code>true</code>.
 	 */
-	boolean whiteToMove=true;
+	private boolean whiteToMove=true;
 	/**
 	 * Holds a boolean representing whether white can castle kingside.
 	 */
-	boolean whiteCastleKingside=false;
+	private boolean whiteCastleKingside=false;
 	/**
 	 * Holds a boolean representing whether white can castle queenside.
 	 */
-	boolean whiteCastleQueenside=false;
+	private boolean whiteCastleQueenside=false;
 	/**
 	 * Holds a boolean representing whether black can castle kingside.
 	 */
-	boolean blackCastleKingside=false;
+	private boolean blackCastleKingside=false;
 	/**
 	 * Holds a boolean representing whether black can castle queenside.
 	 */
-	boolean blackCastleQueenside=false;
+	private boolean blackCastleQueenside=false;
 	/**
 	 * Holds a reference to the curent en-passant <code>Square</code> of
 	 * the <code>Game</code>.
@@ -258,6 +258,36 @@ public class Game
 	public void setEnPassantSquare(Square enPassantSquare)
 	{
 		this.enPassantSquare = enPassantSquare;
+	}
+	public boolean isWhiteToMove() {
+		return whiteToMove;
+	}
+	public void setWhiteToMove(boolean whiteToMove) {
+		this.whiteToMove = whiteToMove;
+	}
+	public boolean isWhiteCastleKingside() {
+		return whiteCastleKingside;
+	}
+	public void setWhiteCastleKingside(boolean whiteCastleKingside) {
+		this.whiteCastleKingside = whiteCastleKingside;
+	}
+	public boolean isWhiteCastleQueenside() {
+		return whiteCastleQueenside;
+	}
+	public void setWhiteCastleQueenside(boolean whiteCastleQueenside) {
+		this.whiteCastleQueenside = whiteCastleQueenside;
+	}
+	public boolean isBlackCastleKingside() {
+		return blackCastleKingside;
+	}
+	public void setBlackCastleKingside(boolean blackCastleKingside) {
+		this.blackCastleKingside = blackCastleKingside;
+	}
+	public boolean isBlackCastleQueenside() {
+		return blackCastleQueenside;
+	}
+	public void setBlackCastleQueenside(boolean blackCastleQueenside) {
+		this.blackCastleQueenside = blackCastleQueenside;
 	}
 	public void printMainLine()
 	{

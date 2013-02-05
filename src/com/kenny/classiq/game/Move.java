@@ -50,6 +50,26 @@ public class Move
 	 */
 	private byte halfMoveClock=0;
 	/**
+	 * Holds a boolean representing whether white can castle kingside. To
+	 * be restored during unMakeMove, if at all reset.
+	 */
+	boolean whiteCastleKingside=false;
+	/**
+	 * Holds a boolean representing whether white can castle queenside. To
+	 * be restored during unMakeMove, if at all reset.
+	 */
+	boolean whiteCastleQueenside=false;
+	/**
+	 * Holds a boolean representing whether black can castle kingside. To
+	 * be restored during unMakeMove, if at all reset.
+	 */
+	boolean blackCastleKingside=false;
+	/**
+	 * Holds a boolean representing whether black can castle queenside. To
+	 * be restored during unMakeMove, if at all reset.
+	 */
+	boolean blackCastleQueenside=false;
+	/**
 	 * Holds the string which represents the move in simple WinBoard
 	 * notation, eg, "e2e4". This should be sent to the GUI as a command,
 	 * if the engine wants to play this move.
@@ -117,6 +137,10 @@ public class Move
 		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
 			capturingMove)
 			halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -194,6 +218,10 @@ public class Move
 		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
 	}
 	/**
 	 * Generic getter method to access the private member toSquare.
@@ -225,6 +253,10 @@ public class Move
 		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
 	}
 	/**
 	 * This method is used to access the private data member hence
@@ -331,6 +363,10 @@ public class Move
 		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
 	}
 	/**
 	 * Generic getter method used to access the private data member
@@ -369,6 +405,30 @@ public class Move
 	public void setHalfMoveClock(byte halfMoveClock)
 	{
 		this.halfMoveClock = halfMoveClock;
+	}
+	public boolean isWhiteCastleKingside() {
+		return whiteCastleKingside;
+	}
+	public void setWhiteCastleKingside(boolean whiteCastleKingside) {
+		this.whiteCastleKingside = whiteCastleKingside;
+	}
+	public boolean isWhiteCastleQueenside() {
+		return whiteCastleQueenside;
+	}
+	public void setWhiteCastleQueenside(boolean whiteCastleQueenside) {
+		this.whiteCastleQueenside = whiteCastleQueenside;
+	}
+	public boolean isBlackCastleKingside() {
+		return blackCastleKingside;
+	}
+	public void setBlackCastleKingside(boolean blackCastleKingside) {
+		this.blackCastleKingside = blackCastleKingside;
+	}
+	public boolean isBlackCastleQueenside() {
+		return blackCastleQueenside;
+	}
+	public void setBlackCastleQueenside(boolean blackCastleQueenside) {
+		this.blackCastleQueenside = blackCastleQueenside;
 	}
 	/**
 	 * Returns the string to be displayed to the user as a description
