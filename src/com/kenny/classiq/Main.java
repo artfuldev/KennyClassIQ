@@ -50,6 +50,7 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
+		//Print introductory and debug messages
 		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
 				+" by "+Definitions.authorName);
 		System.out.println("Available Processors: "
@@ -57,6 +58,7 @@ public class Main
 		System.out.println("Available Memory: "
 				+Runtime.getRuntime().freeMemory()/1024/1024
 				+" MB");
+		//Get protocol type from console/pipe and start proper guiConsole
 		protocolType=inputStream.nextLine();
 		if(protocolType.matches("uci"))
 			guiConsole=new UCI();
