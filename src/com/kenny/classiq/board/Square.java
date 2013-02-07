@@ -174,12 +174,14 @@ public class Square
 	}
 	/**
 	 * Used to set a <code>Piece</code> at this <code>Square</code>.
-	 * Generic setter method to set the private data member.
+	 * Generic setter method to set the private data member. Also sets the
+	 * square of the piece to this <code>Square</code>
 	 * @param piece <code>Piece</code> to be set at this <code>Square</code>.
 	 */
 	public void setPiece(Piece piece)
 	{
 		this.piece = piece;
+		this.piece.setSquare(this);
 	}
 	/**
 	 * Used to get the <code>Board</code> to which this <code>Square</code>
