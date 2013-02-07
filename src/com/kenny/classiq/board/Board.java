@@ -232,10 +232,24 @@ public class Board
 	{
 		return square[index];
 	}
+	/**
+	 * Generic getter method used to access the <code>Game</code> to which the
+	 * <code>Board</code> belongs. Since it is a private member, it has to be
+	 * accessed by a public getter method.
+	 * @return The <code>Game</code> of this <code>Board</code>.
+	 */
 	public Game getGame()
 	{
 		return game;
 	}
+	/**
+	 * Generic setter method used to set the <code>Game</code> to which the
+	 * <code>Board</code> belongs. Since it is a private member, it has to be
+	 * set by a public setter method. Generally not used, as it is set during
+	 * construction itself, still defined as good programming practice (it may
+	 * become useful later).
+	 * @return The <code>Game</code> of this <code>Board</code>.
+	 */
 	public void setGame(Game game)
 	{
 		this.game = game;
