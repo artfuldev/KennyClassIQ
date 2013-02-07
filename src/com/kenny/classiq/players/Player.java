@@ -132,6 +132,26 @@ public abstract class Player
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
 	 * which this <code>Player</code> is a part.
+	 * <p>
+	 * The complex code inside can be explained as follows:
+	 * <p>
+	 * First, if the move is non-capturing move, the fromSquare's piece is 
+	 * made the toSquare's piece, and the fromSquare's piece is made null.
+	 * Otherwise, the captured piece is sent to the <code>PieceSet</code> of
+	 * the corresponding <code>game</code>, and then, the previous step is
+	 * taken.
+	 * <p>
+	 * If the move is made by black, the moveNumber of the corresponding
+	 * <code>Game</code> is incremented. Then, the halfMoveClock is modified
+	 * accordingly.
+	 * <p>
+	 * Then, the castling flags are reset if the moves are made from e1,h1
+	 * or a1 if the playing side is white, and if they are made from r8,h8
+	 * or a8 if the playing side is black.
+	 * <p>
+	 * Finally, if a double pawn move has been made, the enPassantSquare of
+	 * the corresponding <code>Game</code> is changed to reflect the latest
+	 * proper value.
 	 * @param moveToMake The <code>Move</code> to be made.
 	 */
 	public void makeMove(Move moveToMake)
@@ -179,21 +199,25 @@ public abstract class Player
 					moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
 		}
 		if(moveToMake.getPieceMoved().getShortAlgebraicNotation().matches("P"))
-			if(Integer.parseInt(moveToMake.getFromSquare().getRank().getName())==2)
-				if(Integer.parseInt(moveToMake.getToSquare().getRank().getName())
-						==4)
-					moveToMake.getBoard().getGame().setEnPassantSquare(moveToMake.getBoard().getSquare
-						(moveToMake.getFromSquare().getFile().getName()+"3"));
-		if(moveToMake.getPieceMoved().getShortAlgebraicNotation().matches("p"))
-			if(Integer.parseInt(moveToMake.getFromSquare().getRank().getName())==7)
-				if(Integer.parseInt(moveToMake.getToSquare().getRank().getName())
-						==5)
-					moveToMake.getBoard().getGame().setEnPassantSquare(moveToMake.getBoard().getSquare
-						(moveToMake.getFromSquare().getFile().getName()+"6"));
+		{
+			byte from=0, to=0, avg=0; 
+			from=Byte.parseByte(moveToMake.getFromSquare().getRank().getName());
+			to=Byte.parseByte(moveToMake.getToSquare().getRank().getName());
+			avg=(byte)((from+to)/2);
+			if(avg==3||avg==6)
+				moveToMake.getBoard().getGame().setEnPassantSquare(
+					moveToMake.getBoard().getSquare(moveToMake.getFromSquare().
+						getFile().getName()+avg));
+		}
 	}
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
 	 * which this <code>Player</code> is a part.
+	 * <p>
+	 * Unmakes all the changes made in makeMove() to the <code>Game</code> of
+	 * the <code>Board</code> in which this <code>Move</code> is made,
+	 * re-assigning the backup values stored in the <code>Move</code> to the
+	 * <code>Game</code>.
 	 * @param moveToUnMake The <code>Move</code> to be un-made.
 	 */
 	public void unMakeMove(Move moveToUnMake)

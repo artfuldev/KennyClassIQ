@@ -15,9 +15,9 @@ public class MoveTest
 	{
 		Game game=new Game(Definitions.startPositionFEN);
 		Move moveOne=new Move(game.getGameBoard());
-		Move moveTwo=new Move(game.getGameBoard().getSquare("d2"),
-				game.getGameBoard().getSquare("e7"));
-		moveOne.setMoveString("d2e7");
+		Move moveTwo=new Move(game.getGameBoard().getSquare("e1"),
+				game.getGameBoard().getSquare("g1"));
+		moveOne.setMoveString("e1g1");
 		System.out.println(moveOne.getMoveString());
 		System.out.println(moveTwo.getMoveString());
 		Move moveThree=new Move(game.getGameBoard());
