@@ -37,4 +37,10 @@ public class File
 	{
 		this.name = name;
 	}
+	public Square getSquare(byte rankIndex)
+	{
+		if((rankIndex>-1)&&(rankIndex<8))
+			return square[rankIndex];
+		return null;
+	}
 }
