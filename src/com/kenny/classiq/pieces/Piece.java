@@ -1,6 +1,9 @@
 package com.kenny.classiq.pieces;
 
+import java.util.ArrayList;
+
 import com.kenny.classiq.board.Square;
+import com.kenny.classiq.game.Move;
 
 /**
  * The <code>Piece</code> class is the class which represents a pice of the
@@ -142,5 +145,9 @@ public abstract class Piece
 		if(square!=null)
 			returnString+=" at "+square.toString();
 		return returnString;
+	}
+	public ArrayList<Move> getMoves()
+	{
+		return null;
 	}
 }

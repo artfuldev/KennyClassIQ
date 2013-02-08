@@ -1,5 +1,7 @@
 package com.kenny.classiq.board;
 
+import java.util.ArrayList;
+
 import com.kenny.classiq.pieces.Piece;
 
 /**
@@ -24,17 +26,15 @@ public class Square
 	 */
 	private Board board;
 	/**
-	 * Holds the <code>Rank</code> of the <code>Square</code>, which tells
-	 * us which Rank of the parent <code>Board</code>, the <code>Square</code>
-	 * belongs to.
+	 * Holds the index of this <code>Square</code> in the <code>Rank</code>,
+	 * with respect to the <code>File</code>.
 	 */
-	private Rank rank;
+	private byte fileIndex;
 	/**
-	 * Holds the <code>File</code> of the <code>Square</code>, which tells
-	 * us which <code>File</code> of the parent <code>Board</code>, the
-	 * <code>Square</code> belongs to.
+	 * Holds the index of this <code>Square</code> in the <code>File</code>,
+	 * with respect to the <code>Rank</code>.
 	 */
-	private File file;
+	private byte rankIndex;
 	/**
 	 * Holds the <code>Diagonal</code> of the <code>Square</code>, which tells
 	 * us which <code>Diagonal</code> of the parent <code>Board</code>, the
@@ -68,16 +68,7 @@ public class Square
 	 */
 	public Rank getRank()
 	{
-		return rank;
-	}
-	/**
-	 * Setter method to set the <code>Rank</code> of this <code>Square</code>.
-	 * Primarily used immediately after construction of the <code>Board</code>.
-	 * @param rank <code>Rank</code> to which this <code>Square</code> belongs.
-	 */
-	public void setRank(Rank rank)
-	{
-		this.rank = rank;
+		return board.getRank(rankIndex);
 	}
 	/**
 	 * Genric getter method to access the private date member file. It can
@@ -89,16 +80,7 @@ public class Square
 	 */
 	public File getFile()
 	{
-		return file;
-	}
-	/**
-	 * Setter method to set the <code>File</code> of this <code>Square</code>.
-	 * Primarily used immediately after construction of the <code>Board</code>.
-	 * @param file <code>File</code> to which this <code>Square</code> belongs.
-	 */
-	public void setFile(File file)
-	{
-		this.file = file;
+		return board.getFile(fileIndex);
 	}
 	/**
 	 * Genric getter method to access the private date member diagonal. It can
@@ -111,16 +93,6 @@ public class Square
 	public Diagonal getDiagonal()
 	{
 		return diagonal;
-	}
-	/**
-	 * Setter method to set the <code>Diagonal</code> of this <code>Square</code>.
-	 * Primarily used immediately after construction of the <code>Board</code>.
-	 * @param diagonal <code>Diagonal</code> to which this <code>Square</code>
-	 * belongs.
-	 */
-	public void setDiagonal(Diagonal diagonal)
-	{
-		this.diagonal = diagonal;
 	}
 	/**
 	 * Used to check if the <code>Square</code> is a light square.
@@ -181,7 +153,8 @@ public class Square
 	public void setPiece(Piece piece)
 	{
 		this.piece = piece;
-		this.piece.setSquare(this);
+		if(this.piece!=null)
+			this.piece.setSquare(this);
 	}
 	/**
 	 * Used to get the <code>Board</code> to which this <code>Square</code>
@@ -204,6 +177,78 @@ public class Square
 	public void setBoard(Board board)
 	{
 		this.board = board;
+	}
+	public byte getFileIndex()
+	{
+		return fileIndex;
+	}
+	public void setFileIndex(byte fileIndex)
+	{
+		this.fileIndex = fileIndex;
+	}
+	public byte getRankIndex()
+	{
+		return rankIndex;
+	}
+	public void setRankIndex(byte rankIndex)
+	{
+		this.rankIndex = rankIndex;
+	}
+	/**
+	 * Used to return the neighburing squares of this <code>Square</code>.
+	 * Probably used later to calculate king safety or for pawn move
+	 * generation. 
+	 * @return The neighbouring <code>Square</code>s of a <code>Square</code> as
+	 * an <code>ArrayList</code>.
+	 */
+	public ArrayList<Square> getNeighbouringSquares()
+	{
+		ArrayList<Square> returnList=new ArrayList<Square>();
+		return returnList;
+	}
+	public Square getLeftSquare()
+	{
+		return getRank().getSquare((byte)(fileIndex-1));
+	}
+	public Square getRightSquare()
+	{
+		return getRank().getSquare((byte)(fileIndex+1));
+	}
+	public Square getTopSquare()
+	{
+		return getFile().getSquare((byte)(rankIndex+1));
+	}
+	public Square getBootomSquare()
+	{
+		return getFile().getSquare((byte)(rankIndex-1));
+	}
+	public Square getTopLeftSquare()
+	{
+		if(board.getFile((byte)(fileIndex+1))!=null)
+			return board.getFile((byte)(fileIndex+1)).getSquare(
+				(byte)(rankIndex+1));
+		return null;
+	}
+	public Square getBottomLeftSquare()
+	{
+		if(board.getFile((byte)(fileIndex-1))!=null)
+			return board.getFile((byte)(fileIndex-1)).getSquare(
+				(byte)(rankIndex-1));
+		return null;
+	}
+	public Square getTopRightSquare()
+	{
+		if(board.getFile((byte)(fileIndex+1))!=null)
+			return board.getFile((byte)(fileIndex+1)).getSquare(
+				(byte)(rankIndex+1));
+		return null;
+	}
+	public Square getBottomRightSquare()
+	{
+		if(board.getFile((byte)(fileIndex-1))!=null)
+			return board.getFile((byte)(fileIndex-1)).getSquare(
+				(byte)(rankIndex+1));
+		return null;
 	}
 	/**
 	 * Modifies and overrides the toString function of the Object

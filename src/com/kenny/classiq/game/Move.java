@@ -147,6 +147,7 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		enPassantSquare=board.getGame().getEnPassantSquare();
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -374,6 +375,7 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		enPassantSquare=board.getGame().getEnPassantSquare();
 	}
 	/**
 	 * Generic getter method used to access the private data member
