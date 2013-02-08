@@ -1,11 +1,19 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.12.3 build 1061
+* Latest Application Version: 0.0.124 build 1086
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+######Version 0.0.12.4 (1086)
+* Modified *Square*.
+* Improved *Board*.
+* Corrected minor errors in *Move*.
+* Improved *Rank, File*.
+* Added a lot of new methods.
+* Added *OccupiedSquaresTest* and *CanMoveToTest*, jUnit Test Cases.
 
 ######Version 0.0.12.3 (1061)
 * Added all missing javadoc commentary.
