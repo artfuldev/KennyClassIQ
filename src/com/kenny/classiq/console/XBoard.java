@@ -80,6 +80,8 @@ public class XBoard extends GUIConsole
 								"usermove",
 								"setboard",
 								"?",
+								"black",//added for protocol 1 support
+								"white",//added for protocol 1 support
 								"quit"};
 		listenerRun.setKnownCommands(knownCommands);
 	}
