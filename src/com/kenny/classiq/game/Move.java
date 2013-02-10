@@ -563,7 +563,8 @@ public class Move
 		{
 			//for pawn and other pieces, as for pawn, it is ""
 			if(!pieceMoved.getShortAlgebraicNotation().matches("P"))
-				returnString=pieceMoved.getShortAlgebraicNotation();
+				returnString=pieceMoved.getShortAlgebraicNotation()+
+					fromSquare.getName();
 			//for captures
 			if(capturedPiece!=null)
 			{

@@ -1,11 +1,19 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.124 build 1086
+* Latest Application Version: 0.0.13 build 1099
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.0.13 (1099)
+* Improved *Square*.
+* Improved *Move, Game and Piece*.
+* Changed moveOutput.
+* Corrected certain function definitions.
+* Corrected certain comment blocks.
+* Added *PawnMoveGenTest*, a jUnit Test Case.
 
 ######Version 0.0.12.4 (1086)
 * Modified *Square*.
