@@ -91,7 +91,7 @@ public abstract class Player
 	 * Generic setter method used to tell if the <code>Player</code> plays
 	 * white (if set to true) or black. Since <code>white</code> is a private
 	 * data member, public getter and setter methods should be used to gain
-	 * access to such variables.
+	 * access to it.
 	 * @param white true if <code>Player</code> plays white, false otherwise
 	 */
 	public void setWhite(boolean white)
@@ -140,6 +140,10 @@ public abstract class Player
 	 * Otherwise, the captured piece is sent to the <code>PieceSet</code> of
 	 * the corresponding <code>game</code>, and then, the previous step is
 	 * taken.
+	 * <p>
+	 * Then, the move is added to the <code>MoveList</code> of the <code>
+	 * Game</code> of the <code>Board</code> on which the <code>Move</code>
+	 * is made.
 	 * <p>
 	 * If the move is made by black, the moveNumber of the corresponding
 	 * <code>Game</code> is incremented. Then, the halfMoveClock is modified
