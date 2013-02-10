@@ -1,5 +1,7 @@
 package com.kenny.classiq.board;
 
+import java.util.ArrayList;
+
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.pieces.Piece;
 
@@ -97,8 +99,6 @@ public class Board
 			byte rankIndex=(byte)(i/8);
 			square[i]=new Square();
 			square[i].setBoard(this);
-			square[i].setFile(file[fileIndex]);
-			square[i].setRank(rank[rankIndex]);
 			rank[rankIndex].setSquare(square[i],fileIndex);
 			file[fileIndex].setSquare(square[i],rankIndex);
 			square[i].setName(square[i].getFile().getName()
@@ -153,8 +153,8 @@ public class Board
 			byte rankIndex=(byte)(i/8);
 			square[i]=new Square();
 			square[i].setBoard(this);
-			square[i].setFile(file[fileIndex]);
-			square[i].setRank(rank[rankIndex]);
+			square[i].setFileIndex(fileIndex);
+			square[i].setRankIndex(rankIndex);
 			rank[rankIndex].setSquare(square[i],fileIndex);
 			file[fileIndex].setSquare(square[i],rankIndex);
 			square[i].setName(square[i].getFile().getName()
@@ -232,12 +232,88 @@ public class Board
 	{
 		return square[index];
 	}
+	public Rank getRank(byte rankIndex)
+	{
+		if((rankIndex>-1)&&(rankIndex<8))
+				return rank[rankIndex];
+		return null;
+	}
+	public File getFile(byte fileIndex)
+	{
+		if((fileIndex>-1)&&(fileIndex<8))
+				return file[fileIndex];
+		return null;
+	}
+	/**
+	 * Generic getter method used to access the <code>Game</code> to which the
+	 * <code>Board</code> belongs. Since it is a private member, it has to be
+	 * accessed by a public getter method.
+	 * @return The <code>Game</code> of this <code>Board</code>.
+	 */
 	public Game getGame()
 	{
 		return game;
 	}
+	/**
+	 * Generic setter method used to set the <code>Game</code> to which the
+	 * <code>Board</code> belongs. Since it is a private member, it has to be
+	 * set by a public setter method. Generally not used, as it is set during
+	 * construction itself, still defined as good programming practice (it may
+	 * become useful later).
+	 * @return The <code>Game</code> of this <code>Board</code>.
+	 */
 	public void setGame(Game game)
 	{
 		this.game = game;
+	}
+	public ArrayList<Square> getWhiteOccupiedSquares()
+	{
+		ArrayList<Square> returnList=getOccupiedSquares();
+		for(byte i=0;i<returnList.size();i++)
+			if(!returnList.get(i).getPiece().isWhite())
+			{
+				returnList.remove(i);
+				i--;
+			}
+		return returnList;
+	}
+	public ArrayList<Square> getBlackOccupiedSquares()
+	{
+		ArrayList<Square> returnList=getOccupiedSquares();
+		for(byte i=0;i<returnList.size();i++)
+			if(returnList.get(i).getPiece().isWhite())
+			{
+				returnList.remove(i);
+				i--;
+			}
+		return returnList;
+	}
+	public ArrayList<Square> getOccupiedSquares()
+	{
+		ArrayList<Square> returnList=new ArrayList<Square>();
+		for(byte i=0;i<64;i++)
+			if(getSquare(i).getPiece()!=null)
+				returnList.add(getSquare(i));
+		return returnList;
+	}
+	public ArrayList<Square> getEmptySquares()
+	{
+		ArrayList<Square> returnList=new ArrayList<Square>();
+		for(byte i=0;i<64;i++)
+			if(getSquare(i).getPiece()==null)
+				returnList.add(getSquare(i));
+		return returnList;
+	}
+	public ArrayList<Square> getWhiteCanMoveToSquares()
+	{
+		ArrayList<Square> returnList=getEmptySquares();
+		returnList.addAll(getBlackOccupiedSquares());
+		return returnList;
+	}
+	public ArrayList<Square> getBlackCanMoveToSquares()
+	{
+		ArrayList<Square> returnList=getEmptySquares();
+		returnList.addAll(getWhiteOccupiedSquares());
+		return returnList;
 	}
 }

@@ -91,7 +91,7 @@ public abstract class Player
 	 * Generic setter method used to tell if the <code>Player</code> plays
 	 * white (if set to true) or black. Since <code>white</code> is a private
 	 * data member, public getter and setter methods should be used to gain
-	 * access to such variables.
+	 * access to it.
 	 * @param white true if <code>Player</code> plays white, false otherwise
 	 */
 	public void setWhite(boolean white)
@@ -132,6 +132,30 @@ public abstract class Player
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
 	 * which this <code>Player</code> is a part.
+	 * <p>
+	 * The complex code inside can be explained as follows:
+	 * <p>
+	 * First, if the move is non-capturing move, the fromSquare's piece is 
+	 * made the toSquare's piece, and the fromSquare's piece is made null.
+	 * Otherwise, the captured piece is sent to the <code>PieceSet</code> of
+	 * the corresponding <code>game</code>, and then, the previous step is
+	 * taken.
+	 * <p>
+	 * Then, the move is added to the <code>MoveList</code> of the <code>
+	 * Game</code> of the <code>Board</code> on which the <code>Move</code>
+	 * is made.
+	 * <p>
+	 * If the move is made by black, the moveNumber of the corresponding
+	 * <code>Game</code> is incremented. Then, the halfMoveClock is modified
+	 * accordingly.
+	 * <p>
+	 * Then, the castling flags are reset if the moves are made from e1,h1
+	 * or a1 if the playing side is white, and if they are made from r8,h8
+	 * or a8 if the playing side is black.
+	 * <p>
+	 * Finally, if a double pawn move has been made, the enPassantSquare of
+	 * the corresponding <code>Game</code> is changed to reflect the latest
+	 * proper value.
 	 * @param moveToMake The <code>Move</code> to be made.
 	 */
 	public void makeMove(Move moveToMake)
@@ -150,10 +174,54 @@ public abstract class Player
 		else
 			moveToMake.getBoard().getGame().setHalfMoveClock((byte)
 					(moveToMake.getBoard().getGame().getHalfMoveClock()+1));
+		if(moveToMake.getPieceMoved().isWhite())
+		{
+			if(moveToMake.getMoveString().startsWith("e1"))
+			{
+				moveToMake.getBoard().getGame().setWhiteCastleKingside(false);
+				moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
+			}
+			if(moveToMake.getBoard().getGame().isWhiteCastleKingside())
+				if(moveToMake.getMoveString().startsWith("h1"))
+					moveToMake.getBoard().getGame().setWhiteCastleKingside(false);
+			if(moveToMake.getBoard().getGame().isWhiteCastleQueenside())
+				if(moveToMake.getMoveString().startsWith("a1"))
+					moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
+		}
+		else
+		{
+			if(moveToMake.getMoveString().startsWith("e8"))
+			{
+				moveToMake.getBoard().getGame().setBlackCastleKingside(false);
+				moveToMake.getBoard().getGame().setBlackCastleQueenside(false);
+			}
+			if(moveToMake.getBoard().getGame().isBlackCastleKingside())
+				if(moveToMake.getMoveString().startsWith("h8"))
+					moveToMake.getBoard().getGame().setWhiteCastleKingside(false);
+			if(moveToMake.getBoard().getGame().isWhiteCastleQueenside())
+				if(moveToMake.getMoveString().startsWith("a8"))
+					moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
+		}
+		if(moveToMake.getPieceMoved().getShortAlgebraicNotation().matches("P"))
+		{
+			byte from=0, to=0, avg=0; 
+			from=Byte.parseByte(moveToMake.getFromSquare().getRank().getName());
+			to=Byte.parseByte(moveToMake.getToSquare().getRank().getName());
+			avg=(byte)((from+to)/2);
+			if(avg==3||avg==6)
+				moveToMake.getBoard().getGame().setEnPassantSquare(
+					moveToMake.getBoard().getSquare(moveToMake.getFromSquare().
+						getFile().getName()+avg));
+		}
 	}
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
 	 * which this <code>Player</code> is a part.
+	 * <p>
+	 * Unmakes all the changes made in makeMove() to the <code>Game</code> of
+	 * the <code>Board</code> in which this <code>Move</code> is made,
+	 * re-assigning the backup values stored in the <code>Move</code> to the
+	 * <code>Game</code>.
 	 * @param moveToUnMake The <code>Move</code> to be un-made.
 	 */
 	public void unMakeMove(Move moveToUnMake)
@@ -175,5 +243,43 @@ public abstract class Player
 		else
 			moveToUnMake.getBoard().getGame().setHalfMoveClock((byte)
 					(moveToUnMake.getBoard().getGame().getHalfMoveClock()-1));
+		if(moveToUnMake.getPieceMoved().isWhite())
+		{
+			if(moveToUnMake.getMoveString().startsWith("e1"))
+			{
+				moveToUnMake.getBoard().getGame().setWhiteCastleKingside(
+					moveToUnMake.isWhiteCastleKingside());
+				moveToUnMake.getBoard().getGame().setWhiteCastleQueenside(
+					moveToUnMake.isWhiteCastleQueenside());
+			}
+			if(!moveToUnMake.getBoard().getGame().isWhiteCastleKingside())
+				if(moveToUnMake.getMoveString().startsWith("h1"))
+					moveToUnMake.getBoard().getGame().setWhiteCastleKingside(
+						moveToUnMake.isWhiteCastleKingside());
+			if(!moveToUnMake.getBoard().getGame().isWhiteCastleQueenside())
+				if(moveToUnMake.getMoveString().startsWith("a1"))
+					moveToUnMake.getBoard().getGame().setWhiteCastleQueenside(
+						moveToUnMake.isWhiteCastleQueenside());
+		}
+		else
+		{
+			if(moveToUnMake.getMoveString().startsWith("e8"))
+			{
+				moveToUnMake.getBoard().getGame().setBlackCastleKingside(
+					moveToUnMake.isBlackCastleKingside());
+				moveToUnMake.getBoard().getGame().setBlackCastleQueenside(
+					moveToUnMake.isBlackCastleQueenside());
+			}
+			if(!moveToUnMake.getBoard().getGame().isBlackCastleKingside())
+				if(moveToUnMake.getMoveString().startsWith("h8"))
+					moveToUnMake.getBoard().getGame().setWhiteCastleKingside(
+						moveToUnMake.isBlackCastleKingside());
+			if(!moveToUnMake.getBoard().getGame().isWhiteCastleQueenside())
+				if(moveToUnMake.getMoveString().startsWith("a8"))
+					moveToUnMake.getBoard().getGame().setWhiteCastleQueenside(
+						moveToUnMake.isBlackCastleQueenside());
+		}
+		moveToUnMake.getBoard().getGame().setEnPassantSquare(
+			moveToUnMake.getEnPassantSquare());
 	}
 }

@@ -43,11 +43,21 @@ public class Rank
 		for(int i=0;i<8;i++)
 		{
 			if(square[i].getPiece()!=null)
+			{
 				printString=square[i].getPiece().getShortAlgebraicNotation();
+				if(!square[i].getPiece().isWhite())
+					printString=printString.toLowerCase();
+			}
 			else
 				printString="-";
 			System.out.print(printString+"  ");
 		}
 		System.out.print("\n");
+	}
+	public Square getSquare(byte fileIndex)
+	{
+		if((fileIndex>-1)&&(fileIndex<8))
+			return square[fileIndex];
+		return null;
 	}
 }

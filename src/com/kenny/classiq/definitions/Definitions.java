@@ -24,7 +24,7 @@ public class Definitions
 	/**
 	 * Holds the version of the engine.
 	 */
-	public static final String engineVersion="0.0.12 build 990";
+	public static final String engineVersion="0.0.13 build 1099";
 	/**
 	 * Holds the error string.
 	 */

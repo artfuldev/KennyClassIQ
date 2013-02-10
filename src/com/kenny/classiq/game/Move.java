@@ -50,6 +50,32 @@ public class Move
 	 */
 	private byte halfMoveClock=0;
 	/**
+	 * Holds a boolean representing whether white can castle kingside. To
+	 * be restored during unMakeMove, if at all reset.
+	 */
+	boolean whiteCastleKingside=false;
+	/**
+	 * Holds a boolean representing whether white can castle queenside. To
+	 * be restored during unMakeMove, if at all reset.
+	 */
+	boolean whiteCastleQueenside=false;
+	/**
+	 * Holds a boolean representing whether black can castle kingside. To
+	 * be restored during unMakeMove, if at all reset.
+	 */
+	boolean blackCastleKingside=false;
+	/**
+	 * Holds a boolean representing whether black can castle queenside. To
+	 * be restored during unMakeMove, if at all reset.
+	 */
+	boolean blackCastleQueenside=false;
+	/**
+	 * Holds the en-passant <code>Square</code> of the <code>Game</code>
+	 * before this <code>Move</code>, so that it can be restored during
+	 * unMakeMove.
+	 */
+	private Square enPassantSquare=null;
+	/**
 	 * Holds the string which represents the move in simple WinBoard
 	 * notation, eg, "e2e4". This should be sent to the GUI as a command,
 	 * if the engine wants to play this move.
@@ -114,9 +140,14 @@ public class Move
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
 			capturingMove=true;
-		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+		if(pieceMoved.getClass().getName().matches("Pawn")||
 			capturingMove)
 			halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		enPassantSquare=board.getGame().getEnPassantSquare();
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -191,9 +222,14 @@ public class Move
 				this.capturingMove=true;
 		}
 		board=fromSquare.getBoard();
-		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+		if(pieceMoved.getClass().getName().matches("Pawn")||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		enPassantSquare=board.getGame().getEnPassantSquare();
 	}
 	/**
 	 * Generic getter method to access the private member toSquare.
@@ -222,9 +258,13 @@ public class Move
 		if(fromSquare!=null)
 			moveString+=fromSquare.getName();
 		moveString+=toSquare.getName();
-		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+		if(pieceMoved.getClass().getName().matches("Pawn")||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
 	}
 	/**
 	 * This method is used to access the private data member hence
@@ -328,9 +368,14 @@ public class Move
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
 			capturingMove=true;
-		if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P"||
+		if(pieceMoved.getClass().getName().matches("Pawn")||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		enPassantSquare=board.getGame().getEnPassantSquare();
 	}
 	/**
 	 * Generic getter method used to access the private data member
@@ -371,6 +416,126 @@ public class Move
 		this.halfMoveClock = halfMoveClock;
 	}
 	/**
+	 * Generic getter method. Since whiteCastleKingside is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general. This has the value from
+	 * <code>Game</code> of the <code>Board</code> on which this <code>Move
+	 * </code> is made, and stores it for retrieval during unMakeMove().
+	 * @return <code>true</code> if white can castle on its kingside, before
+	 * this <code>Move</code> has been made.
+	 */
+	public boolean isWhiteCastleKingside()
+	{
+		return whiteCastleKingside;
+	}
+	/**
+	 * Generic setter method, used to set the private variable whiteCastleKingside.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param whiteCastleKingside <code>true</code> if white can castle on its
+	 * kingside.
+	 */
+	public void setWhiteCastleKingside(boolean whiteCastleKingside)
+	{
+		this.whiteCastleKingside = whiteCastleKingside;
+	}
+	/**
+	 * Generic getter method. Since whiteCastleQueenside is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general. This has the value from
+	 * <code>Game</code> of the <code>Board</code> on which this <code>Move
+	 * </code> is made, and stores it for retrieval during unMakeMove().
+	 * @return <code>true</code> if white can castle on its queenside, before
+	 * this <code>Move</code> has been made.
+	 */
+	public boolean isWhiteCastleQueenside()
+	{
+		return whiteCastleQueenside;
+	}
+	/**
+	 * Generic setter method, used to set the private variable whiteCastleQueenside.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param whiteCastleQueenside <code>true</code> if black can castle on its
+	 * queenside.
+	 */
+	public void setWhiteCastleQueenside(boolean whiteCastleQueenside)
+	{
+		this.whiteCastleQueenside = whiteCastleQueenside;
+	}
+	/**
+	 * Generic getter method. Since blackCastleKingside is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general. This has the value from
+	 * <code>Game</code> of the <code>Board</code> on which this <code>Move
+	 * </code> is made, and stores it for retrieval during unMakeMove().
+	 * @return <code>true</code> if black can castle on its kingside, before
+	 * this <code>Move</code> has been made.
+	 */
+	public boolean isBlackCastleKingside()
+	{
+		return blackCastleKingside;
+	}
+	/**
+	 * Generic setter method, used to set the private variable blackCastleKingside.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param blackCastleKingside <code>true</code> if black can castle on its
+	 * kingside.
+	 */
+	public void setBlackCastleKingside(boolean blackCastleKingside)
+	{
+		this.blackCastleKingside = blackCastleKingside;
+	}
+	/**
+	 * Generic getter method. Since blackCastleQueenside is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general. This has the value from
+	 * <code>Game</code> of the <code>Board</code> on which this <code>Move
+	 * </code> is made, and stores it for retrieval during unMakeMove().
+	 * @return <code>true</code> if black can castle on its queenside, before
+	 * this <code>Move</code> has been made.
+	 */
+	public boolean isBlackCastleQueenside()
+	{
+		return blackCastleQueenside;
+	}
+	/**
+	 * Generic setter method, used to set the private variable blackCastleQueenside.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param blackCastleQueenside <code>true</code> if black can castle on its
+	 * queenside.
+	 */
+	public void setBlackCastleQueenside(boolean blackCastleQueenside)
+	{
+		this.blackCastleQueenside = blackCastleQueenside;
+	}
+	/**
+	 * Generic getter method. Since enPassantSquare is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general.
+	 * @return The en-passant <code>Square</code> of the <code>Game</code> of
+	 * the <code>Board</code> of this <code>Move</code>, before the <code>Move
+	 * </code> was made.
+	 */
+	public Square getEnPassantSquare()
+	{
+		return enPassantSquare;
+	}
+	/**
+	 * Generic setter method, used to set the private variable fenString.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param enPassantSquare The <code>Square</code> representing the
+	 * en-passant square of the <code>Game</code> of the <code>Board</code>
+	 * on which this <code>Move</code> is played. 
+	 */
+	public void setEnPassantSquare(Square enPassantSquare)
+	{
+		this.enPassantSquare = enPassantSquare;
+	}
+	/**
 	 * Returns the string to be displayed to the user as a description
 	 * of the move, substituting appropriate strings or adding such
 	 * substrings as necessary, in cases of pawn moves, castlings,
@@ -383,7 +548,7 @@ public class Move
 	{
 		String returnString="";
 		//if the piece moved is a King
-		if(pieceMoved.getShortAlgebraicNotation()=="K")
+		if(pieceMoved.getShortAlgebraicNotation().matches("K"))
 		{
 			//for short castle
 			if(	moveString.matches("e1g1")||
@@ -397,13 +562,14 @@ public class Move
 		else
 		{
 			//for pawn and other pieces, as for pawn, it is ""
-			if(pieceMoved.getShortAlgebraicNotation().toUpperCase()!="P")
-				returnString=pieceMoved.getShortAlgebraicNotation().toUpperCase();
+			if(!pieceMoved.getShortAlgebraicNotation().matches("P"))
+				returnString=pieceMoved.getShortAlgebraicNotation()+
+					fromSquare.getName();
 			//for captures
 			if(capturedPiece!=null)
 			{
 				//if pawn captures, add file of pawn
-				if(pieceMoved.getShortAlgebraicNotation().toUpperCase()=="P")
+				if(pieceMoved.getShortAlgebraicNotation().matches("P"))
 					returnString+=fromSquare.getFile().getName();
 				returnString+="x";
 			}

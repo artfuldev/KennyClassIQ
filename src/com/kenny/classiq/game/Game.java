@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.kenny.classiq.board.Board;
 import com.kenny.classiq.board.Square;
-import com.kenny.classiq.pieces.Piece;
 import com.kenny.classiq.players.AI;
 import com.kenny.classiq.players.GUI;
 import com.kenny.classiq.players.Player;
@@ -28,11 +27,6 @@ public class Game
 	 */
 	private Board gameBoard;
 	/**
-	 * Holds a reference to the last-moved <code>Piece</code> of the
-	 * <code>Game</code>. May be used for some things later on.
-	 */
-	private Piece lastMovedPiece;
-	/**
 	 * Holds the first <code>Player</code> of the <code>Game</code>. Usually
 	 * white, but can be changed. Initialized during construction. And usually
 	 * the GUI (or user).
@@ -50,14 +44,9 @@ public class Game
 	 */
 	private Player currentPlayer;
 	/**
-	 * Holds a reference to the last <code>Move</code> made in the game.
-	 * May be used to set the en-passant <code>Square</code> later, in the
-	 * FEN String.
-	 */
-	private Move lastMove;
-	/**
 	 * Holds the list of <code>Move</code>s made in the game. May be used to
 	 * replay the <code>Game</code>, if such features are necessary later.
+	 * Removed lastMove because it can be accest from this moveList itself.
 	 */
 	private ArrayList<Move> moveList;
 	/**
@@ -85,23 +74,23 @@ public class Game
 	 * the FEN String of this <code>Game</code>. Has a default value of
 	 * <code>true</code>.
 	 */
-	boolean whiteToMove=true;
+	private boolean whiteToMove=true;
 	/**
 	 * Holds a boolean representing whether white can castle kingside.
 	 */
-	boolean whiteCastleKingside=false;
+	private boolean whiteCastleKingside=false;
 	/**
 	 * Holds a boolean representing whether white can castle queenside.
 	 */
-	boolean whiteCastleQueenside=false;
+	private boolean whiteCastleQueenside=false;
 	/**
 	 * Holds a boolean representing whether black can castle kingside.
 	 */
-	boolean blackCastleKingside=false;
+	private boolean blackCastleKingside=false;
 	/**
 	 * Holds a boolean representing whether black can castle queenside.
 	 */
-	boolean blackCastleQueenside=false;
+	private boolean blackCastleQueenside=false;
 	/**
 	 * Holds a reference to the curent en-passant <code>Square</code> of
 	 * the <code>Game</code>.
@@ -123,7 +112,6 @@ public class Game
 	public Game(String fenString)
 	{
 		gameBoard=new Board(this);
-		lastMovedPiece=null;
 		playerOne=new GUI(this,"white");
 		playerTwo=new AI(this,"black");
 		currentPlayer=playerOne;
@@ -203,74 +191,306 @@ public class Game
 	{
 		gameBoard.printBoard();
 	}
+	/**
+	 * Generic getter method. Since pieceSet is a private variable, it has
+	 * to be accessed using a public getter method. This follows the rules
+	 * of data abstraction, thus OOPS in general.
+	 * @return The <code>PieceSet</code> of this <code>Game</code>.
+	 */
 	public PieceSet getPieceSet()
 	{
 		return pieceSet;
 	}
+	/**
+	 * Generic setter method, used to set the private variable pieceSet.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param pieceSet The <code>PieceSet</code> of this <code>Game</code>. 
+	 */
+	public void setPieceSet(PieceSet pieceSet)
+	{
+		this.pieceSet=pieceSet;
+	}
+	/**
+	 * Generic getter method. Since currentPlayer is a private variable, it
+	 * has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general.
+	 * @return The current <code>Player</code> of this <code>Game</code>.
+	 */
 	public Player getCurrentPlayer()
 	{
 		return currentPlayer;
 	}
+	/**
+	 * Generic setter method, used to set the private variable currentPlayer.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param currentPlayer The current <code>Player</code> of this
+	 * <code>Game</code>. 
+	 */
 	public void setCurrentPlayer(Player currentPlayer)
 	{
 		this.currentPlayer = currentPlayer;
 	}
+	/**
+	 * Generic getter method. Since playerOne is a private variable, it has
+	 * to be accessed using a public getter method. This follows the rules
+	 * of data abstraction, thus OOPS in general.
+	 * @return The first <code>Player</code> of this <code>Game</code>.
+	 */
 	public Player getPlayerOne()
 	{
 		return playerOne;
 	}
+	/**
+	 * Generic setter method, used to set the private variable playerOne.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param playerOne The first <code>Player</code> of this <code>Game
+	 * </code>. 
+	 */
+	public void setPlayerOne(Player playerOne)
+	{
+		this.playerOne=playerOne;
+	}
+	/**
+	 * Generic getter method. Since playerTwo is a private variable, it has
+	 * to be accessed using a public getter method. This follows the rules
+	 * of data abstraction, thus OOPS in general.
+	 * @return The second <code>Player</code> of this <code>Game</code>.
+	 */
 	public Player getPlayerTwo()
 	{
 		return playerTwo;
 	}
+	/**
+	 * Generic setter method, used to set the private variable playerTwo.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param playerTwo The second <code>Player</code> of this <code>Game
+	 * </code>. 
+	 */
+	public void setPlayerTwo(Player playerTwo)
+	{
+		this.playerTwo=playerTwo;
+	}
+	/**
+	 * Generic getter method. Since moveList is a private variable, it has
+	 * to be accessed using a public getter method. This follows the rules
+	 * of data abstraction, thus OOPS in general.
+	 * @return The <code>ArrayList</code> of <code>Move</code>s of this
+	 * <code>Game</code>.
+	 */
 	public ArrayList<Move> getMoveList()
 	{
 		return moveList;
 	}
+	/**
+	 * Generic setter method, used to set the private variable moveList.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param moveList The <code>ArrayList</code> of <code>Move</code>
+	 * of this <code>Game</code>. 
+	 */
+	public void setMoveList(ArrayList<Move> moveList)
+	{
+		this.moveList=moveList;
+	}
+	/**
+	 * Generic getter method. Since moveNumber is a private variable, it has
+	 * to be accessed using a public getter method. This follows the rules
+	 * of data abstraction, thus OOPS in general.
+	 * @return The move number of this <code>Game</code>.
+	 */
 	public int getMoveNumber()
 	{
 		return moveNumber;
 	}
+	/**
+	 * Generic setter method, used to set the private variable moveNumber.
+	 * Used to alter the moveNumber while making and un-making <code>Move
+	 * </code>s.
+	 * @param moveNumber The moveNumber of the next <code>Move</code> of
+	 * this <code>Game</code>. 
+	 */
 	public void setMoveNumber(int moveNumber)
 	{
 		this.moveNumber = moveNumber;
 	}
+	/**
+	 * Generic getter method. Since halfMoveClock is a private variable, it
+	 * has to be accessed using a public getter method. This follows the rules
+	 * of data abstraction, thus OOPS in general.
+	 * @return The halfMoveClosk of this <code>Game</code>, as a <code>byte
+	 * </code>.
+	 */
 	public byte getHalfMoveClock()
 	{
 		return halfMoveClock;
 	}
+	/**
+	 * Generic setter method, used to set the private variable halfMoveClock.
+	 * Used to alter the moveNumber while making and un-making <code>Move
+	 * </code>s.
+	 * @param halfMoveClock The half-move clock of this <code>Game</code>,
+	 * as a <code>byte</code>. 
+	 */
 	public void setHalfMoveClock(byte halfMoveClock)
 	{
 		this.halfMoveClock = halfMoveClock;
 	}
+	/**
+	 * Generic getter method. Since fenString is a private variable, it has
+	 * to be accessed using a public getter method. This follows the rules
+	 * of data abstraction, thus OOPS in general.
+	 * @return The FEN <code>String</code> of this <code>Game</code>.
+	 */
 	public String getFenString()
 	{
 		return fenString;
 	}
+	/**
+	 * Generic setter method, used to set the private variable fenString.
+	 * Almost never used. Simply defined as good programming practice, so
+	 * that we have it when we need it (if at all).
+	 * @param fenString The <code>String</code> of this <code>Game</code>. 
+	 */
 	public void setFenString(String fenString)
 	{
 		this.fenString = fenString;
 	}
+	/**
+	 * Generic getter method. Since enPassantSquare is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general.
+	 * @return The en-passant <code>Square</code> of this <code>Game</code>.
+	 */
 	public Square getEnPassantSquare()
 	{
 		return enPassantSquare;
 	}
+	/**
+	 * Generic setter method, used to set the private variable enPassantSquare.
+	 * Used to set and reset the enPassantSquare while making and un-making
+	 * <code>Move</code>s.
+	 * @param enPassantSquare The <code>Square</code> representing the en-passant
+	 * square of this <code>Game</code>. 
+	 */
 	public void setEnPassantSquare(Square enPassantSquare)
 	{
 		this.enPassantSquare = enPassantSquare;
 	}
+	/**
+	 * Generic getter method. Since whiteToMove is a private variable, it has
+	 * to be accessed using a public getter method. This follows the rules
+	 * of data abstraction, thus OOPS in general.
+	 * @return <code>true</code> if it is white's turn to move.
+	 */
+	public boolean isWhiteToMove()
+	{
+		return whiteToMove;
+	}
+	/**
+	 * Generic setter method, used to set the private variable whiteToMove,
+	 * while making and unmaking <code>Move</code>s.
+	 * @param whiteToMove <code>false</code> if it is black's turn to move.
+	 */
+	public void setWhiteToMove(boolean whiteToMove)
+	{
+		this.whiteToMove = whiteToMove;
+	}
+	/**
+	 * Generic getter method. Since whiteCastleKingside is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general.
+	 * @return <code>true</code> if white can castle on its kingside.
+	 */
+	public boolean isWhiteCastleKingside()
+	{
+		return whiteCastleKingside;
+	}
+	/**
+	 * Generic setter method, used to set the private variable
+	 * whiteCastleKingside, while making and unmaking <code>Move</code>s.
+	 * @param whiteCastleKingside <code>true</code> if white can castle
+	 * on its kingside.
+	 */
+	public void setWhiteCastleKingside(boolean whiteCastleKingside)
+	{
+		this.whiteCastleKingside = whiteCastleKingside;
+	}
+	/**
+	 * Generic getter method. Since whiteCastleQueenside is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general.
+	 * @return <code>true</code> if white can castle on its queenside.
+	 */
+	public boolean isWhiteCastleQueenside()
+	{
+		return whiteCastleQueenside;
+	}
+	/**
+	 * Generic setter method, used to set the private variable
+	 * whiteCastleQueenside, while making and unmaking <code>Move</code>s.
+	 * @param whiteCastleQueenside <code>true</code> if white can castle
+	 * on its queenside.
+	 */
+	public void setWhiteCastleQueenside(boolean whiteCastleQueenside)
+	{
+		this.whiteCastleQueenside = whiteCastleQueenside;
+	}
+	/**
+	 * Generic getter method. Since blackCastleKingside is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general.
+	 * @return <code>true</code> if black can castle on its kingside.
+	 */
+	public boolean isBlackCastleKingside()
+	{
+		return blackCastleKingside;
+	}
+	/**
+	 * Generic setter method, used to set the private variable
+	 * blackCastleKingside, while making and unmaking <code>Move</code>s.
+	 * @param blackCastleKingside <code>true</code> if black can castle
+	 * on its kingside.
+	 */
+	public void setBlackCastleKingside(boolean blackCastleKingside)
+	{
+		this.blackCastleKingside = blackCastleKingside;
+	}
+	/**
+	 * Generic getter method. Since blackCastleQueenside is a private variable,
+	 * it has to be accessed using a public getter method. This follows the
+	 * rules of data abstraction, thus OOPS in general.
+	 * @return <code>true</code> if black can castle on its queenside.
+	 */
+	public boolean isBlackCastleQueenside()
+	{
+		return blackCastleQueenside;
+	}
+	/**
+	 * Generic setter method, used to set the private variable
+	 * blackCastleQueenside, while making and unmaking <code>Move</code>s.
+	 * @param blackCastleQueenside <code>true</code> if black can castle
+	 * on its queenside.
+	 */
+	public void setBlackCastleQueenside(boolean blackCastleQueenside)
+	{
+		this.blackCastleQueenside = blackCastleQueenside;
+	}
+	/**
+	 * Prints the list of <code>Move</code>s made by the <code>Player
+	 * </code>s of this <code>Game</code>, along with the move numbers
+	 * when required.
+	 */
 	public void printMainLine()
 	{
 		if(moveList.isEmpty())
-			System.out.print("No moves");
+			System.out.print("No moves made yet...");
 		else
 			for(int i=0;i<moveList.size();i++)
-			{
-				if(i%2==0)
-					System.out.print(i+1);
-				System.out.print(" ");
-				System.out.print(moveList.get(i));
-			}
+				System.out.print(moveList.get(i)+" ");
 		System.out.println();
 	}
 }
