@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.kenny.classiq.board.Board;
 import com.kenny.classiq.board.Square;
-import com.kenny.classiq.pieces.Piece;
 import com.kenny.classiq.players.AI;
 import com.kenny.classiq.players.GUI;
 import com.kenny.classiq.players.Player;
@@ -27,11 +26,6 @@ public class Game
 	 * gets updated as the game progresses with each half-<code>Move</code>.
 	 */
 	private Board gameBoard;
-	/**
-	 * Holds a reference to the last-moved <code>Piece</code> of the
-	 * <code>Game</code>. May be used for some things later on.
-	 */
-	private Piece lastMovedPiece;
 	/**
 	 * Holds the first <code>Player</code> of the <code>Game</code>. Usually
 	 * white, but can be changed. Initialized during construction. And usually
@@ -118,7 +112,6 @@ public class Game
 	public Game(String fenString)
 	{
 		gameBoard=new Board(this);
-		lastMovedPiece=null;
 		playerOne=new GUI(this,"white");
 		playerTwo=new AI(this,"black");
 		currentPlayer=playerOne;
@@ -497,12 +490,7 @@ public class Game
 			System.out.print("No moves made yet...");
 		else
 			for(int i=0;i<moveList.size();i++)
-			{
-				if(i%2==0)
-					System.out.print(i+1);
-				System.out.print(" ");
-				System.out.print(moveList.get(i));
-			}
+				System.out.print(moveList.get(i)+" ");
 		System.out.println();
 	}
 }

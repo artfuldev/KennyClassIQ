@@ -218,14 +218,14 @@ public class Square
 	{
 		return getFile().getSquare((byte)(rankIndex+1));
 	}
-	public Square getBootomSquare()
+	public Square getBottomSquare()
 	{
 		return getFile().getSquare((byte)(rankIndex-1));
 	}
 	public Square getTopLeftSquare()
 	{
-		if(board.getFile((byte)(fileIndex+1))!=null)
-			return board.getFile((byte)(fileIndex+1)).getSquare(
+		if(board.getFile((byte)(fileIndex-1))!=null)
+			return board.getFile((byte)(fileIndex-1)).getSquare(
 				(byte)(rankIndex+1));
 		return null;
 	}
@@ -245,9 +245,9 @@ public class Square
 	}
 	public Square getBottomRightSquare()
 	{
-		if(board.getFile((byte)(fileIndex-1))!=null)
-			return board.getFile((byte)(fileIndex-1)).getSquare(
-				(byte)(rankIndex+1));
+		if(board.getFile((byte)(fileIndex+1))!=null)
+			return board.getFile((byte)(fileIndex+1)).getSquare(
+				(byte)(rankIndex-1));
 		return null;
 	}
 	/**
