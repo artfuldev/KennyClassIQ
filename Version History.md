@@ -1,11 +1,17 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.13.1 build 1123
+* Latest Application Version: 0.0.13.2 build 1145
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+######Version 0.0.13.2 (1145)
+* Improved and optimized move generation of *King* and *Pawn*.
+* Added *Knight* move generation.
+* Improved *Piece*.
+* Added *KnightMoveGenTest*, a jUnit Test Case.
 
 ######Version 0.0.13.1 (1123)
 * Improved *Move*.
