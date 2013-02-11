@@ -23,39 +23,45 @@ public class Pawn extends Piece
 			{
 				if(square.getTopLeftSquare()!=null)
 					if(square.getTopLeftSquare().getPiece()!=null)
-						if(square.getTopLeftSquare().getPiece().isWhite()!=white)
+						if(square.getTopLeftSquare().getPiece().
+								isWhite()!=white)
 							toSquares.add(square.getTopLeftSquare());
 				if(square.getTopRightSquare()!=null)
 					if(square.getTopRightSquare().getPiece()!=null)
-						if(square.getTopRightSquare().getPiece().isWhite()!=white)
+						if(square.getTopRightSquare().getPiece().
+								isWhite()!=white)
 							toSquares.add(square.getTopRightSquare());
 				if(square.getTopSquare()!=null)
 					if(square.getTopSquare().getPiece()==null)
 						toSquares.add(square.getTopSquare());
 				if(Byte.parseByte(square.getRank().getName())==2)
-					if(square.getTopSquare()!=null)
-						if(square.getTopSquare().getTopSquare()!=null)
-							if(square.getTopSquare().getTopSquare().getPiece()==null)
-								toSquares.add(square.getTopSquare().getTopSquare());
+					if(square.getTopSquare().getPiece()==null)
+						if(square.getTopSquare().getTopSquare().
+										getPiece()==null)
+							toSquares.add(square.getTopSquare().
+											getTopSquare());
 			}
 			else
 			{
 				if(square.getBottomLeftSquare()!=null)
 					if(square.getBottomLeftSquare().getPiece()!=null)
-						if(square.getBottomLeftSquare().getPiece().isWhite()!=white)
+						if(square.getBottomLeftSquare().getPiece().
+								isWhite()!=white)
 							toSquares.add(square.getBottomLeftSquare());
 				if(square.getBottomRightSquare()!=null)
 					if(square.getBottomRightSquare().getPiece()!=null)
-						if(square.getBottomRightSquare().getPiece().isWhite()!=white)
+						if(square.getBottomRightSquare().getPiece().
+								isWhite()!=white)
 							toSquares.add(square.getBottomRightSquare());
 				if(square.getBottomSquare()!=null)
 					if(square.getBottomSquare().getPiece()==null)
 						toSquares.add(square.getBottomSquare());
 				if(Byte.parseByte(square.getRank().getName())==7)
-					if(square.getBottomSquare()!=null)
-						if(square.getBottomSquare().getBottomSquare()!=null)
-							if(square.getBottomSquare().getBottomSquare().getPiece()==null)
-								toSquares.add(square.getBottomSquare().getBottomSquare());
+					if(square.getBottomSquare().getPiece()==null)
+						if(square.getBottomSquare().getBottomSquare().
+								getPiece()==null)
+							toSquares.add(square.getBottomSquare().
+									getBottomSquare());
 			}
 			if(!toSquares.isEmpty())
 				for(byte i=0;i<toSquares.size();i++)
