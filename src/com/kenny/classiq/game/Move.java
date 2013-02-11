@@ -21,7 +21,7 @@ public class Move
 	 * Since no move in chess can be made without moving a piece from
 	 * one square to the next, this is important.
 	 */
-	private Piece pieceMoved;
+	private Piece pieceMoved=null;
 	/**
 	 * Holds the piece which was captured in the current move (half-move).
 	 * This is used to transfer the <code>Piece</code> from the <code>Board
@@ -34,13 +34,13 @@ public class Move
 	 * move (half-move). Since no move in chess can be made without
 	 * moving a piece from one square to the next, this is important.
 	 */
-	private Square fromSquare;
+	private Square fromSquare=null;
 	/**
 	 * Holds the square to which the piece was moved in the current
 	 * move (half-move). Since no move in chess can be made without
 	 * moving a piece from one square to the next, this is important.
 	 */
-	private Square toSquare;
+	private Square toSquare=null;
 	/**
 	 * Holds the number of half-<code>Move</code>s made in the <code>Game</code>
 	 * since the last <code>Pawn</code> advance or capture. This is used to
@@ -368,7 +368,7 @@ public class Move
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
 			capturingMove=true;
-		if(pieceMoved.getClass().getName().matches("Pawn")||
+		if(pieceMoved.getShortAlgebraicNotation().matches("P")||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
@@ -548,39 +548,35 @@ public class Move
 	{
 		String returnString="";
 		//if the piece moved is a King
-		if(pieceMoved.getShortAlgebraicNotation().matches("K"))
-		{
+		if((pieceMoved.getShortAlgebraicNotation().matches("K"))&&
 			//for short castle
-			if(	moveString.matches("e1g1")||
-				moveString.matches("e8g8"))
-				returnString="O-O";
+			(	moveString.matches("e1g1")||
+				moveString.matches("e8g8")))
+				return "O-O";
+		if((pieceMoved.getShortAlgebraicNotation().matches("K"))&&
 			//for long castle
-			if(	moveString.matches("e1c1")||
-				moveString.matches("e8c8"))
-				returnString="O-O-O";
-		}
-		else
+			(	moveString.matches("e1c1")||
+				moveString.matches("e8c8")))
+				return "O-O-O";
+		//for pawn and other pieces, as for pawn, it is ""
+		if(!pieceMoved.getShortAlgebraicNotation().matches("P"))
+			returnString=pieceMoved.getShortAlgebraicNotation()+
+				fromSquare.getName();
+		//for captures
+		if(capturedPiece!=null)
 		{
-			//for pawn and other pieces, as for pawn, it is ""
-			if(!pieceMoved.getShortAlgebraicNotation().matches("P"))
-				returnString=pieceMoved.getShortAlgebraicNotation()+
-					fromSquare.getName();
-			//for captures
-			if(capturedPiece!=null)
-			{
-				//if pawn captures, add file of pawn
-				if(pieceMoved.getShortAlgebraicNotation().matches("P"))
-					returnString+=fromSquare.getFile().getName();
-				returnString+="x";
-			}
-			//add destination square either way
-			returnString+=toSquare.toString();
-			//for checking and mating moves
-			if(matingMove)
-				returnString+="#";
-			else if(checkingMove)
-				returnString+="+";
+			//if pawn captures, add file of pawn
+			if(pieceMoved.getShortAlgebraicNotation().matches("P"))
+				returnString+=fromSquare.getFile().getName();
+			returnString+="x";
 		}
+		//add destination square either way
+		returnString+=toSquare.toString();
+		//for checking and mating moves
+		if(matingMove)
+			returnString+="#";
+		else if(checkingMove)
+			returnString+="+";
 		return returnString;
 	}
 }
