@@ -1,11 +1,21 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.15 build 1453
+* Latest Application Version: 0.0.16 build 1677
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.0.16 (1677)
+* Yes, the updates are coming in a frenzy!
+* Added basic UCI support. Now engine supports both UCI and XBoard
+* Improved *Player*.
+* Improved *AI*.
+* Improved *Game*.
+* Improved *FENTest*.
+* Improved *XBoardExecutor*.
+* Tested a lot! Even Demo mode in "Arena" works now!
 
 #####Version 0.0.15 (1453)
 * Made the engine playable.

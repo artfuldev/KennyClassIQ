@@ -203,6 +203,7 @@ public abstract class Player
 					moveToMake.getBoard().getSquare(moveToMake.getFromSquare().
 						getFile().getName()+avg));
 		}
+		game.setWhiteToMove(!game.isWhiteToMove());
 	}
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
@@ -271,9 +272,10 @@ public abstract class Player
 		}
 		moveToUnMake.getBoard().getGame().setEnPassantSquare(
 			moveToUnMake.getEnPassantSquare());
+		game.setWhiteToMove(!game.isWhiteToMove());
 	}
-	public void getMove()
+	public Move getMove()
 	{
-		
+		return null;
 	}
 }
