@@ -45,7 +45,19 @@ public class Pawn extends Piece
 			}
 			if(!toSquares.isEmpty())
 				for(byte i=0;i<toSquares.size();i++)
-					returnList.add(new Move(square,toSquares.get(i)));
+				{
+					Move tempMove=new Move(square,toSquares.get(i));
+					returnList.add(tempMove);
+					if(	(toSquares.get(i).getRankIndex()==0)||
+						(toSquares.get(i).getRankIndex()==7))
+					{
+						returnList.remove(tempMove);
+						returnList.add(new Move(square,toSquares.get(i),"queen"));
+						returnList.add(new Move(square,toSquares.get(i),"rook"));
+						returnList.add(new Move(square,toSquares.get(i),"bishop"));
+						returnList.add(new Move(square,toSquares.get(i),"knight"));
+					}
+				}
 			if(!returnList.isEmpty())
 				return returnList;
 		}
