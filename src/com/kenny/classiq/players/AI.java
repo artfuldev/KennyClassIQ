@@ -1,5 +1,8 @@
 package com.kenny.classiq.players;
 
+import java.util.ArrayList;
+
+import com.kenny.classiq.board.Square;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
 
@@ -10,26 +13,38 @@ import com.kenny.classiq.game.Move;
  */
 public class AI extends Player
 {
+	private Move bestMove;
 	public AI(Game gameReference, String colour)
 	{
-		if(colour.matches("black"))
-			setWhite(false);
-		setPlayerType("ai");
-		setGame(gameReference);
+		if(!colour.matches("white"))
+			white=false;
+		playerType="ai";
+		game=gameReference;
 	}
-
 	/**
-	 * Used to get the <code>Move</code> played by this <code>Player</code>.
-	 * Varies in execution, as each type of <code>Player</code> may process
-	 * the returnMove differently (<code>AI</code> calculates, <code>User</code>
-	 * thinks, and <code>GUI</code> provides). 
-	 * @return The <code>Move</code> this <code>Player</code> wants to play.
+	 * Outputs move, moveNow(?) command not executed.
 	 */
-	@Override
-	public Move getMove()
+	public void getMove()
 	{
-		Move returnMove=new Move(getGame().getGameBoard());
-		returnMove.setMoveString("e2e4");
-		return returnMove;
+		ArrayList<Move> allMoves=new ArrayList<Move>();
+		ArrayList<Square> occupiedSquares;
+		if(white)
+			occupiedSquares=game.getGameBoard().
+				getWhiteOccupiedSquares();
+		else
+			occupiedSquares=game.getGameBoard().
+				getBlackOccupiedSquares();
+		while(!occupiedSquares.isEmpty())
+		{
+			if(occupiedSquares.get(0).getPiece().getMoves()!=null)
+				allMoves.addAll(occupiedSquares.get(0).
+						getPiece().getMoves());
+			occupiedSquares.remove(0);
+		}
+		//Calculate best move here
+		bestMove=allMoves.get(0);
+		System.out.println("1\t0\t0\t0\t"+bestMove);
+		System.out.println("move "+bestMove.getMoveString());
+		makeMove(bestMove);
 	}
 }

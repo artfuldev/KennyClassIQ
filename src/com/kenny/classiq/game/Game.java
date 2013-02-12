@@ -39,11 +39,6 @@ public class Game
 	 */
 	private Player playerTwo;
 	/**
-	 * Holds a reference to the current <code>Player</code> of the
-	 * <code>Game</code>. Is used to switch the players between turns.
-	 */
-	private Player currentPlayer;
-	/**
 	 * Holds the list of <code>Move</code>s made in the game. May be used to
 	 * replay the <code>Game</code>, if such features are necessary later.
 	 * Removed lastMove because it can be accest from this moveList itself.
@@ -74,7 +69,7 @@ public class Game
 	 * the FEN String of this <code>Game</code>. Has a default value of
 	 * <code>true</code>.
 	 */
-	private boolean whiteToMove=true;
+	private boolean whiteToMove;
 	/**
 	 * Holds a boolean representing whether white can castle kingside.
 	 */
@@ -112,9 +107,9 @@ public class Game
 	public Game(String fenString)
 	{
 		gameBoard=new Board(this);
+		whiteToMove=true;
 		playerOne=new GUI(this,"white");
 		playerTwo=new AI(this,"black");
-		currentPlayer=playerOne;
 		pieceSet=new PieceSet();
 		moveList=new ArrayList<Move>();
 		this.fenString=fenString;
@@ -219,18 +214,9 @@ public class Game
 	 */
 	public Player getCurrentPlayer()
 	{
-		return currentPlayer;
-	}
-	/**
-	 * Generic setter method, used to set the private variable currentPlayer.
-	 * Almost never used. Simply defined as good programming practice, so
-	 * that we have it when we need it (if at all).
-	 * @param currentPlayer The current <code>Player</code> of this
-	 * <code>Game</code>. 
-	 */
-	public void setCurrentPlayer(Player currentPlayer)
-	{
-		this.currentPlayer = currentPlayer;
+		if(whiteToMove==playerOne.isWhite())
+			return playerOne;
+		return playerTwo;
 	}
 	/**
 	 * Generic getter method. Since playerOne is a private variable, it has

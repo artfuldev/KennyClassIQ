@@ -18,7 +18,7 @@ public abstract class Player
 	 * used to be able to get extra functionality in case they should(can) be
 	 * provided.
 	 */
-	private Game game;
+	protected Game game;
 	/**
 	 * Holds a String, whose value specifies the type of the player. Used in
 	 * place of a boolean, because AI and User are not the only two types of
@@ -26,12 +26,12 @@ public abstract class Player
 	 * The three accepted String values for this data member are: "ai", "user"
 	 * and "gui". "user" values are not used as of now (version 0.04.04.04).
 	 */
-	private String playerType;
+	protected String playerType;
 	/**
 	 * Holds a value representing the state of being the white side of the
 	 * chess board of a <code>Player</code>. Default value is true.
 	 */
-	private boolean white=true;
+	protected boolean white=true;
 	/**
 	 * Default contsructor of the <code>Player</code> class. Does absolutely
 	 * nothing.
@@ -118,18 +118,6 @@ public abstract class Player
 		this.game = game;
 	}
 	/**
-	 * Used to get the <code>Move</code> played by this <code>Player</code>.
-	 * Varies in execution, as each type of <code>Player</code> may process
-	 * the returnMove differently (<code>AI</code> calculates, <code>User</code>
-	 * thinks, and <code>GUI</code> provides). 
-	 * @return The <code>Move</code> this <code>Player</code> wants to play.
-	 */
-	public Move getMove()
-	{
-		Move returnMove=null;
-		return returnMove;
-	}
-	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
 	 * which this <code>Player</code> is a part.
 	 * <p>
@@ -153,9 +141,11 @@ public abstract class Player
 	 * or a1 if the playing side is white, and if they are made from r8,h8
 	 * or a8 if the playing side is black.
 	 * <p>
-	 * Finally, if a double pawn move has been made, the enPassantSquare of
+	 * And then, if a double pawn move has been made, the enPassantSquare of
 	 * the corresponding <code>Game</code> is changed to reflect the latest
 	 * proper value.
+	 * <p>
+	 * Finally, it sets the whiteToMove variable to its complementary value.
 	 * @param moveToMake The <code>Move</code> to be made.
 	 */
 	public void makeMove(Move moveToMake)
@@ -281,5 +271,9 @@ public abstract class Player
 		}
 		moveToUnMake.getBoard().getGame().setEnPassantSquare(
 			moveToUnMake.getEnPassantSquare());
+	}
+	public void getMove()
+	{
+		
 	}
 }
