@@ -1,11 +1,17 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.13.5 build 1221
+* Latest Application Version: 0.0.14 build 1236
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.0.14 (1236)
+* Removed *Diagonal*.
+* Removed instances of *Diagonal* from *Board*.
+* Improved *Piece*.
+* Added missing commentary for the newly implemented move generation functions, including those in *Square and Piece*.
 
 ######Version 0.0.13.5 (1221)
 * Added move generation for *Queen*.
