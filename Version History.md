@@ -1,11 +1,43 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.13 build 1099
+* Latest Application Version: 0.0.14 build 1236
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.0.14 (1236)
+* Removed *Diagonal*.
+* Removed instances of *Diagonal* from *Board*.
+* Improved *Piece*.
+* Added missing commentary for the newly implemented move generation functions, including those in *Square and Piece*.
+
+######Version 0.0.13.5 (1221)
+* Added move generation for *Queen*.
+* Added *QueenMoveGenTest*, a jUnit Test Case to test if the move generator works properly.
+
+######Version 0.0.13.4 (1203)
+* Added move generation for *Rook*.
+* Added *RookMoveGenTest*, a jUnit Test Case to test if the move generator works properly.
+
+######Version 0.0.13.3 (1187)
+* Optimized certain functions of *Piece*.
+* Added move generation for *Bishop*.
+* Improved *Knight*.
+* Added *BishoPMoveGenTest*, a jUnit Test Case.
+
+######Version 0.0.13.2 (1145)
+* Improved and optimized move generation of *King* and *Pawn*.
+* Added *Knight* move generation.
+* Improved *Piece*.
+* Added *KnightMoveGenTest*, a jUnit Test Case.
+
+######Version 0.0.13.1 (1123)
+* Improved *Move*.
+* Improved *Piece,Pawn*.
+* Added move generation for *King*.
+* Added *KingMoveGenTest*, a jUnit Test Case.
 
 #####Version 0.0.13 (1099)
 * Improved *Square*.
