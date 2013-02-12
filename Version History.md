@@ -1,11 +1,21 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.16 build 1677
+* Latest Application Version: 0.0.17 build 1698
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.0.17 (1698)
+* Improved *Player*.
+* Added promotion moves to *Pawn*.
+* Improved *Move* for promotion.
+* Improved *XBoard, Uci*.
+* Improved *Player*'s *makeMove()* for promotion.
+* Changed version output.
+* Changed exe's and names.
+* Included jlaunch.
 
 #####Version 0.0.16 (1677)
 * Yes, the updates are coming in a frenzy!
