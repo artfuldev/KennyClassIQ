@@ -36,12 +36,6 @@ public class Square
 	 */
 	private byte rankIndex;
 	/**
-	 * Holds the <code>Diagonal</code> of the <code>Square</code>, which tells
-	 * us which <code>Diagonal</code> of the parent <code>Board</code>, the
-	 * <code>Diagonal</code> belongs to.
-	 */
-	private Diagonal diagonal;
-	/**
 	 * Holds the property of the square if it is a light square. In chess,
 	 * light and dark squares alternate, so it is important to make a
 	 * note of this shade of the square.
@@ -81,18 +75,6 @@ public class Square
 	public File getFile()
 	{
 		return board.getFile(fileIndex);
-	}
-	/**
-	 * Genric getter method to access the private date member diagonal. It can
-	 * be used to better evaluate the board, by calling the <code>Diagonal</code>
-	 * to which this <code>Square</code> belongs, and then later using the
-	 * other <code>Square</code>s on the <code>Diagonal</code> to calculate
-	 * stuff! (You get the idea, right?)
-	 * @return <code>Diagonal</code> to which this <code>Square</code> belongs.
-	 */
-	public Diagonal getDiagonal()
-	{
-		return diagonal;
 	}
 	/**
 	 * Used to check if the <code>Square</code> is a light square.
@@ -178,18 +160,46 @@ public class Square
 	{
 		this.board = board;
 	}
+	/**
+	 * Generic getter method used to access the private variable fileIndex.
+	 * Since it is a private data member, it has to be accessed using public
+	 * getter and setter methods.
+	 * @return The file index of this <code>Square</code> on its <code>Board
+	 * </code>. 
+	 */
 	public byte getFileIndex()
 	{
 		return fileIndex;
 	}
+	/**
+	 * Generic setter method used to set the private variable fileIndex.
+	 * Since it is a private data member, it has to be accessed using public
+	 * getter and setter methods.
+	 * @param fileIndex The file index of this <code>Square</code> on its
+	 * <code>Board</code>. 
+	 */
 	public void setFileIndex(byte fileIndex)
 	{
 		this.fileIndex = fileIndex;
 	}
+	/**
+	 * Generic getter method used to access the private variable rankIndex.
+	 * Since it is a private data member, it has to be accessed using public
+	 * getter and setter methods.
+	 * @return The rank index of this <code>Square</code> on its <code>Board
+	 * </code>. 
+	 */
 	public byte getRankIndex()
 	{
 		return rankIndex;
 	}
+	/**
+	 * Generic setter method used to set the private variable rankIndex.
+	 * Since it is a private data member, it has to be accessed using public
+	 * getter and setter methods.
+	 * @param rankIndex The rank index of this <code>Square</code> on its
+	 * <code>Board</code>. 
+	 */
 	public void setRankIndex(byte rankIndex)
 	{
 		this.rankIndex = rankIndex;
@@ -206,22 +216,48 @@ public class Square
 		ArrayList<Square> returnList=new ArrayList<Square>();
 		return returnList;
 	}
+	/**
+	 * Used to get the <code>Square</code> located to the left of this <code>
+	 * Square</code> on its <code>Board</code>.
+	 * @return The left <code>Square</code> if available, else <code>null</code>.
+	 */
 	public Square getLeftSquare()
 	{
 		return getRank().getSquare((byte)(fileIndex-1));
 	}
+	/**
+	 * Used to get the <code>Square</code> located to the right of this <code>
+	 * Square</code> on its <code>Board</code>.
+	 * @return The right <code>Square</code> if available, else <code>null</code>.
+	 */
 	public Square getRightSquare()
 	{
 		return getRank().getSquare((byte)(fileIndex+1));
 	}
+	/**
+	 * Used to get the <code>Square</code> located to the top of this <code>
+	 * Square</code> on its <code>Board</code>.
+	 * @return The top <code>Square</code> if available, else <code>null</code>.
+	 */
 	public Square getTopSquare()
 	{
 		return getFile().getSquare((byte)(rankIndex+1));
 	}
+	/**
+	 * Used to get the <code>Square</code> located to the bottom of this <code>
+	 * Square</code> on its <code>Board</code>.
+	 * @return The bottom <code>Square</code> if available, else <code>null</code>.
+	 */
 	public Square getBottomSquare()
 	{
 		return getFile().getSquare((byte)(rankIndex-1));
 	}
+	/**
+	 * Used to get the <code>Square</code> located to the top-left of this
+	 * <code>Square</code> on its <code>Board</code>.
+	 * @return The top-left <code>Square</code> if available, else
+	 * <code>null</code>.
+	 */
 	public Square getTopLeftSquare()
 	{
 		if(board.getFile((byte)(fileIndex-1))!=null)
@@ -229,6 +265,12 @@ public class Square
 				(byte)(rankIndex+1));
 		return null;
 	}
+	/**
+	 * Used to get the <code>Square</code> located to the bottom-left of this
+	 * <code>Square</code> on its <code>Board</code>.
+	 * @return The bottom-left <code>Square</code> if available, else
+	 * <code>null</code>.
+	 */
 	public Square getBottomLeftSquare()
 	{
 		if(board.getFile((byte)(fileIndex-1))!=null)
@@ -236,6 +278,12 @@ public class Square
 				(byte)(rankIndex-1));
 		return null;
 	}
+	/**
+	 * Used to get the <code>Square</code> located to the top-right of this
+	 * <code>Square</code> on its <code>Board</code>.
+	 * @return The top-right <code>Square</code> if available, else
+	 * <code>null</code>.
+	 */
 	public Square getTopRightSquare()
 	{
 		if(board.getFile((byte)(fileIndex+1))!=null)
@@ -243,6 +291,12 @@ public class Square
 				(byte)(rankIndex+1));
 		return null;
 	}
+	/**
+	 * Used to get the <code>Square</code> located to the bottom-right of this
+	 * <code>Square</code> on its <code>Board</code>.
+	 * @return The bottom-right <code>Square</code> if available, else
+	 * <code>null</code>.
+	 */
 	public Square getBottomRightSquare()
 	{
 		if(board.getFile((byte)(fileIndex+1))!=null)

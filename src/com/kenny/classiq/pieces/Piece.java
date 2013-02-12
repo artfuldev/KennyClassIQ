@@ -146,8 +146,59 @@ public abstract class Piece
 			returnString+=" at "+square.toString();
 		return returnString;
 	}
-	public ArrayList<Move> getMoves()
+	/**
+	 * The function used to get all possible pseudo-legal moves of
+	 * a <code>Piece</code>. This includes <code>Move</code>s
+	 * which are impossible to execute while the <code>King</code>
+	 * is in check. Implementation varies for the subtypes of <code>
+	 * Piece</code>s.
+	 * @return The possible <code>Move</code>s this <code>Piece</code>
+	 * can make, in the absence of a check by the opponent.
+	 */
+	public abstract ArrayList<Move> getMoves();
+	/**
+	 * Used to add a <code>Square</code> to a list of <code>Square</code>s if
+	 * the <code>Square</code> is capturable by this <code>Piece</code> in
+	 * its next <code>Move</code>.
+	 * @param squareReference The <code>Square</code> to be tested for capture.
+	 * @param squareList The list to which it is to be added.
+	 */
+	public void addCaptureSquare(Square squareReference,
+			ArrayList<Square> squareList)
 	{
-		return null;
+		if(squareReference!=null)
+			if(squareReference.getPiece()!=null)
+				if(squareReference.getPiece().isWhite()!=this.isWhite())
+					if(!squareList.contains(squareReference))
+						squareList.add(squareReference);
+	}
+	/**
+	 * Used to add a <code>Square</code> to a list of <code>Square</code>s if
+	 * the <code>Square</code> is occupiable by this <code>Piece</code> in the
+	 * next <code>Move</code>.
+	 * @param squareReference The <code>Square</code> to be tested for move.
+	 * @param squareList The list to which it is to be added.
+	 */
+	public void addMoveToSquare(Square squareReference,
+			ArrayList<Square> squareList)
+	{
+		if(squareReference!=null)
+			if(squareReference.getPiece()==null)
+				if(!squareList.contains(squareReference))
+					squareList.add(squareReference);
+	}
+	/**
+	 * Used to add a <code>Square</code> to a list of <code>Square</code>s if
+	 * the <code>Square</code> is occupiable and capturable by this <code>
+	 * Piece</code> in the next <code>Move</code>.
+	 * @param squareReference The <code>Square</code> to be tested for capture
+	 * and move.
+	 * @param squareList The list to which it is to be added.
+	 */
+	public void addCaptureAndMoveToSquare(Square squareReference,
+			ArrayList<Square> squareList)
+	{
+		addCaptureSquare(squareReference,squareList);
+		addMoveToSquare(squareReference,squareList);
 	}
 }
