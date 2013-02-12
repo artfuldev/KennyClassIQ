@@ -45,22 +45,6 @@ public class Board
 	 */
 	private File[] file;
 	/**
-	 * An array of <code>Diagonal</code> objects, which holds all the light
-	 * squared diagonals of the <code>Board</code>, with each <code>Diagonal</code>
-	 * object containing, not copies, but references, to the respective squares
-	 * of the board, thereby maintaining the integral OOPS concept,
-	 * while still not wasting memory. 
-	 */
-	private Diagonal[] lightDiagonal;
-	/**
-	 * An array of <code>Diagonal</code> objects, which holds all the dark
-	 * squared diagonals of the <code>Board</code>, with each <code>Diagonal</code>
-	 * object containing, not copies, but references, to the respective squares
-	 * of the board, thereby maintaining the integral OOPS concept,
-	 * while still not wasting memory. 
-	 */
-	private Diagonal[] darkDiagonal;
-	/**
 	 * The default constructor of <code>Board</code>, which creates a board
 	 * representing a new game. The constructor may also set values for its
 	 * variables or call an initialization function to do the same. Usually,
