@@ -1,11 +1,22 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.14 build 1236
+* Latest Application Version: 0.0.15 build 1453
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.0.15 (1453)
+* Made the engine playable.
+* Improved *Player*.
+* Improved *Executor*
+* Improved *XBoardExecutor* by adding implementations for *new, usermove and setboard*.
+* Improved *Game*.
+* Improved *QueenMoveGenTest*.
+* Added *getMove()* to *AI*.
+* Added *GetMoveTest*, a jUnit Test Case.
+
 
 #####Version 0.0.14 (1236)
 * Removed *Diagonal*.
