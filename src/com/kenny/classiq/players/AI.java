@@ -24,11 +24,11 @@ public class AI extends Player
 	/**
 	 * Outputs move, moveNow(?) command not executed.
 	 */
-	public void getMove()
+	public Move getMove()
 	{
 		ArrayList<Move> allMoves=new ArrayList<Move>();
 		ArrayList<Square> occupiedSquares;
-		if(white)
+		if(game.isWhiteToMove())
 			occupiedSquares=game.getGameBoard().
 				getWhiteOccupiedSquares();
 		else
@@ -44,7 +44,7 @@ public class AI extends Player
 		//Calculate best move here
 		bestMove=allMoves.get(0);
 		System.out.println("1\t0\t0\t0\t"+bestMove);
-		System.out.println("move "+bestMove.getMoveString());
 		makeMove(bestMove);
+		return bestMove;
 	}
 }
