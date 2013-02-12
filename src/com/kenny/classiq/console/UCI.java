@@ -32,7 +32,7 @@ public class UCI extends GUIConsole
 	public void init()
 	{
 		System.out.println("id name "+Definitions.engineName+" "
-				+Definitions.engineVersion);
+				+Definitions.engineMainVersion);
 		System.out.println("id author "+Definitions.authorName);
 		System.out.println("uciok");
 		String[] knownCommands={"go",
