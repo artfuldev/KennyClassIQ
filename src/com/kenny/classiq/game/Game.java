@@ -154,7 +154,77 @@ public class Game
 			}
 			fileIndex++;
 		}
-		if(fenTokens[1]!="w")
+		if(fenTokens[1].matches("b"))
+			whiteToMove=false;
+		if(fenTokens[2].contains("K"))
+			whiteCastleKingside=true;
+		if(fenTokens[2].contains("Q"))
+			whiteCastleQueenside=true;
+		if(fenTokens[2].contains("k"))
+			blackCastleKingside=true;
+		if(fenTokens[2].contains("q"))
+			blackCastleQueenside=true;
+		if(fenTokens[3]!="-")
+			setEnPassantSquare(gameBoard.getSquare(fenTokens[3]));
+		halfMoveClock=Byte.parseByte(fenTokens[4]);
+		moveNumber=Integer.parseInt(fenTokens[5]);
+	}
+	/**
+	 * This is a function of <code>Game</code> which takes a FEN String as
+	 * a parameter in order to setup a game that way.
+	 * @param fenString The FEN String of the <code>Game</code> to be setup.
+	 */
+	public void setFen(String fenString)
+	{
+		gameBoard=new Board(this);
+		whiteToMove=true;
+		playerOne=new GUI(this,"white");
+		playerTwo=new AI(this,"black");
+		pieceSet=new PieceSet();
+		moveList=new ArrayList<Move>();
+		this.fenString=fenString;
+		String[] fenTokens=fenString.split("\\s");
+		char[] positionString=fenTokens[0].toCharArray();
+		for(byte i=0,rankIndex=7,fileIndex=0;i<positionString.length;i++)
+		{
+			byte index=(byte)((rankIndex*8)+fileIndex);
+			if(positionString[i]=='k')
+				gameBoard.setPiece(pieceSet.getPiece("black","king"),index);
+			else if(positionString[i]=='K')
+				gameBoard.setPiece(pieceSet.getPiece("white","king"),index);
+			else if(positionString[i]=='q')
+				gameBoard.setPiece(pieceSet.getPiece("black","queen"),index);
+			else if(positionString[i]=='Q')
+				gameBoard.setPiece(pieceSet.getPiece("white","queen"),index);
+			else if(positionString[i]=='b')
+				gameBoard.setPiece(pieceSet.getPiece("black","bishop"),index);
+			else if(positionString[i]=='B')
+				gameBoard.setPiece(pieceSet.getPiece("white","bishop"),index);
+			else if(positionString[i]=='n')
+				gameBoard.setPiece(pieceSet.getPiece("black","knight"),index);
+			else if(positionString[i]=='N')
+				gameBoard.setPiece(pieceSet.getPiece("white","knight"),index);
+			else if(positionString[i]=='r')
+				gameBoard.setPiece(pieceSet.getPiece("black","rook"),index);
+			else if(positionString[i]=='R')
+				gameBoard.setPiece(pieceSet.getPiece("white","rook"),index);
+			else if(positionString[i]=='p')
+				gameBoard.setPiece(pieceSet.getPiece("black","pawn"),index);
+			else if(positionString[i]=='P')
+				gameBoard.setPiece(pieceSet.getPiece("queen","pawn"),index);
+			else if(positionString[i]=='/')
+			{
+				rankIndex--;
+				fileIndex=-1;
+			}
+			else
+			{
+				String tempString=positionString[i]+"";
+				fileIndex+=Byte.parseByte(tempString)-1;
+			}
+			fileIndex++;
+		}
+		if(fenTokens[1].matches("b"))
 			whiteToMove=false;
 		if(fenTokens[2].contains("K"))
 			whiteCastleKingside=true;
@@ -214,7 +284,7 @@ public class Game
 	 */
 	public Player getCurrentPlayer()
 	{
-		if(whiteToMove==playerOne.isWhite())
+		if(whiteToMove)
 			return playerOne;
 		return playerTwo;
 	}
