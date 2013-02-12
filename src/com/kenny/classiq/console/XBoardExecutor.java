@@ -1,6 +1,8 @@
 package com.kenny.classiq.console;
 
 import com.kenny.classiq.definitions.Definitions;
+import com.kenny.classiq.game.Game;
+import com.kenny.classiq.game.Move;
 
 /**
  * The <code>XBoardExecutor</code> class extends <code>Executor</code> and
@@ -32,6 +34,19 @@ public class XBoardExecutor extends Executor
 			//implemented commands
 			if(commandString.startsWith("ping"))
 				System.out.println("pong "+splitString[1]);
+			else if(commandString.startsWith("usermove"))
+			{
+				Move userMove=new Move(chessGame.getGameBoard());
+				userMove.setMoveString(splitString[1]);
+				chessGame.getCurrentPlayer().makeMove(userMove);
+				chessGame.getCurrentPlayer().getMove();
+			}
+			else if(commandString.startsWith("setboard"))
+				chessGame=new Game(splitString[1]+" "+splitString[2]+" "
+						+splitString[3]+" "+splitString[4]+" "
+						+splitString[5]+" "+splitString[6]);
+			else if(commandString.startsWith("new"))
+				chessGame=new Game(Definitions.startPositionFEN);
 			//commands not yet implemented properly
 			else
 				System.out.println(Definitions.debugMessage+"received "
