@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.14 build 1236 *([Version History](Version%20History.md#version-history))*
+* Latest Application Version: 0.0.15 build 1453 *([Version History](Version%20History.md#version-history))*
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * ReadMe Version: 2.4
 
@@ -14,13 +14,22 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 ##Features
 (Words in italics represent class names)
 
-* Unplayable.
+Game-breaking features (why you *can't* play against it now):
+
+* Plays only the first move it can find.
+* Cannot make promotion moves.
+* Does not know about checks or mates or draw.
+* Does not do search or evaluation.
+
+Niceties under the hood (why you *should* play against it later):
+
 * Better *Move* system *(Players make Moves in the Game)*.
 * Automatic *MoveList* of *Game* updation.
 * Better *printMainLine()* implementation.
 * Better *FEN* implementation.
 * Better-than-ever *Console* implementation, with reader, listener and executor threads.
-* Other features yet to come! :D
+
+Other features yet to come! :D
 
 ##Branching
 * *[master](https://github.com/kenshinthebattosai/KennyClassIQ)* contains the latest minor revision.
@@ -34,7 +43,8 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 * To have a close-to-real-world representation of the game inside the program
 
 ###Short Term
-* To finish defining only the necessary things for a game, ie, *Square, Piece*, etc, and atleast play random moves.
-* To do move generation and legal move checking.
+* To do legal move checking (if in check or not).
+* To make the engine understand how the game ends.
 * To finish defining *Game*.
 * To finish adding commentary to all uploaded files.
+* To design a logo and an icon.
