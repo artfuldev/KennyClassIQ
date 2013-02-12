@@ -202,6 +202,8 @@ public abstract class Player
 				moveToMake.getBoard().getGame().setEnPassantSquare(
 					moveToMake.getBoard().getSquare(moveToMake.getFromSquare().
 						getFile().getName()+avg));
+			if(moveToMake.isPromotingMove())
+				moveToMake.getToSquare().setPiece(moveToMake.getPromotedPiece());
 		}
 		game.setWhiteToMove(!game.isWhiteToMove());
 	}
