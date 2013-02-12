@@ -1,5 +1,7 @@
 package com.kenny.classiq.console;
 
+import com.kenny.classiq.game.Game;
+
 /**
  * The <code>Executor</code> class is like the prototype of an
  * executor thread, which simply looks to execute the commands
@@ -17,6 +19,11 @@ public abstract class Executor extends Command implements Runnable
 	 * an eception is caught, this is set to false, and the run() ends.
 	 */
 	private boolean alive=true;
+	/**
+	 * Holds a reference to the chess <code>Game</code> with which this
+	 * <code>Executor</code> is involved.
+	 */
+	protected Game chessGame;
 	/**
 	 * Overrides the run() of <code>Runnable</code>. Its operation is
 	 * very simple. It keeps checking for new command every 50 ms, and
