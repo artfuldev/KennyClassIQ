@@ -153,27 +153,24 @@ public abstract class Piece
 	public void addCaptureSquare(Square squareReference,
 			ArrayList<Square> squareList)
 	{
-		ArrayList<Square> returnList=squareList;
 		if(squareReference!=null)
 			if(squareReference.getPiece()!=null)
 				if(squareReference.getPiece().isWhite()!=this.isWhite())
-					if(!returnList.contains(squareReference))
-						returnList.add(squareReference);
+					if(!squareList.contains(squareReference))
+						squareList.add(squareReference);
 	}
 	public void addMoveToSquare(Square squareReference,
 			ArrayList<Square> squareList)
 	{
-		ArrayList<Square> returnList=squareList;
 		if(squareReference!=null)
 			if(squareReference.getPiece()==null)
-				if(!returnList.contains(squareReference))
-					returnList.add(squareReference);
+				if(!squareList.contains(squareReference))
+					squareList.add(squareReference);
 	}
 	public void addCaptureAndMoveToSquare(Square squareReference,
 			ArrayList<Square> squareList)
 	{
-		ArrayList<Square> returnList=squareList;
-		addCaptureSquare(squareReference,returnList);
-		addMoveToSquare(squareReference,returnList);
+		addCaptureSquare(squareReference,squareList);
+		addMoveToSquare(squareReference,squareList);
 	}
 }
