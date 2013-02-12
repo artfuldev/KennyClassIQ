@@ -22,9 +22,17 @@ public class Definitions
 	 */
 	public static final String engineName="Kenny ClassIQ";
 	/**
-	 * Holds the version of the engine.
+	 * Holds the main version (MaVN.MiVn) of the engine.
 	 */
-	public static final String engineVersion="0.0.16 build 1677";
+	public static final String engineMainVersion="0.0";
+	/**
+	 * Holds the sub version (.MaRN.MiRN build BN) of the engine.
+	 */
+	public static final String engineSubVersion=".17 build 1698";
+	/**
+	 * Holds the complete version of the engine
+	 */
+	public static final String engineVersion=engineMainVersion+engineSubVersion;
 	/**
 	 * Holds the error string.
 	 */

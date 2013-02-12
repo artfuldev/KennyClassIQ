@@ -102,7 +102,7 @@ public class XBoard extends GUIConsole
 								+"time=0 sigint=0 sigterm=0 colors=0 ping=1 "
 								+"draw=0 pause=0 variants=normal myname="
 								+Definitions.engineName+" "
-								+Definitions.engineVersion);
+								+Definitions.engineMainVersion);
 			//feature setting done
 			System.out.println("feature done=1");
 		}

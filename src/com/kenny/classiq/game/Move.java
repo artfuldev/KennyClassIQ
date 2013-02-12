@@ -104,6 +104,16 @@ public class Move
 	 */
 	private boolean capturingMove=false;
 	/**
+	 * Holds a boolean value specifying if the move is a move involving
+	 * a promotion or not.
+	 */
+	private boolean promotingMove=false;
+	/**
+	 * Holds a reference to the piece to which the move will result in
+	 * promotion.
+	 */
+	private Piece promotedPiece=null;
+	/**
 	 * Default Constructor of <code>Move</code>.
 	 */
 	public Move()
@@ -148,6 +158,26 @@ public class Move
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
 		enPassantSquare=board.getGame().getEnPassantSquare();
+	}
+	public Move(Square fromSquare, Square toSquare, String pieceType)
+	{
+		this.fromSquare=fromSquare;
+		this.toSquare=toSquare;
+		pieceMoved=fromSquare.getPiece();
+		moveString=fromSquare.getName()+toSquare.getName();
+		board=fromSquare.getBoard();
+		capturedPiece=toSquare.getPiece();
+		if(capturedPiece!=null)
+			capturingMove=true;
+		if(pieceMoved.getClass().getName().matches("Pawn")||
+			capturingMove)
+			halfMoveClock=board.getGame().getHalfMoveClock();
+		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
+		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
+		blackCastleKingside=board.getGame().isBlackCastleKingside();
+		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		enPassantSquare=board.getGame().getEnPassantSquare();
+		promoteTo(pieceType);
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -358,24 +388,22 @@ public class Move
 		for(byte i=0;i<64;i++)
 		{
 			if(moveString.startsWith(board.getSquare(i).getName()))
-				fromSquare=board.getSquare(i);
-			if(moveString.endsWith(board.getSquare(i).getName()))
-				toSquare=board.getSquare(i);
+				setFromSquare(board.getSquare(i));
+			if((!moveString.startsWith(board.getSquare(i).getName()))&&
+				(moveString.contains(board.getSquare(i).getName())))
+				setToSquare(board.getSquare(i));
 			if((fromSquare!=null)&&(toSquare!=null))
 				break;
 		}
-		pieceMoved=fromSquare.getPiece();
-		capturedPiece=toSquare.getPiece();
-		if(capturedPiece!=null)
-			capturingMove=true;
-		if(pieceMoved.getShortAlgebraicNotation().matches("P")||
-				capturingMove)
-				halfMoveClock=board.getGame().getHalfMoveClock();
-		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
-		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
-		blackCastleKingside=board.getGame().isBlackCastleKingside();
-		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();
+		if(moveString.endsWith("Q"))
+			promoteTo("queen");
+		if(moveString.endsWith("R"))
+			promoteTo("rook");
+		if(moveString.endsWith("B"))
+			promoteTo("bishop");
+		if(moveString.endsWith("N"))
+			promoteTo("knight");
+			
 	}
 	/**
 	 * Generic getter method used to access the private data member
@@ -535,6 +563,33 @@ public class Move
 	{
 		this.enPassantSquare = enPassantSquare;
 	}
+	public boolean isPromotingMove()
+	{
+		return promotingMove;
+	}
+	public Piece getPromotedPiece()
+	{
+		return promotedPiece;
+	}
+	public void promoteTo(String pieceType)
+	{
+		promotingMove=true;
+		String colourString;
+		if(pieceMoved.isWhite())
+			colourString="white";
+		else
+			colourString="black";
+		promotedPiece=board.getGame().getPieceSet().getPiece(colourString,pieceType);
+		moveString+=promotedPiece.getShortAlgebraicNotation();
+	}
+	public void setPromotedPiece(Piece promotedPiece)
+	{
+		this.promotedPiece = promotedPiece;
+	}
+	public void setPromotingMove(boolean promotingMove)
+	{
+		this.promotingMove = promotingMove;
+	}
 	/**
 	 * Returns the string to be displayed to the user as a description
 	 * of the move, substituting appropriate strings or adding such
@@ -572,6 +627,9 @@ public class Move
 		}
 		//add destination square either way
 		returnString+=toSquare.toString();
+		//for promotions
+		if(promotingMove)
+			returnString+="="+promotedPiece.getShortAlgebraicNotation();
 		//for checking and mating moves
 		if(matingMove)
 			returnString+="#";
