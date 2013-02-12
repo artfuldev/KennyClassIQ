@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.15 build 1453 *([Version History](Version%20History.md#version-history))*
+* Latest Application Version: 0.0.16 build 1677 *([Version History](Version%20History.md#version-history))*
 * Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
 * ReadMe Version: 2.4
 
@@ -20,9 +20,11 @@ Game-breaking features (why you *can't* play against it now):
 * Cannot make promotion moves.
 * Does not know about checks or mates or draw.
 * Does not do search or evaluation.
+* Does not know set-up position properly.
 
 Niceties under the hood (why you *should* play against it later):
 
+* Multi-protocol support: *UCI* and *WinBoard*
 * Better *Move* system *(Players make Moves in the Game)*.
 * Automatic *MoveList* of *Game* updation.
 * Better *printMainLine()* implementation.
