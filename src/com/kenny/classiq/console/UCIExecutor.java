@@ -1,6 +1,8 @@
 package com.kenny.classiq.console;
 
 import com.kenny.classiq.definitions.Definitions;
+import com.kenny.classiq.game.Game;
+import com.kenny.classiq.game.Move;
 
 /**
  * The <code>UCIExecutor</code> class extends <code>Executor</code> and thus
@@ -30,6 +32,46 @@ public class UCIExecutor extends Executor
 			//implemented commands
 			if(commandString.startsWith("isready"))
 				System.out.println("readyok");
+			else if(commandString.startsWith("ucinewgame"))
+				chessGame=new Game(Definitions.startPositionFEN);
+			else if(commandString.startsWith("position"))
+			{
+				if(splitString[1].matches("startpos"))
+				{
+					chessGame=new Game(Definitions.startPositionFEN);
+					if(splitString.length>2)
+						if(splitString[2].matches("moves"))
+						{
+							Move tempMove;
+							for(byte i=3;i<splitString.length;i++)
+							{
+								tempMove=new Move(chessGame.getGameBoard());
+								tempMove.setMoveString(splitString[i]);
+								chessGame.getCurrentPlayer().makeMove(tempMove);
+							}
+						}
+				}
+				else if(splitString[1].matches("fen"))
+				{
+					chessGame=new Game(splitString[2]+" "+splitString[3]+" "
+						+splitString[4]+" "+splitString[5]+" "
+						+splitString[6]+" "+splitString[7]);
+					if(splitString[8].matches("moves"))
+					{
+						Move tempMove;
+						for(byte i=9;i<splitString.length;i++)
+						{
+							tempMove=new Move(chessGame.getGameBoard());
+							tempMove.setMoveString(splitString[i]);
+							chessGame.getCurrentPlayer().makeMove(tempMove);
+						}
+					}
+					chessGame.showBoard();
+				}
+			}
+			else if(commandString.startsWith("go"))
+				System.out.println("bestmove "+
+						chessGame.getPlayerTwo().getMove().getMoveString());
 			else
 			//commands not implemented properly
 				System.out.println(Definitions.debugMessage+"received "

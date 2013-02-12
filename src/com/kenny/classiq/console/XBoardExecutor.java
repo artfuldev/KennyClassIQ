@@ -39,8 +39,16 @@ public class XBoardExecutor extends Executor
 				Move userMove=new Move(chessGame.getGameBoard());
 				userMove.setMoveString(splitString[1]);
 				chessGame.getCurrentPlayer().makeMove(userMove);
-				chessGame.getCurrentPlayer().getMove();
+				chessGame.showBoard();
+				System.out.println("move "+chessGame.getCurrentPlayer().getMove().
+						getMoveString());
 			}
+			else if(commandString.startsWith("go"))
+				System.out.println("move "+
+						chessGame.getPlayerTwo().getMove().getMoveString());
+			else if(commandString.startsWith("?"))
+				System.out.println("move "+
+						chessGame.getPlayerTwo().getMove().getMoveString());
 			else if(commandString.startsWith("setboard"))
 				chessGame=new Game(splitString[1]+" "+splitString[2]+" "
 						+splitString[3]+" "+splitString[4]+" "
