@@ -20,15 +20,16 @@ package com.kenny.classiq.junit;
 
 import org.junit.Test;
 
-import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
-
-public class GameTest
+public class GamePlayTest
 {
 	@Test
 	public void test()
 	{
-		Game chessGame=new Game(Definitions.startPositionFEN);
+		String newFEN="rnbqkbnr/4pppp/8/8/8/5N2/PBPQ1PPP/1K3q1R w kq - 0 22";
+		Game chessGame=new Game(newFEN);
+		chessGame.showBoard();
+		System.out.println("move "+chessGame.getPlayerTwo().getMove().getMoveString());
 		chessGame.showBoard();
 	}
 }

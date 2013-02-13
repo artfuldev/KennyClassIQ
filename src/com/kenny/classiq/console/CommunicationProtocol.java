@@ -1,11 +1,29 @@
-package com.kenny.classiq.protocols;
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+package com.kenny.classiq.console;
 
 /**
  * <code>CommunicationProtocol</code> is the interface implemented by
  * the <code>UCI</code> and <code>XBoard</code> classes to create a
  * communication object to communicate with the GUI with the help of
  * pipes or standard input/output from the console.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public interface CommunicationProtocol
@@ -28,13 +46,4 @@ public interface CommunicationProtocol
 	 * properly parsed commands to the <code>execute()</code> function.
 	 */
 	public void listen();
-	/**
-	 * It is the function which executes the commands parsed by the
-	 * listener. It is used to check for specific cases and then call
-	 * the respective functions to execute such commands, by passing
-	 * the correct corresponding paramaters to those functions.
-	 * @param commandString The full command to be executed, as a
-	 * <code>String</code>.
-	 */
-	public void execute(String commandString);
 }

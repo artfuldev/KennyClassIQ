@@ -16,19 +16,17 @@
  * 
  */
 
-package com.kenny.classiq.junit;
+package com.kenny.classiq.players;
 
-import org.junit.Test;
-
-import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
 
-public class GameTest
+public class User extends Player
 {
-	@Test
-	public void test()
+	public User(Game gameReference, String colour)
 	{
-		Game chessGame=new Game(Definitions.startPositionFEN);
-		chessGame.showBoard();
+		if(colour.matches("black"))
+			setWhite(false);
+		setPlayerType("user");
+		setGame(gameReference);
 	}
 }
