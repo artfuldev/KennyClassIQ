@@ -1,11 +1,23 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
-* License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.17 build 1698
-* Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
+* License: *GNU GPL v3* (see COPYING.txt)
+* Latest Application Version: 0.1 build 2081
+* Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+####Version 0.1 (2081) - First Playable Version (nickname *Shinta*)
+* Tested a thousand times. Playable, doesn't crash. First stable release.
+* Simply plays the first move it can find. Don't expect searches or evaluations in the first playable version.
+* Added legal-move-checking. Was a huge pain, but my efforts weren't in vain.
+* Improved *Player, Game, Board, AI, Move, Executor, XBoardExecutor, UCIExecutor,* and probably any class you can name.
+* Plays legal move it generates.
+* Can Play both sides.
+* Can play in both *UCI* and *XBoard* modes.
+* Fixed lots of major crashes.
+* Fixed lots of errors in the undocumented builds. Woah! Took me a hell of a time to clear all those.
+* Made installer and hosted it on sourceforge.
 
 #####Version 0.0.17 (1698)
 * Improved *Player*.

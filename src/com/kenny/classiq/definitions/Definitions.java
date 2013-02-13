@@ -1,3 +1,21 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq.definitions;
 
 /**
@@ -8,7 +26,7 @@ package com.kenny.classiq.definitions;
  * them final makes them constant, just the functionality offered by the 
  * <code>#define</code> tags. I have to include the class name, yes, but its
  * better than not having such a functionality at all!
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public class Definitions
@@ -16,7 +34,11 @@ public class Definitions
 	/**
 	 * Holds the author name of the program.
 	 */
-	public static final String authorName="Kenshin Himura (Sudarsan Balaji)";
+	public static final String authorName="Kenshin Himura";
+	/**
+	 * Holds the internal (original) author name.
+	 */
+	public static final String internalAuthorName="Sudarsan Balaji";
 	/**
 	 * Holds the name of the engine.
 	 */
@@ -24,11 +46,11 @@ public class Definitions
 	/**
 	 * Holds the main version (MaVN.MiVn) of the engine.
 	 */
-	public static final String engineMainVersion="0.0";
+	public static final String engineMainVersion="0.1";
 	/**
 	 * Holds the sub version (.MaRN.MiRN build BN) of the engine.
 	 */
-	public static final String engineSubVersion=".17 build 1698";
+	public static final String engineSubVersion=" build 2081";
 	/**
 	 * Holds the complete version of the engine
 	 */
