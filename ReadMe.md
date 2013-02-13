@@ -1,9 +1,10 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
-* License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.17 build 1698 *([Version History](Version%20History.md#version-history))*
-* Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](Versioning.md#versioning))*
-* ReadMe Version: 2.4
+* License: *GNU GPL v3* (see COPYING.txt)
+* Latest Application Version: 0.1 build 2081 *([Version History](Version%20History.md#version-history))*
+* Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq)
+*([Versioning](Versioning.md#versioning))*
+* ReadMe Version: 2.5
 
 ##Description
 
@@ -17,13 +18,14 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 Game-breaking features (why you *can't* play against it now):
 
 * Plays only the first move it can find.
-* Does not know about checks or mates or draw.
+* Does not know about draws.
 * Does not do search or evaluation.
 * Does not know set-up position properly.
 
 Niceties under the hood (why you *should* play against it later):
 
-* Multi-protocol support: *UCI* and *WinBoard*
+* Multi-protocol support: *UCI* and *WinBoard*.
+* Lots of things planned! ;)
 * Better *Move* system *(Players make Moves in the Game)*.
 * Automatic *MoveList* of *Game* updation.
 * Better *printMainLine()* implementation.
@@ -44,8 +46,6 @@ Other features yet to come! :D
 * To have a close-to-real-world representation of the game inside the program
 
 ###Short Term
-* To do legal move checking (if in check or not).
-* To make the engine understand how the game ends.
-* To finish defining *Game*.
+* To start defining the evaluation function.
+* To add some sort of search.
 * To finish adding commentary to all uploaded files.
-* To design a logo and an icon.

@@ -16,17 +16,29 @@
  * 
  */
 
-package com.kenny.classiq.players;
+package com.kenny.classiq.junit;
 
+import org.junit.Test;
+
+import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
+import com.kenny.classiq.game.Move;
 
-public class GUI extends Player
+public class ThreatenedByTest
 {
-	public GUI(Game gameReference, String colour)
+	@Test
+	public void test()
 	{
-		if(colour.matches("black"))
-			setWhite(false);
-		setPlayerType("gui");
-		setGame(gameReference);
+		Game chessGame=new Game(Definitions.startPositionFEN);
+		Move newMove=new Move(chessGame.getGameBoard());
+		newMove.setMoveString("a1a3");
+		chessGame.getCurrentPlayer().makeMove(newMove);
+		chessGame.showBoard();
+		System.out.println(chessGame.getGameBoard().getSquare("a3").
+				getPiece().getMoves());
+		System.out.println(chessGame.getGameBoard().getSquare("a7").
+				threatenedBy(true));
+		System.out.println(chessGame.getGameBoard().getSquare("a7").
+				threatenedBy(false));
 	}
 }

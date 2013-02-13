@@ -1,6 +1,6 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
-* License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
+* License: *GNU GPL v3* (see COPYING.txt)
 * Versioning Document Version: 1.6
 
 ##Versioning
