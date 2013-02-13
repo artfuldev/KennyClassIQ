@@ -1,3 +1,21 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq.pieces;
 
 import java.util.ArrayList;
@@ -11,7 +29,7 @@ import com.kenny.classiq.game.Move;
  * classes derived from this superclass. Enhances the OOPS concept
  * implementation. An abstract class, because no objects will be created of
  * <code>Piece</code> type.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public abstract class Piece
@@ -168,7 +186,7 @@ public abstract class Piece
 	{
 		if(squareReference!=null)
 			if(squareReference.getPiece()!=null)
-				if(squareReference.getPiece().isWhite()!=this.isWhite())
+				if(squareReference.getPiece().isWhite()!=white)
 					if(!squareList.contains(squareReference))
 						squareList.add(squareReference);
 	}
@@ -200,5 +218,20 @@ public abstract class Piece
 	{
 		addCaptureSquare(squareReference,squareList);
 		addMoveToSquare(squareReference,squareList);
+	}
+	public static Piece getPiece(String colour, String pieceType)
+	{
+		Piece returnPiece=new Pawn();
+		if(pieceType.matches("queen"))
+			returnPiece=new Queen();
+		else if(pieceType.matches("rook"))
+			returnPiece=new Rook();
+		else if(pieceType.matches("bishop"))
+			returnPiece=new Bishop();
+		else if(pieceType.matches("knight"))
+			returnPiece=new Knight();
+		if(colour.matches("black"))
+			returnPiece.setWhite(false);
+		return returnPiece;
 	}
 }

@@ -16,17 +16,20 @@
  * 
  */
 
-package com.kenny.classiq.players;
+package com.kenny.classiq.junit;
+
+import org.junit.Test;
 
 import com.kenny.classiq.game.Game;
-
-public class GUI extends Player
+public class GamePlayTest
 {
-	public GUI(Game gameReference, String colour)
+	@Test
+	public void test()
 	{
-		if(colour.matches("black"))
-			setWhite(false);
-		setPlayerType("gui");
-		setGame(gameReference);
+		String newFEN="rnbqkbnr/4pppp/8/8/8/5N2/PBPQ1PPP/1K3q1R w kq - 0 22";
+		Game chessGame=new Game(newFEN);
+		chessGame.showBoard();
+		System.out.println("move "+chessGame.getPlayerTwo().getMove().getMoveString());
+		chessGame.showBoard();
 	}
 }
