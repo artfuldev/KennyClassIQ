@@ -1,8 +1,25 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq.players;
 
 import java.util.ArrayList;
 
-import com.kenny.classiq.board.Square;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
 
@@ -26,23 +43,9 @@ public class AI extends Player
 	 */
 	public Move getMove()
 	{
-		ArrayList<Move> allMoves=new ArrayList<Move>();
-		ArrayList<Square> occupiedSquares;
-		if(game.isWhiteToMove())
-			occupiedSquares=game.getGameBoard().
-				getWhiteOccupiedSquares();
-		else
-			occupiedSquares=game.getGameBoard().
-				getBlackOccupiedSquares();
-		while(!occupiedSquares.isEmpty())
-		{
-			if(occupiedSquares.get(0).getPiece().getMoves()!=null)
-				allMoves.addAll(occupiedSquares.get(0).
-						getPiece().getMoves());
-			occupiedSquares.remove(0);
-		}
+		ArrayList<Move> legalMoves=getLegalMoves(game.isWhiteToMove());
 		//Calculate best move here
-		bestMove=allMoves.get(0);
+		bestMove=legalMoves.get(0);
 		System.out.println("1\t0\t0\t0\t"+bestMove);
 		makeMove(bestMove);
 		return bestMove;
