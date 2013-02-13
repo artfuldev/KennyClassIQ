@@ -1,7 +1,26 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq.board;
 
 import java.util.ArrayList;
 
+import com.kenny.classiq.game.Move;
 import com.kenny.classiq.pieces.Piece;
 
 /**
@@ -302,6 +321,44 @@ public class Square
 		if(board.getFile((byte)(fileIndex+1))!=null)
 			return board.getFile((byte)(fileIndex+1)).getSquare(
 				(byte)(rankIndex-1));
+		return null;
+	}
+	public boolean isThreatenedBy(boolean white)
+	{
+		ArrayList<Square> enemySquares=null;
+		ArrayList<Move> testMoves=null;
+		if(!white)
+			enemySquares=board.getBlackOccupiedSquares();
+		else
+			enemySquares=board.getWhiteOccupiedSquares();
+		for(byte i=0;i<enemySquares.size();i++)
+			if(enemySquares.get(i).getPiece().getMoves()!=null)
+			{
+				testMoves=enemySquares.get(i).getPiece().getMoves();
+				for(byte j=0;j<testMoves.size();j++)
+					if(testMoves.get(j).getToSquare().equals(this))
+						return true;
+			}
+		return false;
+	}
+	public ArrayList<Square> threatenedBy(boolean white)
+	{
+		ArrayList<Square> returnList=new ArrayList<Square>();
+		ArrayList<Square> enemySquares=null;
+		if(!white)
+			enemySquares=board.getBlackOccupiedSquares();
+		else
+			enemySquares=board.getWhiteOccupiedSquares();
+		for(byte i=0;i<enemySquares.size();i++)
+		{
+			if(enemySquares.get(i).getPiece().getMoves()!=null)
+				for(byte j=0;j<enemySquares.get(i).getPiece().getMoves().size();j++)
+					if(enemySquares.get(i).getPiece().getMoves().get(j).
+						getToSquare().equals(this))
+						returnList.add(enemySquares.get(i));
+		}
+		if(!returnList.isEmpty())
+			return returnList;
 		return null;
 	}
 	/**
