@@ -1,8 +1,27 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq.board;
 
 import java.util.ArrayList;
 
 import com.kenny.classiq.game.Game;
+import com.kenny.classiq.game.Move;
 import com.kenny.classiq.pieces.Piece;
 
 /**
@@ -10,7 +29,7 @@ import com.kenny.classiq.pieces.Piece;
  * It is made up of objects of the class <code>Square</code>, which are
  * also members of objects of classes <code>Rank</code>, <code>File</code>,
  * and <code>Diagonal</code>.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class Board
@@ -216,12 +235,26 @@ public class Board
 	{
 		return square[index];
 	}
+	/**
+	 * Used to get a particular <code>Rank<code> of the <code>Board</code>,
+	 * by specifying its rank index in the <code>Board</code>.
+	 * @param rankIndex The index of the required <code>Rank</code> in
+	 * the <code>Board</code>, as a <code>byte</code> from 0-7.
+	 * @return The specified <code>Rank</code> of this <code>Board</code>.
+	 */
 	public Rank getRank(byte rankIndex)
 	{
 		if((rankIndex>-1)&&(rankIndex<8))
 				return rank[rankIndex];
 		return null;
 	}
+	/**
+	 * Used to get a particular <code>File<code> of the <code>Board</code>,
+	 * by specifying its file index in the <code>Board</code>.
+	 * @param fileIndex The index of the required <code>File</code> in
+	 * the <code>Board</code>, as a <code>byte</code> from 0-7.
+	 * @return The specified <code>File</code> of this <code>Board</code>.
+	 */
 	public File getFile(byte fileIndex)
 	{
 		if((fileIndex>-1)&&(fileIndex<8))
@@ -250,6 +283,13 @@ public class Board
 	{
 		this.game = game;
 	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * white pieces. Uses the getOccupiedSquares() function and removes the
+	 * <code>Square</code>s which are occupied by black pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * white <code>Piece</code>s.
+	 */
 	public ArrayList<Square> getWhiteOccupiedSquares()
 	{
 		ArrayList<Square> returnList=getOccupiedSquares();
@@ -261,6 +301,13 @@ public class Board
 			}
 		return returnList;
 	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * black pieces. Uses the getOccupiedSquares() function and removes the
+	 * <code>Square</code>s which are occupied by white pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * black <code>Piece</code>s.
+	 */
 	public ArrayList<Square> getBlackOccupiedSquares()
 	{
 		ArrayList<Square> returnList=getOccupiedSquares();
@@ -272,6 +319,13 @@ public class Board
 			}
 		return returnList;
 	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * pieces. Checks if the </code>Square</code>s are empty and adds the
+	 * <code>Square</code>s which are occupied by pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * <code>Piece</code>s.
+	 */
 	public ArrayList<Square> getOccupiedSquares()
 	{
 		ArrayList<Square> returnList=new ArrayList<Square>();
@@ -280,6 +334,13 @@ public class Board
 				returnList.add(getSquare(i));
 		return returnList;
 	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are not occupied by
+	 * pieces. Checks if the </code>Square</code>s are empty and adds the
+	 * <code>Square</code>s which are not occupied by pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s not having
+	 * <code>Piece</code>s.
+	 */
 	public ArrayList<Square> getEmptySquares()
 	{
 		ArrayList<Square> returnList=new ArrayList<Square>();
@@ -288,16 +349,70 @@ public class Board
 				returnList.add(getSquare(i));
 		return returnList;
 	}
-	public ArrayList<Square> getWhiteCanMoveToSquares()
+	/**
+	 * Used to get the <code>Square</code> in which the white <code>
+	 * King</code> is present. Used to calculate legality of <code>
+	 * Move</code>s.
+	 * @return The <code>Square</code> in which the white <code>
+	 * King</code> is present.
+	 */
+	public Square getWhiteKingSquare()
 	{
-		ArrayList<Square> returnList=getEmptySquares();
-		returnList.addAll(getBlackOccupiedSquares());
-		return returnList;
+		for(byte i=0;i<getWhiteOccupiedSquares().size();i++)
+			if(getWhiteOccupiedSquares().get(i).getPiece().
+					getShortAlgebraicNotation().matches("K"))
+			{
+				return getWhiteOccupiedSquares().get(i);
+			}
+		return null;
 	}
-	public ArrayList<Square> getBlackCanMoveToSquares()
+	/**
+	 * Used to get the <code>Square</code> in which the black <code>
+	 * King</code> is present. Used to calculate legality of <code>
+	 * Move</code>s.
+	 * @return The <code>Square</code> in which the black <code>
+	 * King</code> is present.
+	 */
+	public Square getBlackKingSquare()
 	{
-		ArrayList<Square> returnList=getEmptySquares();
-		returnList.addAll(getWhiteOccupiedSquares());
-		return returnList;
+		for(byte i=0;i<getBlackOccupiedSquares().size();i++)
+			if(getBlackOccupiedSquares().get(i).getPiece().
+					getShortAlgebraicNotation().matches("K"))
+			{
+				return getBlackOccupiedSquares().get(i);
+			}
+		return null;
+	}
+	/**
+	 * Used to check if the side specified by the <code>boolean</code>
+	 * is in the checked position on the <code>Board</code>
+	 * @param white The side for which the isChecked test should be
+	 * made.
+	 * @return <code>true</code> if the side's <code>King</code> is in
+	 * check, <code>false</code> otherwise.
+	 */
+	public boolean isChecked(boolean white)
+	{
+		ArrayList<Square> enemySquares=null;
+		ArrayList<Move> testMoves=null;
+		if(white)
+			enemySquares=getBlackOccupiedSquares();
+		else
+			enemySquares=getWhiteOccupiedSquares();
+		for(byte i=0;i<enemySquares.size();i++)
+		{
+			testMoves=enemySquares.get(i).getPiece().getMoves();
+			if(testMoves!=null)
+				for(byte j=0;j<testMoves.size();j++)
+				{
+					Move testMove=testMoves.get(j);
+					if(testMove!=null)
+						if(testMove.isCapturingMove())
+							if(testMove.getCapturedPiece().
+								getShortAlgebraicNotation().matches("K"))
+								return true;
+				}
+		}
+		return false;
 	}
 }

@@ -1,3 +1,21 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq;
 
 import java.util.Scanner;
@@ -13,7 +31,7 @@ import com.kenny.classiq.definitions.Definitions;
  * first received commands. Later, this may be expanded to tell
  * the difference between GUI and a user. The commands received from
  * the GUI are used to play the game (internally).
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class Main
@@ -52,7 +70,8 @@ public class Main
 	{
 		//Print introductory and debug messages
 		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
-				+" by "+Definitions.authorName);
+				+" by "+Definitions.authorName+" ("+Definitions.internalAuthorName
+				+")");
 		System.out.println("Available Processors: "
 				+Runtime.getRuntime().availableProcessors());
 		System.out.println("Available Memory: "

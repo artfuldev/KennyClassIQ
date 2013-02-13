@@ -1,3 +1,21 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq.game;
 
 import com.kenny.classiq.board.Board;
@@ -11,7 +29,7 @@ import com.kenny.classiq.pieces.Piece;
  * certain special moves like castling and check and mate require the
  * definition of additional elements in the <code>toString()</code>
  * function.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public class Move
@@ -112,7 +130,7 @@ public class Move
 	 * Holds a reference to the piece to which the move will result in
 	 * promotion.
 	 */
-	private Piece promotedPiece=null;
+	private Piece promotedPiece;
 	/**
 	 * Default Constructor of <code>Move</code>.
 	 */
@@ -150,7 +168,7 @@ public class Move
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
 			capturingMove=true;
-		if(pieceMoved.getClass().getName().matches("Pawn")||
+		if(pieceMoved.getShortAlgebraicNotation().matches("P")||
 			capturingMove)
 			halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
@@ -169,15 +187,20 @@ public class Move
 		capturedPiece=toSquare.getPiece();
 		if(capturedPiece!=null)
 			capturingMove=true;
-		if(pieceMoved.getClass().getName().matches("Pawn")||
-			capturingMove)
-			halfMoveClock=board.getGame().getHalfMoveClock();
+		halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();
-		promoteTo(pieceType);
+		enPassantSquare=board.getGame().getEnPassantSquare();promotingMove=true;
+		String colourString;
+		if(pieceMoved.isWhite())
+			colourString="white";
+		else
+			colourString="black";
+		promotedPiece=board.getGame().getPieceSet().getPiece(colourString,pieceType);
+		moveString+=promotedPiece.getShortAlgebraicNotation();
+		
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -252,7 +275,7 @@ public class Move
 				this.capturingMove=true;
 		}
 		board=fromSquare.getBoard();
-		if(pieceMoved.getClass().getName().matches("Pawn")||
+		if(pieceMoved.getShortAlgebraicNotation().matches("P")||
 				capturingMove)
 				halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
@@ -288,9 +311,8 @@ public class Move
 		if(fromSquare!=null)
 			moveString+=fromSquare.getName();
 		moveString+=toSquare.getName();
-		if(pieceMoved.getClass().getName().matches("Pawn")||
-				capturingMove)
-				halfMoveClock=board.getGame().getHalfMoveClock();
+		if(capturingMove)
+			halfMoveClock=board.getGame().getHalfMoveClock();
 		whiteCastleKingside=board.getGame().isWhiteCastleKingside();
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
@@ -389,9 +411,9 @@ public class Move
 		{
 			if(moveString.startsWith(board.getSquare(i).getName()))
 				setFromSquare(board.getSquare(i));
-			if((!moveString.startsWith(board.getSquare(i).getName()))&&
-				(moveString.contains(board.getSquare(i).getName())))
-				setToSquare(board.getSquare(i));
+			if(moveString.contains(board.getSquare(i).getName()))
+				if(!moveString.startsWith(board.getSquare(i).getName()))
+					setToSquare(board.getSquare(i));
 			if((fromSquare!=null)&&(toSquare!=null))
 				break;
 		}
@@ -403,7 +425,6 @@ public class Move
 			promoteTo("bishop");
 		if(moveString.endsWith("N"))
 			promoteTo("knight");
-			
 	}
 	/**
 	 * Generic getter method used to access the private data member
@@ -580,7 +601,7 @@ public class Move
 		else
 			colourString="black";
 		promotedPiece=board.getGame().getPieceSet().getPiece(colourString,pieceType);
-		moveString+=promotedPiece.getShortAlgebraicNotation();
+		System.out.println(promotedPiece);
 	}
 	public void setPromotedPiece(Piece promotedPiece)
 	{
