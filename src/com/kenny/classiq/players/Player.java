@@ -1,5 +1,26 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq.players;
 
+import java.util.ArrayList;
+
+import com.kenny.classiq.board.Square;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
 
@@ -205,7 +226,8 @@ public abstract class Player
 			if(moveToMake.isPromotingMove())
 				moveToMake.getToSquare().setPiece(moveToMake.getPromotedPiece());
 		}
-		game.setWhiteToMove(!game.isWhiteToMove());
+		moveToMake.getBoard().getGame().setWhiteToMove(!moveToMake.getBoard().
+				getGame().isWhiteToMove());
 	}
 	/**
 	 * Used to make a move on the <code>Board</code> of the <code>Game</code>
@@ -274,10 +296,96 @@ public abstract class Player
 		}
 		moveToUnMake.getBoard().getGame().setEnPassantSquare(
 			moveToUnMake.getEnPassantSquare());
-		game.setWhiteToMove(!game.isWhiteToMove());
+		moveToUnMake.getBoard().getGame().setWhiteToMove(!moveToUnMake.getBoard().
+				getGame().isWhiteToMove());
 	}
 	public Move getMove()
 	{
 		return null;
+	}
+	public ArrayList<Move> getLegalMoves(boolean white)
+	{
+		ArrayList<Move> allMoves=new ArrayList<Move>();
+		ArrayList<Move> legalMoves=new ArrayList<Move>();
+		ArrayList<Square> occupiedSquares;
+		if(white)
+			occupiedSquares=game.getGameBoard().
+				getWhiteOccupiedSquares();
+		else
+			occupiedSquares=game.getGameBoard().
+				getBlackOccupiedSquares();
+		while(!occupiedSquares.isEmpty())
+		{
+			if(occupiedSquares.get(0).getPiece().getMoves()!=null)
+				allMoves.addAll(occupiedSquares.get(0).
+						getPiece().getMoves());
+			occupiedSquares.remove(0);
+		}
+		boolean inCheck=false,legal;
+		if(game.getGameBoard().isChecked(false))
+			inCheck=true;
+		if(!allMoves.isEmpty())
+		{
+			Move newMove;
+			if(white)
+				for(byte i=0;i<allMoves.size();i++)
+				{
+					legal=true;
+					newMove=allMoves.get(i);
+					makeMove(newMove);
+					if(game.getGameBoard().isChecked(white))
+						legal=false;
+					unMakeMove(newMove);
+					if(legal==false)
+						continue;
+					else if(newMove.getMoveString().matches("e1g1"))
+					{
+						if(game.getGameBoard().getSquare("f1").isThreatenedBy(false))
+							legal=false;
+						else if(inCheck)
+							legal=false;
+					}
+					else if(newMove.getMoveString().matches("e1c1"))
+					{
+						if(game.getGameBoard().getSquare("d1").isThreatenedBy(false))
+							legal=false;
+						else if(inCheck)
+							legal=false;
+					}
+					else
+						legalMoves.add(newMove);
+				}
+			else
+				for(byte i=0;i<allMoves.size();i++)
+				{
+					legal=true;
+					newMove=allMoves.get(i);
+					makeMove(newMove);
+					if(game.getGameBoard().isChecked(white))
+						legal=false;
+					unMakeMove(newMove);
+					if(legal==false)
+						continue;
+					else if(allMoves.get(i).getMoveString().matches("e8g8"))
+					{
+						if(game.getGameBoard().getSquare("f8").isThreatenedBy(true))
+							legal=false;
+						if(inCheck)
+							legal=false;
+					}
+					else if(allMoves.get(i).getMoveString().matches("e8c8"))
+					{
+						if(game.getGameBoard().getSquare("d8").isThreatenedBy(true))
+							legal=false;
+						if(inCheck)
+							legal=false;
+					}
+					else
+						legalMoves.add(newMove);
+				}
+		}
+		if(!legalMoves.isEmpty())
+			return legalMoves;
+		return legalMoves;
 	}
 }
