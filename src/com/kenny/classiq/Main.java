@@ -31,7 +31,7 @@ import com.kenny.classiq.definitions.Definitions;
  * first received commands. Later, this may be expanded to tell
  * the difference between GUI and a user. The commands received from
  * the GUI are used to play the game (internally).
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class Main
@@ -70,7 +70,8 @@ public class Main
 	{
 		//Print introductory and debug messages
 		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
-				+" by "+Definitions.authorName);
+				+" by "+Definitions.authorName+" ("+Definitions.internalAuthorName
+				+")");
 		System.out.println("Available Processors: "
 				+Runtime.getRuntime().availableProcessors());
 		System.out.println("Available Memory: "

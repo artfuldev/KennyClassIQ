@@ -32,7 +32,7 @@ import com.kenny.classiq.pieces.Piece;
  * diagonals, all of which again contain the same 64 squares (references,
  * not duplicates). This represents an intricate, inter-related OOPS design,
  * which closely represents the real world.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public class Square

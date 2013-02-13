@@ -24,7 +24,7 @@ package com.kenny.classiq.console;
  * certain known commands, and matches it with the commandString
  * to see if it is a new command, and sets the newCommand variable,
  * so that the executor thread can perform its action.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class Listener extends Command implements Runnable

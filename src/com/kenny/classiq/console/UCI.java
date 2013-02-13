@@ -27,7 +27,7 @@ import com.kenny.classiq.definitions.Definitions;
  * functions, which are common to both <code>XBoard</code> and
  * <code>UCI</code> protocols. Not fully defined yet. It extends <code>
  * GUIConsole</code>.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class UCI extends GUIConsole

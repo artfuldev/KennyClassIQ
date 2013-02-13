@@ -27,7 +27,7 @@ import com.kenny.classiq.game.Game;
  * <code>Command</code> to inherit the static member commandString,
  * and implements <code>Runnable</code>. It is made abstract so that
  * separate UCI and XBoard executors may be defined.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public abstract class Executor extends Command implements Runnable

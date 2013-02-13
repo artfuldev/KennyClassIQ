@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * the use of global variables, every <code>Runnable</code> class which
  * should be used in a <code>Thread</code> extends this class, as, again,
  * java does not support extending a class from more than one class.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class Command

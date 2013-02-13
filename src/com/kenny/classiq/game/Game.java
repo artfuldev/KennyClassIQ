@@ -34,7 +34,7 @@ import com.kenny.classiq.players.Player;
  * the list of <code>Move</code>s made so far, a <code>PieceSet</code> which
  * holds all the pieces of the <code>Game</code>, and a reference to the last
  * moved <code>Piece</code>.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public class Game

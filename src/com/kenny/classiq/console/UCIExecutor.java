@@ -26,7 +26,7 @@ import com.kenny.classiq.game.Move;
  * The <code>UCIExecutor</code> class extends <code>Executor</code> and thus
  * inherits its run() method by default. All that remains is to define its
  * execute() method properly, according to the <code>UCI</code> protocol.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public class UCIExecutor extends Executor

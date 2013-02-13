@@ -27,7 +27,7 @@ import com.kenny.classiq.game.Move;
  * thus inherits its run() method by default. All that remains is to define
  * its execute() method properly, according to the <code>XBoard</code>
  * protocol.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public class XBoardExecutor extends Executor

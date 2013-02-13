@@ -29,7 +29,7 @@ import com.kenny.classiq.pieces.Piece;
  * certain special moves like castling and check and mate require the
  * definition of additional elements in the <code>toString()</code>
  * function.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public class Move

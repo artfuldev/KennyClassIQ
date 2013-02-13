@@ -16,38 +16,20 @@
  * 
  */
 
-package com.kenny.classiq.players;
+package com.kenny.classiq.junit;
 
-import java.util.ArrayList;
+import org.junit.Test;
 
 import com.kenny.classiq.game.Game;
-import com.kenny.classiq.game.Move;
-
-/**
- * The <code>AI</code> represents the <code>AI Player</code> which
- * calculates the best <code>Move</code> and returns it.
- * @author Kenshin Himura  
- */
-public class AI extends Player
+public class GamePlayTest
 {
-	private Move bestMove;
-	public AI(Game gameReference, String colour)
+	@Test
+	public void test()
 	{
-		if(!colour.matches("white"))
-			white=false;
-		playerType="ai";
-		game=gameReference;
-	}
-	/**
-	 * Outputs move, moveNow(?) command not executed.
-	 */
-	public Move getMove()
-	{
-		ArrayList<Move> legalMoves=getLegalMoves(game.isWhiteToMove());
-		//Calculate best move here
-		bestMove=legalMoves.get(0);
-		System.out.println("1\t0\t0\t0\t"+bestMove);
-		makeMove(bestMove);
-		return bestMove;
+		String newFEN="rnbqkbnr/4pppp/8/8/8/5N2/PBPQ1PPP/1K3q1R w kq - 0 22";
+		Game chessGame=new Game(newFEN);
+		chessGame.showBoard();
+		System.out.println("move "+chessGame.getPlayerTwo().getMove().getMoveString());
+		chessGame.showBoard();
 	}
 }

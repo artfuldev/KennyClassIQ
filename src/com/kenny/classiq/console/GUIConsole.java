@@ -29,7 +29,7 @@ package com.kenny.classiq.console;
  * <p>
  * It is defined as an abstract class because the <code>UCI</code> and
  * <code>XBoard</code> classes alone will have objects.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public abstract class GUIConsole extends Command implements CommunicationProtocol

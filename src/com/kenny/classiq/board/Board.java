@@ -29,7 +29,7 @@ import com.kenny.classiq.pieces.Piece;
  * It is made up of objects of the class <code>Square</code>, which are
  * also members of objects of classes <code>Rank</code>, <code>File</code>,
  * and <code>Diagonal</code>.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class Board
@@ -283,6 +283,13 @@ public class Board
 	{
 		this.game = game;
 	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * white pieces. Uses the getOccupiedSquares() function and removes the
+	 * <code>Square</code>s which are occupied by black pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * white <code>Piece</code>s.
+	 */
 	public ArrayList<Square> getWhiteOccupiedSquares()
 	{
 		ArrayList<Square> returnList=getOccupiedSquares();
@@ -294,6 +301,13 @@ public class Board
 			}
 		return returnList;
 	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * black pieces. Uses the getOccupiedSquares() function and removes the
+	 * <code>Square</code>s which are occupied by white pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * black <code>Piece</code>s.
+	 */
 	public ArrayList<Square> getBlackOccupiedSquares()
 	{
 		ArrayList<Square> returnList=getOccupiedSquares();
@@ -305,6 +319,13 @@ public class Board
 			}
 		return returnList;
 	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * pieces. Checks if the </code>Square</code>s are empty and adds the
+	 * <code>Square</code>s which are occupied by pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * <code>Piece</code>s.
+	 */
 	public ArrayList<Square> getOccupiedSquares()
 	{
 		ArrayList<Square> returnList=new ArrayList<Square>();
@@ -313,6 +334,13 @@ public class Board
 				returnList.add(getSquare(i));
 		return returnList;
 	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are not occupied by
+	 * pieces. Checks if the </code>Square</code>s are empty and adds the
+	 * <code>Square</code>s which are not occupied by pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s not having
+	 * <code>Piece</code>s.
+	 */
 	public ArrayList<Square> getEmptySquares()
 	{
 		ArrayList<Square> returnList=new ArrayList<Square>();
@@ -321,18 +349,13 @@ public class Board
 				returnList.add(getSquare(i));
 		return returnList;
 	}
-	public ArrayList<Square> getWhiteCanMoveToSquares()
-	{
-		ArrayList<Square> returnList=getEmptySquares();
-		returnList.addAll(getBlackOccupiedSquares());
-		return returnList;
-	}
-	public ArrayList<Square> getBlackCanMoveToSquares()
-	{
-		ArrayList<Square> returnList=getEmptySquares();
-		returnList.addAll(getWhiteOccupiedSquares());
-		return returnList;
-	}
+	/**
+	 * Used to get the <code>Square</code> in which the white <code>
+	 * King</code> is present. Used to calculate legality of <code>
+	 * Move</code>s.
+	 * @return The <code>Square</code> in which the white <code>
+	 * King</code> is present.
+	 */
 	public Square getWhiteKingSquare()
 	{
 		for(byte i=0;i<getWhiteOccupiedSquares().size();i++)
@@ -343,6 +366,13 @@ public class Board
 			}
 		return null;
 	}
+	/**
+	 * Used to get the <code>Square</code> in which the black <code>
+	 * King</code> is present. Used to calculate legality of <code>
+	 * Move</code>s.
+	 * @return The <code>Square</code> in which the black <code>
+	 * King</code> is present.
+	 */
 	public Square getBlackKingSquare()
 	{
 		for(byte i=0;i<getBlackOccupiedSquares().size();i++)
@@ -353,6 +383,14 @@ public class Board
 			}
 		return null;
 	}
+	/**
+	 * Used to check if the side specified by the <code>boolean</code>
+	 * is in the checked position on the <code>Board</code>
+	 * @param white The side for which the isChecked test should be
+	 * made.
+	 * @return <code>true</code> if the side's <code>King</code> is in
+	 * check, <code>false</code> otherwise.
+	 */
 	public boolean isChecked(boolean white)
 	{
 		ArrayList<Square> enemySquares=null;

@@ -25,7 +25,7 @@ import com.kenny.classiq.Main;
  * and is helpful in creating a thread to enable getting inputs quickly from
  * the console or the pipe. It is similar for both protocols (<code>UCI</code>
  * and <code>XBoard</code>)
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class InputThread extends Command implements Runnable

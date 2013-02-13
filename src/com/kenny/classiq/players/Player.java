@@ -29,7 +29,7 @@ import com.kenny.classiq.game.Move;
  * <code>Game</code> class. It used to get moves from a player, and the
  * method for getting the move from the player should depend upon the
  * type of the player (ie, human or ai).
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public abstract class Player

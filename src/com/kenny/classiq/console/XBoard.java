@@ -30,7 +30,7 @@ import com.kenny.classiq.definitions.Definitions;
  * functions, which are common to both <code>XBoard</code> and
  * <code>UCI</code> protocols. Extends <code>GUIConsole</code> for
  * obvious reasons.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  * 
  */
 public class XBoard extends GUIConsole

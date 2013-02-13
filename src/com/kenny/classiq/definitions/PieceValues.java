@@ -28,7 +28,7 @@ package com.kenny.classiq.definitions;
  * them final makes them constant, just the functionality offered by the 
  * <code>#define</code> tags. I have to include the class name, yes, but its
  * better than not having such a functionality at all!
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public class PieceValues

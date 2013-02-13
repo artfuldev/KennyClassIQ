@@ -32,7 +32,7 @@ import com.kenny.classiq.pieces.Rook;
  * normal chess game (the normal variant).
  * <p>
  * For the order of pieces in the piece set, please see {@link #piece}
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  */
 public class PieceSet
 {

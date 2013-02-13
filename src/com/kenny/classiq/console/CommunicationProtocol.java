@@ -23,7 +23,7 @@ package com.kenny.classiq.console;
  * the <code>UCI</code> and <code>XBoard</code> classes to create a
  * communication object to communicate with the GUI with the help of
  * pipes or standard input/output from the console.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public interface CommunicationProtocol

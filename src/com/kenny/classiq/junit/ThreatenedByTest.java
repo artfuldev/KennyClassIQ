@@ -16,38 +16,29 @@
  * 
  */
 
-package com.kenny.classiq.players;
+package com.kenny.classiq.junit;
 
-import java.util.ArrayList;
+import org.junit.Test;
 
+import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
 
-/**
- * The <code>AI</code> represents the <code>AI Player</code> which
- * calculates the best <code>Move</code> and returns it.
- * @author Kenshin Himura  
- */
-public class AI extends Player
+public class ThreatenedByTest
 {
-	private Move bestMove;
-	public AI(Game gameReference, String colour)
+	@Test
+	public void test()
 	{
-		if(!colour.matches("white"))
-			white=false;
-		playerType="ai";
-		game=gameReference;
-	}
-	/**
-	 * Outputs move, moveNow(?) command not executed.
-	 */
-	public Move getMove()
-	{
-		ArrayList<Move> legalMoves=getLegalMoves(game.isWhiteToMove());
-		//Calculate best move here
-		bestMove=legalMoves.get(0);
-		System.out.println("1\t0\t0\t0\t"+bestMove);
-		makeMove(bestMove);
-		return bestMove;
+		Game chessGame=new Game(Definitions.startPositionFEN);
+		Move newMove=new Move(chessGame.getGameBoard());
+		newMove.setMoveString("a1a3");
+		chessGame.getCurrentPlayer().makeMove(newMove);
+		chessGame.showBoard();
+		System.out.println(chessGame.getGameBoard().getSquare("a3").
+				getPiece().getMoves());
+		System.out.println(chessGame.getGameBoard().getSquare("a7").
+				threatenedBy(true));
+		System.out.println(chessGame.getGameBoard().getSquare("a7").
+				threatenedBy(false));
 	}
 }

@@ -29,7 +29,7 @@ import com.kenny.classiq.game.Move;
  * classes derived from this superclass. Enhances the OOPS concept
  * implementation. An abstract class, because no objects will be created of
  * <code>Piece</code> type.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
  *
  */
 public abstract class Piece
