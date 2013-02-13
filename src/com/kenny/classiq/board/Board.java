@@ -1,6 +1,27 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq.board;
 
+import java.util.ArrayList;
+
 import com.kenny.classiq.game.Game;
+import com.kenny.classiq.game.Move;
 import com.kenny.classiq.pieces.Piece;
 
 /**
@@ -8,7 +29,8 @@ import com.kenny.classiq.pieces.Piece;
  * It is made up of objects of the class <code>Square</code>, which are
  * also members of objects of classes <code>Rank</code>, <code>File</code>,
  * and <code>Diagonal</code>.
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
+ * 
  */
 public class Board
 {
@@ -41,22 +63,6 @@ public class Board
 	 * while still not wasting memory. 
 	 */
 	private File[] file;
-	/**
-	 * An array of <code>Diagonal</code> objects, which holds all the light
-	 * squared diagonals of the <code>Board</code>, with each <code>Diagonal</code>
-	 * object containing, not copies, but references, to the respective squares
-	 * of the board, thereby maintaining the integral OOPS concept,
-	 * while still not wasting memory. 
-	 */
-	private Diagonal[] lightDiagonal;
-	/**
-	 * An array of <code>Diagonal</code> objects, which holds all the dark
-	 * squared diagonals of the <code>Board</code>, with each <code>Diagonal</code>
-	 * object containing, not copies, but references, to the respective squares
-	 * of the board, thereby maintaining the integral OOPS concept,
-	 * while still not wasting memory. 
-	 */
-	private Diagonal[] darkDiagonal;
 	/**
 	 * The default constructor of <code>Board</code>, which creates a board
 	 * representing a new game. The constructor may also set values for its
@@ -96,8 +102,6 @@ public class Board
 			byte rankIndex=(byte)(i/8);
 			square[i]=new Square();
 			square[i].setBoard(this);
-			square[i].setFile(file[fileIndex]);
-			square[i].setRank(rank[rankIndex]);
 			rank[rankIndex].setSquare(square[i],fileIndex);
 			file[fileIndex].setSquare(square[i],rankIndex);
 			square[i].setName(square[i].getFile().getName()
@@ -123,7 +127,7 @@ public class Board
 	 */
 	public Board(Game game)
 	{
-		this.game=game;
+		this.setGame(game);
 		//Create 64 squares, 8 ranks, and 8 files
 		square=new Square[64];
 		rank=new Rank[8];
@@ -152,8 +156,8 @@ public class Board
 			byte rankIndex=(byte)(i/8);
 			square[i]=new Square();
 			square[i].setBoard(this);
-			square[i].setFile(file[fileIndex]);
-			square[i].setRank(rank[rankIndex]);
+			square[i].setFileIndex(fileIndex);
+			square[i].setRankIndex(rankIndex);
 			rank[rankIndex].setSquare(square[i],fileIndex);
 			file[fileIndex].setSquare(square[i],rankIndex);
 			square[i].setName(square[i].getFile().getName()
@@ -205,5 +209,210 @@ public class Board
 	public void setPiece(Piece piece, byte index)
 	{
 		square[index].setPiece(piece);
+	}
+	/**
+	 * Used to get a specific <code>Square</code> of this <code>Board</code>,
+	 * when the name of the <code>Square</code> is known.
+	 * @param squareName The name of the <code>Square</code> as a String, eg.
+	 * "e2".
+	 * @return The specified <code>Square</code>. 
+	 */
+	public Square getSquare(String squareName)
+	{
+		for(int i=0;i<square.length;i++)
+			if(square[i].getName().matches(squareName))
+				return square[i];
+		return null;
+	}
+
+	/**
+	 * Used to get a specific <code>Square</code> of this <code>Board</code>,
+	 * when the index of the <code>Square</code> is known.
+	 * @param index The index of the <code>Square</code> as a byte, 0-64.
+	 * @return The specified <code>Square</code>. 
+	 */
+	public Square getSquare(byte index)
+	{
+		return square[index];
+	}
+	/**
+	 * Used to get a particular <code>Rank<code> of the <code>Board</code>,
+	 * by specifying its rank index in the <code>Board</code>.
+	 * @param rankIndex The index of the required <code>Rank</code> in
+	 * the <code>Board</code>, as a <code>byte</code> from 0-7.
+	 * @return The specified <code>Rank</code> of this <code>Board</code>.
+	 */
+	public Rank getRank(byte rankIndex)
+	{
+		if((rankIndex>-1)&&(rankIndex<8))
+				return rank[rankIndex];
+		return null;
+	}
+	/**
+	 * Used to get a particular <code>File<code> of the <code>Board</code>,
+	 * by specifying its file index in the <code>Board</code>.
+	 * @param fileIndex The index of the required <code>File</code> in
+	 * the <code>Board</code>, as a <code>byte</code> from 0-7.
+	 * @return The specified <code>File</code> of this <code>Board</code>.
+	 */
+	public File getFile(byte fileIndex)
+	{
+		if((fileIndex>-1)&&(fileIndex<8))
+				return file[fileIndex];
+		return null;
+	}
+	/**
+	 * Generic getter method used to access the <code>Game</code> to which the
+	 * <code>Board</code> belongs. Since it is a private member, it has to be
+	 * accessed by a public getter method.
+	 * @return The <code>Game</code> of this <code>Board</code>.
+	 */
+	public Game getGame()
+	{
+		return game;
+	}
+	/**
+	 * Generic setter method used to set the <code>Game</code> to which the
+	 * <code>Board</code> belongs. Since it is a private member, it has to be
+	 * set by a public setter method. Generally not used, as it is set during
+	 * construction itself, still defined as good programming practice (it may
+	 * become useful later).
+	 * @return The <code>Game</code> of this <code>Board</code>.
+	 */
+	public void setGame(Game game)
+	{
+		this.game = game;
+	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * white pieces. Uses the getOccupiedSquares() function and removes the
+	 * <code>Square</code>s which are occupied by black pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * white <code>Piece</code>s.
+	 */
+	public ArrayList<Square> getWhiteOccupiedSquares()
+	{
+		ArrayList<Square> returnList=getOccupiedSquares();
+		for(byte i=0;i<returnList.size();i++)
+			if(!returnList.get(i).getPiece().isWhite())
+			{
+				returnList.remove(i);
+				i--;
+			}
+		return returnList;
+	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * black pieces. Uses the getOccupiedSquares() function and removes the
+	 * <code>Square</code>s which are occupied by white pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * black <code>Piece</code>s.
+	 */
+	public ArrayList<Square> getBlackOccupiedSquares()
+	{
+		ArrayList<Square> returnList=getOccupiedSquares();
+		for(byte i=0;i<returnList.size();i++)
+			if(returnList.get(i).getPiece().isWhite())
+			{
+				returnList.remove(i);
+				i--;
+			}
+		return returnList;
+	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are occupied by
+	 * pieces. Checks if the </code>Square</code>s are empty and adds the
+	 * <code>Square</code>s which are occupied by pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s having
+	 * <code>Piece</code>s.
+	 */
+	public ArrayList<Square> getOccupiedSquares()
+	{
+		ArrayList<Square> returnList=new ArrayList<Square>();
+		for(byte i=0;i<64;i++)
+			if(getSquare(i).getPiece()!=null)
+				returnList.add(getSquare(i));
+		return returnList;
+	}
+	/**
+	 * Used to get the list of <code>Squares</code> which are not occupied by
+	 * pieces. Checks if the </code>Square</code>s are empty and adds the
+	 * <code>Square</code>s which are not occupied by pieces.
+	 * @return An <code>ArrayList</code> of <code>Square</code>s not having
+	 * <code>Piece</code>s.
+	 */
+	public ArrayList<Square> getEmptySquares()
+	{
+		ArrayList<Square> returnList=new ArrayList<Square>();
+		for(byte i=0;i<64;i++)
+			if(getSquare(i).getPiece()==null)
+				returnList.add(getSquare(i));
+		return returnList;
+	}
+	/**
+	 * Used to get the <code>Square</code> in which the white <code>
+	 * King</code> is present. Used to calculate legality of <code>
+	 * Move</code>s.
+	 * @return The <code>Square</code> in which the white <code>
+	 * King</code> is present.
+	 */
+	public Square getWhiteKingSquare()
+	{
+		for(byte i=0;i<getWhiteOccupiedSquares().size();i++)
+			if(getWhiteOccupiedSquares().get(i).getPiece().
+					getShortAlgebraicNotation().matches("K"))
+			{
+				return getWhiteOccupiedSquares().get(i);
+			}
+		return null;
+	}
+	/**
+	 * Used to get the <code>Square</code> in which the black <code>
+	 * King</code> is present. Used to calculate legality of <code>
+	 * Move</code>s.
+	 * @return The <code>Square</code> in which the black <code>
+	 * King</code> is present.
+	 */
+	public Square getBlackKingSquare()
+	{
+		for(byte i=0;i<getBlackOccupiedSquares().size();i++)
+			if(getBlackOccupiedSquares().get(i).getPiece().
+					getShortAlgebraicNotation().matches("K"))
+			{
+				return getBlackOccupiedSquares().get(i);
+			}
+		return null;
+	}
+	/**
+	 * Used to check if the side specified by the <code>boolean</code>
+	 * is in the checked position on the <code>Board</code>
+	 * @param white The side for which the isChecked test should be
+	 * made.
+	 * @return <code>true</code> if the side's <code>King</code> is in
+	 * check, <code>false</code> otherwise.
+	 */
+	public boolean isChecked(boolean white)
+	{
+		ArrayList<Square> enemySquares=null;
+		ArrayList<Move> testMoves=null;
+		if(white)
+			enemySquares=getBlackOccupiedSquares();
+		else
+			enemySquares=getWhiteOccupiedSquares();
+		for(byte i=0;i<enemySquares.size();i++)
+		{
+			testMoves=enemySquares.get(i).getPiece().getMoves();
+			if(testMoves!=null)
+				for(byte j=0;j<testMoves.size();j++)
+				{
+					Move testMove=testMoves.get(j);
+					if(testMove!=null)
+						if(testMove.isCapturingMove())
+							if(testMove.getCapturedPiece().
+								getShortAlgebraicNotation().matches("K"))
+								return true;
+				}
+		}
+		return false;
 	}
 }

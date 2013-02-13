@@ -22,13 +22,23 @@ import org.junit.Test;
 
 import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
+import com.kenny.classiq.game.Move;
 
-public class GameTest
+public class ThreatenedByTest
 {
 	@Test
 	public void test()
 	{
 		Game chessGame=new Game(Definitions.startPositionFEN);
+		Move newMove=new Move(chessGame.getGameBoard());
+		newMove.setMoveString("a1a3");
+		chessGame.getCurrentPlayer().makeMove(newMove);
 		chessGame.showBoard();
+		System.out.println(chessGame.getGameBoard().getSquare("a3").
+				getPiece().getMoves());
+		System.out.println(chessGame.getGameBoard().getSquare("a7").
+				threatenedBy(true));
+		System.out.println(chessGame.getGameBoard().getSquare("a7").
+				threatenedBy(false));
 	}
 }

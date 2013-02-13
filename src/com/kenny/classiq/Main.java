@@ -1,9 +1,28 @@
+/*
+ * This file is part of "Kenny ClassIQ", (c) Kenshin Himura, 2013.
+ * 
+ * "Kenny ClassIQ" is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * "Kenny ClassIQ" is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with "Kenny ClassIQ".  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package com.kenny.classiq;
 
 import java.util.Scanner;
-
-import com.kenny.classiq.protocols.UCI;
-import com.kenny.classiq.protocols.XBoard;
+import com.kenny.classiq.console.GUIConsole;
+import com.kenny.classiq.console.UCI;
+import com.kenny.classiq.console.XBoard;
+import com.kenny.classiq.definitions.Definitions;
 
 /**
  * The <code>Main</code> class serves just like a main() function
@@ -12,15 +31,18 @@ import com.kenny.classiq.protocols.XBoard;
  * first received commands. Later, this may be expanded to tell
  * the difference between GUI and a user. The commands received from
  * the GUI are used to play the game (internally).
- * @author Kenshin Himura (Sudarsan Balaji)
+ * @author Kenshin Himura  
+ * 
  */
 public class Main
 {
 	/**
 	 * A <code>Scanner</code> object representing the input stream
 	 * of the console, or the pipe, in case of GUI communication.
+	 * Made public so that the <code>Scanner</code> may be used by
+	 * threads other than the main thread.
 	 */
-	private static Scanner inputStream=new Scanner(System.in);
+	public static Scanner inputStream=new Scanner(System.in);
 	/**
 	 * A <code>String</code> representing the protocol type, as
 	 * obtained through the <code>Scanner</code> object. As of now,
@@ -29,6 +51,11 @@ public class Main
 	 * be used to identify if it is a GUI at all.
 	 */
 	private static String protocolType;
+	/**
+	 * A <code>GUIConsole</code> representing the GUI console. It can
+	 * be of either protocol, so is instantiated later.
+	 */
+	public static GUIConsole guiConsole=null;
 	/**
 	 * The main function of the <code>Main</code> class is declared as
 	 * a static function so that it can be called without an instance
@@ -41,14 +68,22 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		UCI uciConsole=new UCI();
-		XBoard xboardConsole=new XBoard();
+		//Print introductory and debug messages
+		System.out.println(Definitions.engineName+" "+Definitions.engineVersion
+				+" by "+Definitions.authorName+" ("+Definitions.internalAuthorName
+				+")");
+		System.out.println("Available Processors: "
+				+Runtime.getRuntime().availableProcessors());
+		System.out.println("Available Memory: "
+				+Runtime.getRuntime().freeMemory()/1024/1024
+				+" MB");
+		//Get protocol type from console/pipe and start proper guiConsole
 		protocolType=inputStream.nextLine();
 		if(protocolType.matches("uci"))
-			uciConsole.start();
+			guiConsole=new UCI();
 		if(protocolType.matches("xboard"))
-			xboardConsole.start();
+			guiConsole=new XBoard();
+		guiConsole.start();
 		//else, create custom console or GUI
-		inputStream.close();
 	}
 }

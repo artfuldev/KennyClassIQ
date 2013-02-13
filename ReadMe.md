@@ -1,9 +1,10 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
-* License: *GNU GPL v3 and CC-BY-NC-SA Licenses* (see gpl.txt and ccbyncsa.txt)
-* Latest Application Version: 0.0.04.03 build 221 *([Version History](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Version%20History.md))*
-* Latest Stable Version: [-.--](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable) *([Versioning](https://github.com/kenshinthebattosai/KennyClassIQ/blob/master/Versioning.md))*
-* ReadMe Version: 1.5
+* License: *GNU GPL v3* (see COPYING.txt)
+* Latest Application Version: 0.1 build 2081 *([Version History](Version%20History.md#version-history))*
+* Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq)
+*([Versioning](Versioning.md#versioning))*
+* ReadMe Version: 2.5
 
 ##Description
 
@@ -14,14 +15,30 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 ##Features
 (Words in italics represent class names)
 
-* Unplayable.
-* Other features yet to come! :D
+Game-breaking features (why you *can't* play against it now):
+
+* Plays only the first move it can find.
+* Does not know about draws.
+* Does not do search or evaluation.
+* Does not know set-up position properly.
+
+Niceties under the hood (why you *should* play against it later):
+
+* Multi-protocol support: *UCI* and *WinBoard*.
+* Lots of things planned! ;)
+* Better *Move* system *(Players make Moves in the Game)*.
+* Automatic *MoveList* of *Game* updation.
+* Better *printMainLine()* implementation.
+* Better *FEN* implementation.
+* Better-than-ever *Console* implementation, with reader, listener and executor threads.
+
+Other features yet to come! :D
 
 ##Branching
-* *master* contains the latest code.
-* *stable* contains the latest stable code *(x.xx)*.
-* *majrev* contains the latest major revision.
-* *minrev* contains the latest minor revision.
+* *[master](https://github.com/kenshinthebattosai/KennyClassIQ)* contains the latest minor revision.
+* *[majrev](https://github.com/kenshinthebattosai/KennyClassIQ/tree/majrev)* contains the latest major revision.
+* *[stable](https://github.com/kenshinthebattosai/KennyClassIQ/tree/stable)* contains the latest stable code *(minor version)*.
+* *[working](https://github.com/kenshinthebattosai/KennyClassIQ/tree/minrev)* contains the latest code.
 
 ##Goals
 
@@ -29,8 +46,6 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 * To have a close-to-real-world representation of the game inside the program
 
 ###Short Term
-* To finish defining *XBoard* class, *CommunicationProtocol* interface properly.
-* To finish defining only the necessary things for a game, ie, *Square, Piece*, etc, and atleast play random moves.
-* To finish defining *Game*.
+* To start defining the evaluation function.
+* To add some sort of search.
 * To finish adding commentary to all uploaded files.
-* To make an executable jar (console program) capable of communicating with Arena GUI, identifying all possible xboard/winboard commands.
