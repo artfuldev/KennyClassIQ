@@ -61,7 +61,7 @@ public class UCIExecutor extends Executor
 						if(splitString[2].matches("moves"))
 						{
 							Move tempMove;
-							for(byte i=3;i<splitString.length;i++)
+							for(int i=3;i<splitString.length;i++)
 							{
 								tempMove=new Move(chessGame.getGameBoard());
 								tempMove.setMoveString(splitString[i]);
@@ -78,7 +78,7 @@ public class UCIExecutor extends Executor
 						if(splitString[8].matches("moves"))
 						{
 							Move tempMove;
-							for(byte i=9;i<splitString.length;i++)
+							for(int i=9;i<splitString.length;i++)
 							{
 								tempMove=new Move(chessGame.getGameBoard());
 								tempMove.setMoveString(splitString[i]);
