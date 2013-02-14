@@ -52,9 +52,10 @@ public class Pawn extends Piece
 				{
 					Square epSquare=square.getBoard().getGame().getEnPassantSquare();
 					if(epSquare!=null)
-						if((epSquare.getFileIndex()-square.getFileIndex()==1)||
-							(epSquare.getFileIndex()-square.getFileIndex()==-1))
-							addMoveToSquare(epSquare,toSquares);
+						if(epSquare.getRankIndex()==5)
+							if((epSquare.getFileIndex()-square.getFileIndex()==1)||
+								(epSquare.getFileIndex()-square.getFileIndex()==-1))
+								addMoveToSquare(epSquare,toSquares);
 				}
 			}
 			else
@@ -72,9 +73,10 @@ public class Pawn extends Piece
 				{
 					Square epSquare=square.getBoard().getGame().getEnPassantSquare();
 					if(epSquare!=null)
-						if((epSquare.getFileIndex()-square.getFileIndex()==1)||
-							(epSquare.getFileIndex()-square.getFileIndex()==-1))
-							addMoveToSquare(epSquare,toSquares);
+						if(epSquare.getRankIndex()==2)
+							if((epSquare.getFileIndex()-square.getFileIndex()==1)||
+								(epSquare.getFileIndex()-square.getFileIndex()==-1))
+								addMoveToSquare(epSquare,toSquares);
 				}
 			}
 			if(!toSquares.isEmpty())
