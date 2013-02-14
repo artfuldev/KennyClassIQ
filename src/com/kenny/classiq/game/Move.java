@@ -192,15 +192,9 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();promotingMove=true;
-		String colourString;
-		if(pieceMoved.isWhite())
-			colourString="white";
-		else
-			colourString="black";
-		promotedPiece=board.getGame().getPieceSet().getPiece(colourString,pieceType);
-		moveString+=promotedPiece.getShortAlgebraicNotation();
-		
+		enPassantSquare=board.getGame().getEnPassantSquare();
+		promoteTo(pieceType);
+		moveString+=promotedPiece.getShortAlgebraicNotation();	
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -406,7 +400,7 @@ public class Move
 	 */
 	public void setMoveString(String moveString)
 	{
-		this.moveString=moveString;
+		this.moveString=moveString.toLowerCase();
 		for(byte i=0;i<64;i++)
 		{
 			if(moveString.startsWith(board.getSquare(i).getName()))
@@ -417,13 +411,13 @@ public class Move
 			if((fromSquare!=null)&&(toSquare!=null))
 				break;
 		}
-		if(moveString.endsWith("Q"))
+		if(moveString.endsWith("q"))
 			promoteTo("queen");
-		if(moveString.endsWith("R"))
+		if(moveString.endsWith("r"))
 			promoteTo("rook");
-		if(moveString.endsWith("B"))
+		if(moveString.endsWith("b"))
 			promoteTo("bishop");
-		if(moveString.endsWith("N"))
+		if(moveString.endsWith("n"))
 			promoteTo("knight");
 	}
 	/**
@@ -601,7 +595,6 @@ public class Move
 		else
 			colourString="black";
 		promotedPiece=board.getGame().getPieceSet().getPiece(colourString,pieceType);
-		System.out.println(promotedPiece);
 	}
 	public void setPromotedPiece(Piece promotedPiece)
 	{
