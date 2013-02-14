@@ -415,4 +415,15 @@ public class Board
 		}
 		return false;
 	}
+	public int getScore(boolean white)
+	{
+		int score=0;
+		ArrayList<Square> whiteSquares=getWhiteOccupiedSquares();
+		ArrayList<Square> blackSquares=getBlackOccupiedSquares();
+		for(Square wS:whiteSquares)
+			score+=wS.getPiece().getPieceValue();
+		for(Square bS:blackSquares)
+			score-=bS.getPiece().getPieceValue();
+		return score;
+	}
 }
