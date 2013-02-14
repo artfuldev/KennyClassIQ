@@ -409,7 +409,7 @@ public class Board
 					if(testMove!=null)
 						if(testMove.isCapturingMove())
 							if(testMove.getCapturedPiece().
-								getShortAlgebraicNotation().matches("K"))
+							getShortAlgebraicNotation().matches("K"))
 								return true;
 				}
 		}

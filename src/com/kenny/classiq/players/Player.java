@@ -172,11 +172,18 @@ public abstract class Player
 	public void makeMove(Move moveToMake)
 	{
 		if(moveToMake.isCapturingMove())
+		{
 			moveToMake.getBoard().getGame().getPieceSet().setPiece(
-							moveToMake.getCapturedPiece());
+			moveToMake.getCapturedPiece());
+			if(moveToMake.getToSquare().equals(moveToMake.getEnPassantSquare()))
+				if(moveToMake.getPieceMoved().getShortAlgebraicNotation().
+					matches("P"))
+					moveToMake.getCapturedPiece().getSquare().setPiece(null);
+		}
 		moveToMake.getFromSquare().setPiece(null);
 		moveToMake.getToSquare().setPiece(moveToMake.getPieceMoved());
 		moveToMake.getBoard().getGame().getMoveList().add(moveToMake);
+		moveToMake.getBoard().getGame().setEnPassantSquare(null);
 		if(!moveToMake.getPieceMoved().isWhite())
 			moveToMake.getBoard().getGame().setMoveNumber(
 				moveToMake.getBoard().getGame().getMoveNumber()+1);
@@ -215,14 +222,22 @@ public abstract class Player
 		}
 		if(moveToMake.getPieceMoved().getShortAlgebraicNotation().matches("P"))
 		{
-			byte from=0, to=0, avg=0; 
-			from=Byte.parseByte(moveToMake.getFromSquare().getRank().getName());
-			to=Byte.parseByte(moveToMake.getToSquare().getRank().getName());
-			avg=(byte)((from+to)/2);
-			if(avg==3||avg==6)
-				moveToMake.getBoard().getGame().setEnPassantSquare(
-					moveToMake.getBoard().getSquare(moveToMake.getFromSquare().
-						getFile().getName()+avg));
+			if(moveToMake.getPieceMoved().isWhite())
+			{
+				if(moveToMake.getFromSquare().getRankIndex()==1)
+					if(moveToMake.getToSquare().getRankIndex()==3)
+						moveToMake.getBoard().getGame().setEnPassantSquare(
+						moveToMake.getBoard().getSquare(moveToMake.getFromSquare().
+						getFile().getName()+2));
+			}
+			else
+			{
+				if(moveToMake.getFromSquare().getRankIndex()==6)
+					if(moveToMake.getToSquare().getRankIndex()==4)
+						moveToMake.getBoard().getGame().setEnPassantSquare(
+						moveToMake.getBoard().getSquare(moveToMake.getFromSquare().
+						getFile().getName()+6));
+			}
 			if(moveToMake.isPromotingMove())
 				moveToMake.getToSquare().setPiece(moveToMake.getPromotedPiece());
 		}
@@ -242,12 +257,17 @@ public abstract class Player
 	public void unMakeMove(Move moveToUnMake)
 	{
 		moveToUnMake.getFromSquare().setPiece(moveToUnMake.getPieceMoved());
-		moveToUnMake.getFromSquare().getPiece().setSquare(
-											moveToUnMake.getFromSquare());
 		if(!moveToUnMake.isCapturingMove())
 			moveToUnMake.getToSquare().setPiece(null);
 		else
-			moveToUnMake.getToSquare().setPiece(moveToUnMake.getCapturedPiece());
+		{
+			moveToUnMake.getCapturedPiece().getSquare().setPiece(
+			moveToUnMake.getCapturedPiece());
+			if(moveToUnMake.getEnPassantSquare().equals(moveToUnMake.getToSquare()))
+				if(moveToUnMake.getPieceMoved().getShortAlgebraicNotation().
+					matches("P"))
+					moveToUnMake.getToSquare().setPiece(null);
+		}
 		moveToUnMake.getBoard().getGame().getMoveList().remove(moveToUnMake);
 		if(!moveToUnMake.getPieceMoved().isWhite())
 			moveToUnMake.getBoard().getGame().setMoveNumber(
@@ -333,6 +353,7 @@ public abstract class Player
 					legal=true;
 					newMove=allMoves.get(i);
 					makeMove(newMove);
+					game.printStats();
 					if(game.getGameBoard().isChecked(white))
 						legal=false;
 					unMakeMove(newMove);
