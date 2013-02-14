@@ -45,8 +45,18 @@ public class AI extends Player
 	{
 		ArrayList<Move> legalMoves=getLegalMoves(game.isWhiteToMove());
 		//Calculate best move here
-		bestMove=legalMoves.get(0);
-		System.out.println("1\t0\t0\t0\t"+bestMove);
+		int bestScore=(int)(Double.NEGATIVE_INFINITY);
+		for(Move move:legalMoves)
+		{
+			makeMove(move);
+			if(game.getGameBoard().getScore(game.isWhiteToMove())>=bestScore)
+			{
+				bestScore=game.getGameBoard().getScore(game.isWhiteToMove());
+				bestMove=move;
+				System.out.println("1\t"+bestScore+"\t0\t"+legalMoves.size()+"\t"+bestMove);
+			}
+			unMakeMove(move);
+		}
 		makeMove(bestMove);
 		return bestMove;
 	}

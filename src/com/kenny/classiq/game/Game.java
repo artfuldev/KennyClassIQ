@@ -573,5 +573,6 @@ public class Game
 		printMainLine();
 		System.out.println("White to move: "+isWhiteToMove());
 		System.out.println("En Passant Square: "+enPassantSquare);
+		System.out.println("Score: "+gameBoard.getScore(true));
 	}
 }

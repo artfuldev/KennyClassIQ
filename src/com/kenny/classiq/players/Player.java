@@ -228,7 +228,7 @@ public abstract class Player
 					if(moveToMake.getToSquare().getRankIndex()==3)
 						moveToMake.getBoard().getGame().setEnPassantSquare(
 						moveToMake.getBoard().getSquare(moveToMake.getFromSquare().
-						getFile().getName()+2));
+						getFile().getName()+3));
 			}
 			else
 			{
@@ -263,10 +263,11 @@ public abstract class Player
 		{
 			moveToUnMake.getCapturedPiece().getSquare().setPiece(
 			moveToUnMake.getCapturedPiece());
-			if(moveToUnMake.getEnPassantSquare().equals(moveToUnMake.getToSquare()))
-				if(moveToUnMake.getPieceMoved().getShortAlgebraicNotation().
-					matches("P"))
-					moveToUnMake.getToSquare().setPiece(null);
+			if(moveToUnMake.getEnPassantSquare()!=null)
+				if(moveToUnMake.getEnPassantSquare().equals(moveToUnMake.getToSquare()))
+					if(moveToUnMake.getPieceMoved().getShortAlgebraicNotation().
+						matches("P"))
+						moveToUnMake.getToSquare().setPiece(null);
 		}
 		moveToUnMake.getBoard().getGame().getMoveList().remove(moveToUnMake);
 		if(!moveToUnMake.getPieceMoved().isWhite())
@@ -353,7 +354,6 @@ public abstract class Player
 					legal=true;
 					newMove=allMoves.get(i);
 					makeMove(newMove);
-					game.printStats();
 					if(game.getGameBoard().isChecked(white))
 						legal=false;
 					unMakeMove(newMove);
