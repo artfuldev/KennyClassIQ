@@ -175,7 +175,7 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();
+		setEnPassantSquare(board.getGame().getEnPassantSquare());
 	}
 	public Move(Square fromSquare, Square toSquare, String pieceType)
 	{
@@ -192,9 +192,8 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();
 		promoteTo(pieceType);
-		moveString+=promotedPiece.getShortAlgebraicNotation();	
+		moveString+=promotedPiece.getShortAlgebraicNotation();
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -276,7 +275,7 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();
+		setEnPassantSquare(board.getGame().getEnPassantSquare());
 	}
 	/**
 	 * Generic getter method to access the private member toSquare.
@@ -311,6 +310,7 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		setEnPassantSquare(board.getGame().getEnPassantSquare());
 	}
 	/**
 	 * This method is used to access the private data member hence
@@ -577,6 +577,18 @@ public class Move
 	public void setEnPassantSquare(Square enPassantSquare)
 	{
 		this.enPassantSquare = enPassantSquare;
+		if(enPassantSquare!=null)
+			if(toSquare!=null)
+				if(toSquare.equals(enPassantSquare))
+					if(pieceMoved!=null)
+						if(pieceMoved.getShortAlgebraicNotation().matches("P"))
+						{
+							capturingMove=true;
+							if(pieceMoved.isWhite())
+								capturedPiece=toSquare.getBottomSquare().getPiece();
+							else
+								capturedPiece=toSquare.getTopSquare().getPiece();
+						}
 	}
 	public boolean isPromotingMove()
 	{
@@ -644,6 +656,10 @@ public class Move
 		//for promotions
 		if(promotingMove)
 			returnString+="="+promotedPiece.getShortAlgebraicNotation();
+		//for en-passant
+		if(toSquare.equals(enPassantSquare))
+			if(pieceMoved.getShortAlgebraicNotation().matches("P"))
+				returnString+="/ep";
 		//for checking and mating moves
 		if(matingMove)
 			returnString+="#";
