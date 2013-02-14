@@ -1,11 +1,20 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
-* Latest Application Version: 0.1 build 2081
+* Latest Application Version: 0.1.1 build 2097
 * Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.1.1 (2097)
+* Fixed #143.
+* Fixed buggy *UCI* driver, now both *UCI and WinBoard* drivers are at the same level.
+* Added and implemented support for *d* command, which can be used to display the stats of the *Game*.
+* Improved *Game, Executor, UCIExecutor and XBoardExecutor*.
+* Added *printStats()* to *Game*.
+* Optimized *Move* construction.
+* Corrected major issue with promotion moves' setting of moveString.
 
 ####Version 0.1 (2081) - First Playable Version (nickname *Shinta*)
 * Tested a thousand times. Playable, doesn't crash. First stable release.
