@@ -1,11 +1,17 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
-* Latest Application Version: 0.1.1 build 2097
+* Latest Application Version: 0.1.2 build 2156
 * Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.1.2 (2156)
+* Fixed issues #142, #146, and #147
+* Added proper UCI support.
+* Added enPassant Move Generation.
+* Updated debug messages.
 
 #####Version 0.1.1 (2097)
 * Fixed #143.
