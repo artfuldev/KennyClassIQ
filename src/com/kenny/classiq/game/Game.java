@@ -572,5 +572,6 @@ public class Game
 		showBoard();
 		printMainLine();
 		System.out.println("White to move: "+isWhiteToMove());
+		System.out.println("En Passant Square: "+enPassantSquare);
 	}
 }
