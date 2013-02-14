@@ -74,22 +74,25 @@ public class UCIExecutor extends Executor
 					chessGame=new Game(splitString[2]+" "+splitString[3]+" "
 						+splitString[4]+" "+splitString[5]+" "
 						+splitString[6]+" "+splitString[7]);
-					if(splitString[8].matches("moves"))
-					{
-						Move tempMove;
-						for(byte i=9;i<splitString.length;i++)
+					if(splitString.length>8)
+						if(splitString[8].matches("moves"))
 						{
-							tempMove=new Move(chessGame.getGameBoard());
-							tempMove.setMoveString(splitString[i]);
-							chessGame.getCurrentPlayer().makeMove(tempMove);
+							Move tempMove;
+							for(byte i=9;i<splitString.length;i++)
+							{
+								tempMove=new Move(chessGame.getGameBoard());
+								tempMove.setMoveString(splitString[i]);
+								chessGame.getCurrentPlayer().makeMove(tempMove);
+							}
 						}
-					}
 					chessGame.showBoard();
 				}
 			}
 			else if(commandString.startsWith("go"))
 				System.out.println("bestmove "+
 						chessGame.getPlayerTwo().getMove().getMoveString());
+			else if(commandString.startsWith("d"))
+				chessGame.printStats();
 			else
 			//commands not implemented properly
 				System.out.println(Definitions.debugMessage+"received "

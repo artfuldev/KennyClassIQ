@@ -65,8 +65,7 @@ public abstract class Executor extends Command implements Runnable
 		      alive=false;
 		      System.out.println("Execution failed");
 		      ex.printStackTrace();
-		      chessGame.showBoard();
-		      System.out.println("white to move: "+chessGame.isWhiteToMove());
+		      chessGame.printStats();
 		    }
 		}
 	}

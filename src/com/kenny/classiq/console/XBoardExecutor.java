@@ -72,6 +72,8 @@ public class XBoardExecutor extends Executor
 						+splitString[5]+" "+splitString[6]);
 			else if(commandString.startsWith("new"))
 				chessGame=new Game(Definitions.startPositionFEN);
+			else if(commandString.startsWith("d"))
+				chessGame.printStats();
 			//commands not yet implemented properly
 			else
 				System.out.println(Definitions.debugMessage+"received "
