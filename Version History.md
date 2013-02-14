@@ -1,11 +1,20 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
-* Latest Application Version: 0.1.2 build 2156
+* Latest Application Version: 0.1.3 build 2198
 * Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+#####Version 0.1.3 (2198)
+* Fixed issues #144 and #150.
+* Corrected errors in enPassantSquare generation.
+* Corrected errors in isChecked().
+* Added scores.
+* Added MakeBestMove ability..
+* Added *MakeBestMoveTest*, to test it.
+* Made various bugfixes and improvements.
 
 #####Version 0.1.2 (2156)
 * Fixed issues #142, #146, and #147
