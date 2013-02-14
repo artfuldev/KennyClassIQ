@@ -100,7 +100,8 @@ public class XBoard extends GUIConsole
 								"?",
 								"black",//added for protocol 1 support
 								"white",//added for protocol 1 support
-								"quit"};
+								"quit",
+								"d"};
 		listenerRun.setKnownCommands(knownCommands);
 	}
 	/**

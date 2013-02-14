@@ -20,25 +20,28 @@ package com.kenny.classiq.junit;
 
 import org.junit.Test;
 
-import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
 
-public class CanMoveToTest
+public class EnPassantTest
 {
 	@Test
 	public void test()
 	{
-		Game chessGame=new Game(Definitions.startPositionFEN);
-		chessGame.showBoard();
-		System.out.println(chessGame.getGameBoard().getEmptySquares());
-		System.out.println(chessGame.getGameBoard().getWhiteCanMoveToSquares());
-		System.out.println(chessGame.getGameBoard().getBlackCanMoveToSquares());
-		Move moveOne=new Move(chessGame.getGameBoard());
-		moveOne.setMoveString("e2e4");
-		chessGame.getPlayerOne().makeMove(moveOne);
-		System.out.println(chessGame.getGameBoard().getEmptySquares());
-		System.out.println(chessGame.getGameBoard().getWhiteCanMoveToSquares());
-		System.out.println(chessGame.getGameBoard().getBlackCanMoveToSquares());
+		String newFEN="rnbqkbnr/pppp1ppp/4p3/4P3/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2 ";
+		Game chessGame=new Game(newFEN);
+		chessGame.printStats();
+		Move newMove=new Move(chessGame.getGameBoard());
+		newMove.setMoveString("d7d5");
+		chessGame.getCurrentPlayer().makeMove(newMove);
+		chessGame.printStats();
+		Move newMoveThree=new Move(chessGame.getGameBoard());
+		newMoveThree.setMoveString("e5d6");
+		chessGame.getCurrentPlayer().makeMove(newMoveThree);
+		chessGame.printStats();
+		chessGame.getCurrentPlayer().unMakeMove(newMoveThree);
+		chessGame.printStats();
+		chessGame.getPlayerTwo().getMove();
+		
 	}
 }

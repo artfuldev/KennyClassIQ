@@ -567,4 +567,11 @@ public class Game
 				System.out.print(moveList.get(i)+" ");
 		System.out.println();
 	}
+	public void printStats()
+	{
+		showBoard();
+		printMainLine();
+		System.out.println("White to move: "+isWhiteToMove());
+		System.out.println("En Passant Square: "+enPassantSquare);
+	}
 }
