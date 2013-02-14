@@ -60,7 +60,8 @@ public class UCI extends GUIConsole
 								"stop",
 								"ponderhit",
 								"quit",
-								"position"};
+								"position",
+								"d"};
 		listenerRun.setKnownCommands(knownCommands);
 	}
 }
