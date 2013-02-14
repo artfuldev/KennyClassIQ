@@ -50,7 +50,7 @@ public class Definitions
 	/**
 	 * Holds the sub version (.MaRN.MiRN build BN) of the engine.
 	 */
-	public static final String engineSubVersion=".2 build 2156";
+	public static final String engineSubVersion=".3 build 2198";
 	/**
 	 * Holds the complete version of the engine
 	 */

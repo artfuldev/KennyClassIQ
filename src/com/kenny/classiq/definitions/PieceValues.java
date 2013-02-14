@@ -38,7 +38,7 @@ public class PieceValues
 	 * Much higher than all pieces put together in the game,
 	 * to avoid the engine caring about exchanges.
 	 */
-	public static final int kingValue=30000;
+	public static final int kingValue=39900;
 	/**
 	 * Holds the value of the queen in centipawns
 	 */

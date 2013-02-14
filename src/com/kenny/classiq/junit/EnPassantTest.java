@@ -41,7 +41,21 @@ public class EnPassantTest
 		chessGame.printStats();
 		chessGame.getCurrentPlayer().unMakeMove(newMoveThree);
 		chessGame.printStats();
-		chessGame.getPlayerTwo().getMove();
+		newFEN="rnbqkbnr/1ppppp1p/8/8/p7/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1 ";
+		chessGame=new Game(newFEN);
+		chessGame.printStats();
+		newMove=new Move(chessGame.getGameBoard());
+		newMove.setMoveString("b2b4");
+		chessGame.getCurrentPlayer().makeMove(newMove);
+		chessGame.printStats();
+		newMoveThree=new Move(chessGame.getGameBoard());
+		newMoveThree.setMoveString("a4b3");
+		chessGame.getCurrentPlayer().makeMove(newMoveThree);
+		chessGame.printStats();
+		chessGame.getCurrentPlayer().unMakeMove(newMoveThree);
+		chessGame.printStats();
+		
+//		chessGame.getPlayerTwo().getMove();
 		
 	}
 }
