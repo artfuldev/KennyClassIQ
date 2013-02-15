@@ -18,6 +18,7 @@
 
 package com.kenny.classiq.console;
 
+import com.kenny.classiq.Main;
 import com.kenny.classiq.game.Game;
 
 /**
@@ -30,8 +31,9 @@ import com.kenny.classiq.game.Game;
  * @author Kenshin Himura  
  * 
  */
-public abstract class Executor extends Command implements Runnable
+public abstract class Executor implements Runnable
 {
+	protected Command command;
 	/**
 	 * Holds a boolean which determines the life of the thread. When
 	 * an eception is caught, this is set to false, and the run() ends.
@@ -42,6 +44,10 @@ public abstract class Executor extends Command implements Runnable
 	 * <code>Executor</code> is involved.
 	 */
 	protected Game chessGame;
+	public Executor(Command command)
+	{
+		this.command=command;
+	}
 	/**
 	 * Overrides the run() of <code>Runnable</code>. Its operation is
 	 * very simple. It keeps checking for new command every 50 ms, and
@@ -53,19 +59,25 @@ public abstract class Executor extends Command implements Runnable
 		{
 			try
 			{
-				Thread.sleep(50);
-				while(!commandArray.isEmpty())
+				synchronized(command)
 				{
-					execute(commandArray.get(0));
-					commandArray.remove(0);
+					while(!command.commandArray.isEmpty())
+					{
+						execute(command.commandArray.get(0));
+						command.commandArray.remove(0);
+					}
+					command.notifyAll();
+					command.wait();
 				}
 		    }
 			catch(Exception ex)
 			{
 		      alive=false;
 		      System.out.println("Execution failed");
-		      ex.printStackTrace();
-		      chessGame.printStats();
+		      if(chessGame!=null)
+		    	  chessGame.printStats();
+		      if(!Main.protocolType.matches("xboard"))
+		    	  System.out.println("info string engine crashed");
 		    }
 		}
 	}

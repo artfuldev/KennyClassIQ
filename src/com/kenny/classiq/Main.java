@@ -50,7 +50,7 @@ public class Main
 	 * <code>XBoard</code> or <code>UCI</code>, but later it can
 	 * be used to identify if it is a GUI at all.
 	 */
-	private static String protocolType;
+	public static String protocolType;
 	/**
 	 * A <code>GUIConsole</code> representing the GUI console. It can
 	 * be of either protocol, so is instantiated later.

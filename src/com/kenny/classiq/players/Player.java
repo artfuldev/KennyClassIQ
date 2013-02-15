@@ -198,6 +198,22 @@ public abstract class Player
 			{
 				moveToMake.getBoard().getGame().setWhiteCastleKingside(false);
 				moveToMake.getBoard().getGame().setWhiteCastleQueenside(false);
+				if(moveToMake.getMoveString().contains("g1"))
+				{
+					moveToMake.getBoard().getRank((byte)0).getSquare((byte)5).
+					setPiece(moveToMake.getBoard().getRank((byte)0).
+							getSquare((byte)7).getPiece());
+					moveToMake.getBoard().getRank((byte)0).
+					getSquare((byte)7).setPiece(null);
+				}
+				else if(moveToMake.getMoveString().contains("c1"))
+				{
+					moveToMake.getBoard().getRank((byte)0).getSquare((byte)3).
+					setPiece(moveToMake.getBoard().getRank((byte)0).
+							getSquare((byte)0).getPiece());
+					moveToMake.getBoard().getRank((byte)0).
+					getSquare((byte)0).setPiece(null);
+				}
 			}
 			if(moveToMake.getBoard().getGame().isWhiteCastleKingside())
 				if(moveToMake.getMoveString().startsWith("h1"))
@@ -212,6 +228,22 @@ public abstract class Player
 			{
 				moveToMake.getBoard().getGame().setBlackCastleKingside(false);
 				moveToMake.getBoard().getGame().setBlackCastleQueenside(false);
+				if(moveToMake.getMoveString().contains("g8"))
+				{
+					moveToMake.getBoard().getRank((byte)7).getSquare((byte)5).
+					setPiece(moveToMake.getBoard().getRank((byte)7).
+							getSquare((byte)7).getPiece());
+					moveToMake.getBoard().getRank((byte)7).
+					getSquare((byte)7).setPiece(null);
+				}
+				else if(moveToMake.getMoveString().contains("c8"))
+				{
+					moveToMake.getBoard().getRank((byte)7).getSquare((byte)3).
+					setPiece(moveToMake.getBoard().getRank((byte)7).
+							getSquare((byte)0).getPiece());
+					moveToMake.getBoard().getRank((byte)7).
+					getSquare((byte)0).setPiece(null);
+				}
 			}
 			if(moveToMake.getBoard().getGame().isBlackCastleKingside())
 				if(moveToMake.getMoveString().startsWith("h8"))
@@ -287,6 +319,22 @@ public abstract class Player
 					moveToUnMake.isWhiteCastleKingside());
 				moveToUnMake.getBoard().getGame().setWhiteCastleQueenside(
 					moveToUnMake.isWhiteCastleQueenside());
+				if(moveToUnMake.getMoveString().contains("g1"))
+				{
+					moveToUnMake.getBoard().getRank((byte)0).getSquare((byte)7).
+					setPiece(moveToUnMake.getBoard().getRank((byte)0).
+							getSquare((byte)5).getPiece());
+					moveToUnMake.getBoard().getRank((byte)0).
+					getSquare((byte)5).setPiece(null);
+				}
+				if(moveToUnMake.getMoveString().contains("c1"))
+				{
+					moveToUnMake.getBoard().getRank((byte)0).getSquare((byte)0).
+					setPiece(moveToUnMake.getBoard().getRank((byte)0).
+							getSquare((byte)3).getPiece());
+					moveToUnMake.getBoard().getRank((byte)0).
+					getSquare((byte)3).setPiece(null);
+				}
 			}
 			if(!moveToUnMake.getBoard().getGame().isWhiteCastleKingside())
 				if(moveToUnMake.getMoveString().startsWith("h1"))
@@ -305,6 +353,22 @@ public abstract class Player
 					moveToUnMake.isBlackCastleKingside());
 				moveToUnMake.getBoard().getGame().setBlackCastleQueenside(
 					moveToUnMake.isBlackCastleQueenside());
+				if(moveToUnMake.getMoveString().contains("g8"))
+				{
+					moveToUnMake.getBoard().getRank((byte)7).getSquare((byte)7).
+					setPiece(moveToUnMake.getBoard().getRank((byte)7).
+							getSquare((byte)5).getPiece());
+					moveToUnMake.getBoard().getRank((byte)7).
+					getSquare((byte)5).setPiece(null);
+				}
+				if(moveToUnMake.getMoveString().contains("c8"))
+				{
+					moveToUnMake.getBoard().getRank((byte)7).getSquare((byte)0).
+					setPiece(moveToUnMake.getBoard().getRank((byte)7).
+							getSquare((byte)3).getPiece());
+					moveToUnMake.getBoard().getRank((byte)7).
+					getSquare((byte)3).setPiece(null);
+				}
 			}
 			if(!moveToUnMake.getBoard().getGame().isBlackCastleKingside())
 				if(moveToUnMake.getMoveString().startsWith("h8"))
@@ -405,8 +469,6 @@ public abstract class Player
 						legalMoves.add(newMove);
 				}
 		}
-		if(!legalMoves.isEmpty())
-			return legalMoves;
 		return legalMoves;
 	}
 }
