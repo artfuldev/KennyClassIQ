@@ -18,6 +18,7 @@
 
 package com.kenny.classiq.console;
 
+
 /**
  * The <code>Listener</code> class, which implements <code>Runnable
  * </code>, serves as a prototype for a genral listener. It has
@@ -27,8 +28,9 @@ package com.kenny.classiq.console;
  * @author Kenshin Himura  
  * 
  */
-public class Listener extends Command implements Runnable
+public class Listener implements Runnable
 {
+	private Command command;
 	/**
 	 * Holds a boolean which determines the life of the thread. When
 	 * an eception is caught, this is set to false, and the run() ends.
@@ -39,6 +41,10 @@ public class Listener extends Command implements Runnable
 	 * representing the protocol upon its initialization.
 	 */
 	private String knownCommands[];
+	public Listener(Command command)
+	{
+		this.command=command;
+	}
 	/**
 	 * Used to set the known commands of a listener, according to the
 	 * protocol it belongs to.
@@ -60,9 +66,13 @@ public class Listener extends Command implements Runnable
 		{
 			try
 			{
-				Thread.sleep(50);
-				if((commandString!=null)&&(commandString!=previousCommandString))
-					validate();
+				synchronized(command)
+				{
+					if(command.newCommand)
+						validate();
+					command.notifyAll();
+					command.wait();
+				}
 		    }
 			catch(Exception ex)
 			{
@@ -79,9 +89,9 @@ public class Listener extends Command implements Runnable
 	 */
 	public void validate()
 	{
-		previousCommandString=commandString;
 		for(byte i=0;i<knownCommands.length;i++)
-			if(commandString.startsWith(knownCommands[i].toLowerCase()))
-				commandArray.add(commandString);
+			if(command.commandString.startsWith(knownCommands[i].toLowerCase()))
+				command.commandArray.add(command.commandString);
+		command.newCommand=false;
 	}
 }

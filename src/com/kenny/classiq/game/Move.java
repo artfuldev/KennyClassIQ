@@ -175,7 +175,7 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();
+		setEnPassantSquare(board.getGame().getEnPassantSquare());
 	}
 	public Move(Square fromSquare, Square toSquare, String pieceType)
 	{
@@ -192,15 +192,8 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();promotingMove=true;
-		String colourString;
-		if(pieceMoved.isWhite())
-			colourString="white";
-		else
-			colourString="black";
-		promotedPiece=board.getGame().getPieceSet().getPiece(colourString,pieceType);
+		promoteTo(pieceType);
 		moveString+=promotedPiece.getShortAlgebraicNotation();
-		
 	}
 	/**
 	 * Generic getter method of the variable pieceMoved. Since its a
@@ -282,7 +275,7 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
-		enPassantSquare=board.getGame().getEnPassantSquare();
+		setEnPassantSquare(board.getGame().getEnPassantSquare());
 	}
 	/**
 	 * Generic getter method to access the private member toSquare.
@@ -317,6 +310,7 @@ public class Move
 		whiteCastleQueenside=board.getGame().isWhiteCastleQueenside();
 		blackCastleKingside=board.getGame().isBlackCastleKingside();
 		blackCastleQueenside=board.getGame().isBlackCastleQueenside();
+		setEnPassantSquare(board.getGame().getEnPassantSquare());
 	}
 	/**
 	 * This method is used to access the private data member hence
@@ -406,7 +400,7 @@ public class Move
 	 */
 	public void setMoveString(String moveString)
 	{
-		this.moveString=moveString;
+		this.moveString=moveString.toLowerCase();
 		for(byte i=0;i<64;i++)
 		{
 			if(moveString.startsWith(board.getSquare(i).getName()))
@@ -417,13 +411,13 @@ public class Move
 			if((fromSquare!=null)&&(toSquare!=null))
 				break;
 		}
-		if(moveString.endsWith("Q"))
+		if(moveString.endsWith("q"))
 			promoteTo("queen");
-		if(moveString.endsWith("R"))
+		if(moveString.endsWith("r"))
 			promoteTo("rook");
-		if(moveString.endsWith("B"))
+		if(moveString.endsWith("b"))
 			promoteTo("bishop");
-		if(moveString.endsWith("N"))
+		if(moveString.endsWith("n"))
 			promoteTo("knight");
 	}
 	/**
@@ -583,6 +577,18 @@ public class Move
 	public void setEnPassantSquare(Square enPassantSquare)
 	{
 		this.enPassantSquare = enPassantSquare;
+		if(enPassantSquare!=null)
+			if(toSquare!=null)
+				if(toSquare.equals(enPassantSquare))
+					if(pieceMoved!=null)
+						if(pieceMoved.getShortAlgebraicNotation().matches("P"))
+						{
+							capturingMove=true;
+							if(pieceMoved.isWhite())
+								capturedPiece=toSquare.getBottomSquare().getPiece();
+							else
+								capturedPiece=toSquare.getTopSquare().getPiece();
+						}
 	}
 	public boolean isPromotingMove()
 	{
@@ -601,7 +607,6 @@ public class Move
 		else
 			colourString="black";
 		promotedPiece=board.getGame().getPieceSet().getPiece(colourString,pieceType);
-		System.out.println(promotedPiece);
 	}
 	public void setPromotedPiece(Piece promotedPiece)
 	{
@@ -651,6 +656,10 @@ public class Move
 		//for promotions
 		if(promotingMove)
 			returnString+="="+promotedPiece.getShortAlgebraicNotation();
+		//for en-passant
+		if(toSquare.equals(enPassantSquare))
+			if(pieceMoved.getShortAlgebraicNotation().matches("P"))
+				returnString+="/ep";
 		//for checking and mating moves
 		if(matingMove)
 			returnString+="#";

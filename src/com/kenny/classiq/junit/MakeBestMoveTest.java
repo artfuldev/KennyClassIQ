@@ -20,25 +20,17 @@ package com.kenny.classiq.junit;
 
 import org.junit.Test;
 
-import com.kenny.classiq.definitions.Definitions;
 import com.kenny.classiq.game.Game;
-import com.kenny.classiq.game.Move;
 
-public class CanMoveToTest
+public class MakeBestMoveTest
 {
 	@Test
 	public void test()
 	{
-		Game chessGame=new Game(Definitions.startPositionFEN);
-		chessGame.showBoard();
-		System.out.println(chessGame.getGameBoard().getEmptySquares());
-		System.out.println(chessGame.getGameBoard().getWhiteCanMoveToSquares());
-		System.out.println(chessGame.getGameBoard().getBlackCanMoveToSquares());
-		Move moveOne=new Move(chessGame.getGameBoard());
-		moveOne.setMoveString("e2e4");
-		chessGame.getPlayerOne().makeMove(moveOne);
-		System.out.println(chessGame.getGameBoard().getEmptySquares());
-		System.out.println(chessGame.getGameBoard().getWhiteCanMoveToSquares());
-		System.out.println(chessGame.getGameBoard().getBlackCanMoveToSquares());
+		String newFEN="rnb1k3/ppp1pppp/8/8/8/3pnbrq/PPPPPPPP/RNBQKBNR w KQq - 0 1 ";
+		Game chessGame=new Game(newFEN);
+		chessGame.printStats();
+		chessGame.getPlayerTwo().getMove();
+		chessGame.printStats();
 	}
 }

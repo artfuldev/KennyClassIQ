@@ -31,6 +31,10 @@ import com.kenny.classiq.game.Move;
  */
 public class UCIExecutor extends Executor
 {
+	public UCIExecutor(Command command)
+	{
+		super(command);
+	}
 	/**
 	 * It is the function which executes the commands parsed by the
 	 * listener. It is used to check for specific cases and then call
@@ -61,7 +65,7 @@ public class UCIExecutor extends Executor
 						if(splitString[2].matches("moves"))
 						{
 							Move tempMove;
-							for(byte i=3;i<splitString.length;i++)
+							for(int i=3;i<splitString.length;i++)
 							{
 								tempMove=new Move(chessGame.getGameBoard());
 								tempMove.setMoveString(splitString[i]);
@@ -74,22 +78,26 @@ public class UCIExecutor extends Executor
 					chessGame=new Game(splitString[2]+" "+splitString[3]+" "
 						+splitString[4]+" "+splitString[5]+" "
 						+splitString[6]+" "+splitString[7]);
-					if(splitString[8].matches("moves"))
-					{
-						Move tempMove;
-						for(byte i=9;i<splitString.length;i++)
+					if(splitString.length>8)
+						if(splitString[8].matches("moves"))
 						{
-							tempMove=new Move(chessGame.getGameBoard());
-							tempMove.setMoveString(splitString[i]);
-							chessGame.getCurrentPlayer().makeMove(tempMove);
+							Move tempMove;
+							for(int i=9;i<splitString.length;i++)
+							{
+								tempMove=new Move(chessGame.getGameBoard());
+								tempMove.setMoveString(splitString[i]);
+								chessGame.getCurrentPlayer().makeMove(tempMove);
+							}
 						}
-					}
-					chessGame.showBoard();
 				}
 			}
 			else if(commandString.startsWith("go"))
+			{
 				System.out.println("bestmove "+
 						chessGame.getPlayerTwo().getMove().getMoveString());
+			}
+			else if(commandString.startsWith("d"))
+				chessGame.printStats();
 			else
 			//commands not implemented properly
 				System.out.println(Definitions.debugMessage+"received "

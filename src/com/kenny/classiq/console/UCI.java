@@ -38,8 +38,8 @@ public class UCI extends GUIConsole
 	 */
 	public void start()
 	{
-		executorRun=new UCIExecutor();
-		executor=new Thread(executorRun);
+		executorRun=new UCIExecutor(command);
+		executor=new Thread(executorRun,"Executor");
 		init();
 		listen();
 	}
@@ -60,7 +60,8 @@ public class UCI extends GUIConsole
 								"stop",
 								"ponderhit",
 								"quit",
-								"position"};
+								"position",
+								"d"};
 		listenerRun.setKnownCommands(knownCommands);
 	}
 }
