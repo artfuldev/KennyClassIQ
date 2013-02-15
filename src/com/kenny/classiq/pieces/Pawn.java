@@ -42,24 +42,42 @@ public class Pawn extends Piece
 				addCaptureSquare(square.getTopRightSquare(),toSquares);
 				addCaptureSquare(square.getTopLeftSquare(),toSquares);
 				addMoveToSquare(square.getTopSquare(),toSquares);
-				if(Byte.parseByte(square.getRank().getName())==2)
+				if(square.getRankIndex()==1)
 					if(square.getTopSquare().getPiece()==null)
 						if(square.getTopSquare().getTopSquare().
-										getPiece()==null)
+							getPiece()==null)
 							toSquares.add(square.getTopSquare().
-											getTopSquare());
+							getTopSquare());
+				if(square.getRankIndex()==4)
+				{
+					Square epSquare=square.getBoard().getGame().getEnPassantSquare();
+					if(epSquare!=null)
+						if(epSquare.getRankIndex()==5)
+							if((epSquare.getFileIndex()-square.getFileIndex()==1)||
+								(epSquare.getFileIndex()-square.getFileIndex()==-1))
+								addMoveToSquare(epSquare,toSquares);
+				}
 			}
 			else
 			{
 				addCaptureSquare(square.getBottomRightSquare(),toSquares);
 				addCaptureSquare(square.getBottomLeftSquare(),toSquares);
 				addMoveToSquare(square.getBottomSquare(),toSquares);
-				if(Byte.parseByte(square.getRank().getName())==7)
+				if(square.getRankIndex()==6)
 					if(square.getBottomSquare().getPiece()==null)
 						if(square.getBottomSquare().getBottomSquare().
-								getPiece()==null)
+							getPiece()==null)
 							toSquares.add(square.getBottomSquare().
-									getBottomSquare());
+							getBottomSquare());
+				if(square.getRankIndex()==3)
+				{
+					Square epSquare=square.getBoard().getGame().getEnPassantSquare();
+					if(epSquare!=null)
+						if(epSquare.getRankIndex()==2)
+							if((epSquare.getFileIndex()-square.getFileIndex()==1)||
+								(epSquare.getFileIndex()-square.getFileIndex()==-1))
+								addMoveToSquare(epSquare,toSquares);
+				}
 			}
 			if(!toSquares.isEmpty())
 				for(byte i=0;i<toSquares.size();i++)

@@ -1,8 +1,8 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
-* Latest Application Version: 0.1 build 2081 *([Version History](Version%20History.md#version-history))*
-* Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq)
+* Latest Application Version: 0.2 build 2771 *([Version History](Version%20History.md#version-history))*
+* Latest Stable Version: [0.2](https://www.sourceforge.net/projects/kennyclassiq)
 *([Versioning](Versioning.md#versioning))*
 * ReadMe Version: 2.5
 
@@ -13,13 +13,15 @@ Kenny ClassIQ *(read Kenny Classic)* is something like my dream project. It is a
 Having completed it successfully, I've gained the confidence to proceed with Kenny ClassIQ, named so because it is more class-oriented than Kenny, and because I want it to be intelligent. *(A play with words landed me Kenny ClassIQ.)* Also, I used this name so that people searching for my other chess engine Kenny can also find this more advanced chess engine (okay, yes, I wanted to name my chess engine Kenny, so).
 
 ##Features
+(Features refer to existing features in the latest stable version only).
+
 (Words in italics represent class names)
 
 Game-breaking features (why you *can't* play against it now):
 
-* Plays only the first move it can find.
+* Plays only fixed search depth : 3 half moves mode.
 * Does not know about draws.
-* Does not do search or evaluation.
+* Does not do search or evaluation properly.
 * Does not know set-up position properly.
 
 Niceties under the hood (why you *should* play against it later):
@@ -30,7 +32,7 @@ Niceties under the hood (why you *should* play against it later):
 * Automatic *MoveList* of *Game* updation.
 * Better *printMainLine()* implementation.
 * Better *FEN* implementation.
-* Better-than-ever *Console* implementation, with reader, listener and executor threads.
+* Better-than-ever *Console* implementation, with *synchronized* reader, listener and executor threads.
 
 Other features yet to come! :D
 

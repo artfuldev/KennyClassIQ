@@ -60,8 +60,8 @@ public class XBoard extends GUIConsole
 	 */
 	public void start()
 	{
-		executorRun=new XBoardExecutor();
-		executor=new Thread(executorRun);
+		executorRun=new XBoardExecutor(command);
+		executor=new Thread(executorRun,"Executor");
 		init();
 		listen();
 	}
@@ -73,10 +73,10 @@ public class XBoard extends GUIConsole
 	public void init()
 	{
 		System.out.println("xboard");
-		commandString=Main.inputStream.nextLine();
-		if(commandString.startsWith("protover"))
+		command.commandString=Main.inputStream.nextLine();
+		if(command.commandString.startsWith("protover"))
 		{
-			String[] split=commandString.split("\\s");
+			String[] split=command.commandString.split("\\s");
 			if(split.length>1)
 				protocolVersion=Byte.parseByte(split[1]);
 			System.out.println("accepted protover "+protocolVersion);
@@ -100,7 +100,8 @@ public class XBoard extends GUIConsole
 								"?",
 								"black",//added for protocol 1 support
 								"white",//added for protocol 1 support
-								"quit"};
+								"quit",
+								"d"};
 		listenerRun.setKnownCommands(knownCommands);
 	}
 	/**

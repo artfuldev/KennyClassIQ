@@ -1,11 +1,51 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
-* Latest Application Version: 0.1 build 2081
-* Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
+* Latest Application Version: 0.2 build 2771
+* Latest Stable Version: [0.2](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+####Version 0.2 (2771)
+* Lots of bugfixes.
+* Added evaluation.
+* Added minimax search with alpha-beta pruning.
+* Corrected UCI output.
+* Corrected *Executor* errors.
+* Renamed threads.
+* Corrected issues #151, #152.
+* Engine now plays okay-okay moves with 3 depths (fixed for now, will be dynamic later).
+* No time-related implementation.
+* Made *protocolType of Main* public so output strings can be properly formatted according to the GUI.
+* Re-added the boolean newCommand in *Command*.
+* Corrected errors in *makeMove() and unMakeMove()* which did not implement proper castling.
+* Implemented Quicksort in move ordering.
+* Removed Windows executables and added jLaunch executable. (32-bit only)
+
+#####Version 0.1.3 (2198)
+* Fixed issues #144 and #150.
+* Corrected errors in enPassantSquare generation.
+* Corrected errors in isChecked().
+* Added scores.
+* Added MakeBestMove ability..
+* Added *MakeBestMoveTest*, to test it.
+* Made various bugfixes and improvements.
+
+#####Version 0.1.2 (2156)
+* Fixed issues #142, #146, and #147
+* Added proper UCI support.
+* Added enPassant Move Generation.
+* Updated debug messages.
+
+#####Version 0.1.1 (2097)
+* Fixed #143.
+* Fixed buggy *UCI* driver, now both *UCI and WinBoard* drivers are at the same level.
+* Added and implemented support for *d* command, which can be used to display the stats of the *Game*.
+* Improved *Game, Executor, UCIExecutor and XBoardExecutor*.
+* Added *printStats()* to *Game*.
+* Optimized *Move* construction.
+* Corrected major issue with promotion moves' setting of moveString.
 
 ####Version 0.1 (2081) - First Playable Version (nickname *Shinta*)
 * Tested a thousand times. Playable, doesn't crash. First stable release.

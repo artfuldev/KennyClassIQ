@@ -32,6 +32,10 @@ import com.kenny.classiq.game.Move;
  */
 public class XBoardExecutor extends Executor
 {
+	public XBoardExecutor(Command command)
+	{
+		super(command);
+	}
 	/**
 	 * It is the function which executes the commands parsed by the
 	 * listener. It is used to check for specific cases and then call
@@ -72,6 +76,8 @@ public class XBoardExecutor extends Executor
 						+splitString[5]+" "+splitString[6]);
 			else if(commandString.startsWith("new"))
 				chessGame=new Game(Definitions.startPositionFEN);
+			else if(commandString.startsWith("d"))
+				chessGame.printStats();
 			//commands not yet implemented properly
 			else
 				System.out.println(Definitions.debugMessage+"received "
