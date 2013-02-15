@@ -35,22 +35,20 @@ public class Command
 	/**
 	 * Holds the previous command string, used to check if it has changed
 	 * between the time it was last checked for change by the threads which
-	 * access it. Made volatile so multiple threads can access it
-	 * simultaneously.
+	 * access it.
 	 */
-	protected static volatile String previousCommandString=null;
+	protected String previousCommandString="bleh";
 	/**
 	 * Holds the command string, which is the line absorbed from
 	 * the console in the case of a user, or the pipe in case of a GUI.
-	 * Made volatile so multiple threads can access it simultaneously.
 	 */
-	protected static volatile String commandString=null;
+	protected String commandString="waiting";
 	/**
 	 * Holds the commands from the GUI as an <code>ArrayList</code> of 
 	 * <code>String</code>s. Used to capture and execute all command inputs,
 	 * without missing even one. Solves a lot of issues. Also removes the
-	 * necessity of using a boolean newCommand. Made volatile so that multiple
-	 * threads can access it simultaneously.
+	 * necessity of using a boolean newCommand.
 	 */
-	protected static volatile ArrayList<String> commandArray=new ArrayList<String>();
+	protected ArrayList<String> commandArray=new ArrayList<String>();
+	protected boolean newCommand=false;
 }

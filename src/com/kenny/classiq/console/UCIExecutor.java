@@ -31,6 +31,10 @@ import com.kenny.classiq.game.Move;
  */
 public class UCIExecutor extends Executor
 {
+	public UCIExecutor(Command command)
+	{
+		super(command);
+	}
 	/**
 	 * It is the function which executes the commands parsed by the
 	 * listener. It is used to check for specific cases and then call
@@ -85,12 +89,13 @@ public class UCIExecutor extends Executor
 								chessGame.getCurrentPlayer().makeMove(tempMove);
 							}
 						}
-					chessGame.showBoard();
 				}
 			}
 			else if(commandString.startsWith("go"))
+			{
 				System.out.println("bestmove "+
 						chessGame.getPlayerTwo().getMove().getMoveString());
+			}
 			else if(commandString.startsWith("d"))
 				chessGame.printStats();
 			else
