@@ -19,9 +19,9 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 
 Game-breaking features (why you *can't* play against it now):
 
-* Plays only the first move it can find.
+* Plays only fixed search depth : 3 half moves mode.
 * Does not know about draws.
-* Does not do search or evaluation.
+* Does not do search or evaluation properly.
 * Does not know set-up position properly.
 
 Niceties under the hood (why you *should* play against it later):
@@ -32,7 +32,7 @@ Niceties under the hood (why you *should* play against it later):
 * Automatic *MoveList* of *Game* updation.
 * Better *printMainLine()* implementation.
 * Better *FEN* implementation.
-* Better-than-ever *Console* implementation, with reader, listener and executor threads.
+* Better-than-ever *Console* implementation, with *synchronized* reader, listener and executor threads.
 
 Other features yet to come! :D
 
