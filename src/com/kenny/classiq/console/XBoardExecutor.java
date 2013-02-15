@@ -32,6 +32,10 @@ import com.kenny.classiq.game.Move;
  */
 public class XBoardExecutor extends Executor
 {
+	public XBoardExecutor(Command command)
+	{
+		super(command);
+	}
 	/**
 	 * It is the function which executes the commands parsed by the
 	 * listener. It is used to check for specific cases and then call
