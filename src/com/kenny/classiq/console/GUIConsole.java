@@ -32,20 +32,21 @@ package com.kenny.classiq.console;
  * @author Kenshin Himura  
  *
  */
-public abstract class GUIConsole extends Command implements CommunicationProtocol
+public abstract class GUIConsole implements CommunicationProtocol
 {
+	Command command=new Command();
 	/**
 	 * Holds an instance of the <code>Runnable</code> class <code>
 	 * Listener</code> to faciliatate creation of a listener <code>
 	 * Thread</code>.
 	 */
-	protected Listener listenerRun=new Listener();
+	protected Listener listenerRun=new Listener(command);
 	/**
 	 * Holds an instance of the <code>Runnable</code> class <code>
 	 * Listener</code> to faciliatate creation of a listener <code>
 	 * Thread</code>.
 	 */
-	protected InputThread inputReaderRun=new InputThread();
+	protected InputThread inputReaderRun=new InputThread(command);
 	/**
 	 * Holds an instance of the <code>Runnable</code> class <code>
 	 * Executor</code> to faciliatate creation of a corresponding
@@ -57,12 +58,12 @@ public abstract class GUIConsole extends Command implements CommunicationProtoco
 	 * Creates a listener <code>Thread</code> with an instance of the <code>
 	 * Runnable</code> class.
 	 */
-	protected Thread listener=new Thread(listenerRun);
+	protected Thread listener=new Thread(listenerRun,"Listener");
 	/**
 	 * Creates an inputReader <code>Thread</code> with an instance of the <code>
 	 * Runnable</code> class.
 	 */
-	protected Thread inputReader=new Thread(inputReaderRun);
+	protected Thread inputReader=new Thread(inputReaderRun,"InputReader");
 	/**
 	 * Declares an executor <code>Thread</code> with an instance of the <code>
 	 * Runnable</code> class. The instantiation is done from within the
@@ -76,8 +77,8 @@ public abstract class GUIConsole extends Command implements CommunicationProtoco
 	 */
 	public void listen()
 	{
-		inputReader.start();
 		listener.start();
 		executor.start();
+		inputReader.start();
 	}
 }
