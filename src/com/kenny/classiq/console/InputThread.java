@@ -28,13 +28,18 @@ import com.kenny.classiq.Main;
  * @author Kenshin Himura  
  * 
  */
-public class InputThread extends Command implements Runnable
+public class InputThread implements Runnable
 {
+	private Command command;
 	/**
 	 * Holds a boolean which determines the life of the thread. When
 	 * an eception is caught, this is set to false, and the run() ends.
 	 */
 	private boolean alive=true;
+	public InputThread(Command command)
+	{
+		this.command=command;
+	}
 	/**
 	 * Overrides the run() of <code>Runnable</code>. Its operation is
 	 * very simple. It keeps checking for a new input command every 50 ms,
@@ -46,8 +51,17 @@ public class InputThread extends Command implements Runnable
 		{
 			try
 			{
-				Thread.sleep(50);
-				commandString=Main.inputStream.nextLine().toLowerCase();
+				
+				synchronized(command)
+				{
+					if(command.commandArray.isEmpty())
+					{
+						command.commandString=Main.inputStream.nextLine().toLowerCase();
+						command.newCommand=true;
+					}
+					command.notifyAll();
+					command.wait();
+				}
 			}
 			catch(Exception ex)
 			{

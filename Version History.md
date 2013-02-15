@@ -1,11 +1,27 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
-* Latest Application Version: 0.1.3 build 2198
-* Latest Stable Version: [0.1](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
+* Latest Application Version: 0.2 build 2771
+* Latest Stable Version: [0.2](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+####Version 0.2 (2771)
+* Lots of bugfixes.
+* Added evaluation.
+* Added minimax search with alpha-beta pruning.
+* Corrected UCI output.
+* Corrected *Executor* errors.
+* Renamed threads.
+* Corrected issues #151, #152.
+* Engine now plays okay-okay moves with 3 depths (fixed for now, will be dynamic later).
+* No time-related implementation.
+* Made *protocolType of Main* public so output strings can be properly formatted according to the GUI.
+* Re-added the boolean newCommand in *Command*.
+* Corrected errors in *makeMove() and unMakeMove()* which did not implement proper castling.
+* Implemented Quicksort in move ordering.
+* Removed Windows executables and added jLaunch executable. (32-bit only)
 
 #####Version 0.1.3 (2198)
 * Fixed issues #144 and #150.

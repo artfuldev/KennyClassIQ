@@ -20,6 +20,7 @@ package com.kenny.classiq.board;
 
 import java.util.ArrayList;
 
+import com.kenny.classiq.definitions.PieceValues;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
 import com.kenny.classiq.pieces.Piece;
@@ -415,15 +416,59 @@ public class Board
 		}
 		return false;
 	}
-	public int getScore(boolean white)
+	public int getScore(boolean whitePerspective)
 	{
-		int score=0;
+		int score=0,pieceValue;
 		ArrayList<Square> whiteSquares=getWhiteOccupiedSquares();
 		ArrayList<Square> blackSquares=getBlackOccupiedSquares();
+		ArrayList<Move> tempMoves;
 		for(Square wS:whiteSquares)
-			score+=wS.getPiece().getPieceValue();
+		{
+			tempMoves=wS.getPiece().getMoves();
+			if(!wS.getPiece().getShortAlgebraicNotation().matches("K"))
+			{
+				pieceValue=wS.getPiece().getPieceValue();
+				score+=pieceValue;
+				if(tempMoves!=null)
+					score+=(tempMoves.size()*pieceValue/100);
+			}
+			else
+				if(tempMoves!=null)
+					score+=tempMoves.size();
+			if(wS.isThreatenedBy(false))
+				for(Square wST:wS.threatenedBy(false))
+					if(wST.getPiece().getPieceValue()!=PieceValues.kingValue)
+						score-=2*(10-(wST.getPiece().getPieceValue()/100));
+		}
 		for(Square bS:blackSquares)
-			score-=bS.getPiece().getPieceValue();
-		return score;
+		{
+			tempMoves=bS.getPiece().getMoves();
+			if(!bS.getPiece().getShortAlgebraicNotation().matches("K"))
+			{
+				pieceValue=bS.getPiece().getPieceValue();
+				score-=pieceValue;
+				if(tempMoves!=null)
+					score-=(tempMoves.size()*pieceValue/100);
+			}
+			else
+				if(tempMoves!=null)
+					score-=tempMoves.size();
+			if(bS.isThreatenedBy(true))
+				for(Square bST:bS.threatenedBy(true))
+					if(bST.getPiece().getPieceValue()!=PieceValues.kingValue)
+						score+=2*(10-(bST.getPiece().getPieceValue()/100));
+		}
+		if(game.getCurrentPlayer().getLegalMoves(true).isEmpty())
+			if(isChecked(true))
+				return -PieceValues.kingValue;
+			else return 0;
+		if(game.getCurrentPlayer().getLegalMoves(false).isEmpty())
+			if(isChecked(false))
+				return PieceValues.kingValue;
+			else
+				return 0;
+		if(whitePerspective)
+			return score;
+		return -score;
 	}
 }
