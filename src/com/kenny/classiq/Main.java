@@ -56,6 +56,7 @@ public class Main
 	 * be of either protocol, so is instantiated later.
 	 */
 	public static GUIConsole guiConsole=null;
+	public static boolean uci=false;
 	/**
 	 * The main function of the <code>Main</code> class is declared as
 	 * a static function so that it can be called without an instance
@@ -80,7 +81,10 @@ public class Main
 		//Get protocol type from console/pipe and start proper guiConsole
 		protocolType=inputStream.nextLine();
 		if(protocolType.matches("uci"))
+		{
+			uci=true;
 			guiConsole=new UCI();
+		}
 		if(protocolType.matches("xboard"))
 			guiConsole=new XBoard();
 		guiConsole.start();

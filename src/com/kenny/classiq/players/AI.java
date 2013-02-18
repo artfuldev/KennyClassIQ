@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.kenny.classiq.Main;
 import com.kenny.classiq.definitions.PieceValues;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
@@ -34,13 +33,17 @@ import com.kenny.classiq.game.Move;
  */
 public class AI extends Player
 {
-	private Move bestMove;
-	private Move tempBestMove;
 	private int nodes;
-	private byte sd=3;
+	private Move bestMove=null;
+	private byte sd=2;
+	private byte sdepth;
 	private long startTime=0;
 	private long elapsedTime=0;
 	private long timeLimit=0;
+	private int bestScore=0;
+	private int nps;
+	private ArrayList<Move> principalVariation;
+	int infinity=(int)(2*PieceValues.kingValue);
 	public AI(Game gameReference, String colour)
 	{
 		if(!colour.matches("white"))
@@ -56,114 +59,36 @@ public class AI extends Player
 		nodes=0;
 		startTime=System.nanoTime();
 		timeLimit=(long)(Double.POSITIVE_INFINITY);
-		ArrayList<Move> legalMoves=getLegalMoves(game.isWhiteToMove());
-		ArrayList<Integer> scores=new ArrayList<Integer>();
 		//Calculate best move here
-		int infinity=(int)(2*PieceValues.kingValue);
-		int bestScore=-infinity;
-		int currentScore=-infinity;
-		byte depth;
-		Move move=null;
-		int i=0,nps=0;
-		int tempBestScore=-infinity;
-		for(depth=0;depth<sd;depth++)
+		bestScore=-infinity;
+		for(sdepth=1;sdepth<=sd;sdepth++)
 		{
+			bestScore=-infinity;
 			elapsedTime=(System.nanoTime()-startTime)/1000000L;
-			if(timeLimit>elapsedTime)
+			if(timeLimit>(elapsedTime*sdepth))
 			{
-				currentScore=-infinity;
-				tempBestScore=-infinity;
-				scores.clear();
-				for(i=0;i<legalMoves.size();i++)
+				principalVariation=new ArrayList<Move>(sdepth+1);
+				bestScore=alphaBetaPVS((byte)(sdepth),-infinity,infinity,
+							principalVariation);
+				if((bestScore/PieceValues.kingValue)>0)
 				{
-					move=legalMoves.get(i);
-					makeMove(move);
-					currentScore=alphaBeta(game,depth,-infinity,infinity,
-											game.isWhiteToMove());
-					if(game.isWhiteToMove())
-						currentScore*=-1;
-					scores.add(-currentScore);
-					if(currentScore==PieceValues.kingValue)
+					if(uci)
 					{
-						if(!Main.protocolType.matches("xboard"))
-							System.out.println("info score mate 1");
-						bestMove=move;
-						unMakeMove(move);
-						bestScore=currentScore;
-						break;
+						System.out.print("info score mate ");
+						if(bestScore<0)
+							System.out.print("-");
+						System.out.println((sdepth));
 					}
-					if(currentScore>=tempBestScore)
-					{
-						tempBestScore=currentScore;
-						tempBestMove=move;
-					}
-					unMakeMove(move);
-					elapsedTime=(System.nanoTime()-startTime)/1000/1000;
-					nps=(int)(nodes*1000/elapsedTime);
-					if(Main.protocolType.matches("xboard"))
-						System.out.println((depth+1)+"\t"+bestScore+"\t"+elapsedTime
-								+"\t"+nodes+"\t"+bestMove);
-					else
-						System.out.println("info currmove "+move
-								+" currmovenumber "+(i+1)+" depth "+(depth+1)
-								+" seldepth "+sd+" pv "+tempBestMove
-								+" score cp "+tempBestScore);
-					if(timeLimit<(elapsedTime+30))
-						break;
 				}
 				if(bestScore==PieceValues.kingValue)
 					break;
-				bestMove=tempBestMove;
-				bestScore=tempBestScore;
-				elapsedTime=(System.nanoTime()-startTime)/1000000L;
-				nps=(int)(nodes*1000/elapsedTime);
-				if(Main.protocolType.matches("xboard"))
-					System.out.println((depth+1)+"\t"+bestScore+"\t"+elapsedTime
-							+"\t"+nodes+"\t"+bestMove);
-				else
-					System.out.println("info nodes "+nodes+" pv "+bestMove
-							+" score cp "+bestScore+" time "+elapsedTime
-							+" nps "+nps);
-				if(depth+1<sd)
-					quickSort(scores,legalMoves);
 				timeLimit-=elapsedTime;
 			}
 			else
 				timeLimit+=(timeLimit-elapsedTime);
-		}
+		}		
 		makeMove(bestMove);
 		return bestMove;
-	}
-	private int alphaBeta(Game game, byte depth, int alpha, int beta, boolean white)
-	{
-		nodes++;
-		ArrayList<Move> tempMoves=game.getCurrentPlayer().getLegalMoves(white);
-		if((depth==0)||(tempMoves.isEmpty()))
-			return game.getGameBoard().getScore(true);
-		if(white)
-		{
-			for(Move move:tempMoves)
-			{
-				makeMove(move);
-				alpha=Math.max(alpha,alphaBeta(game,(byte)(depth-1),alpha,beta,!white));
-				unMakeMove(move);
-				if(beta<=alpha)
-					break;
-			}
-			return alpha;
-		}
-		else
-		{
-			for(Move move:tempMoves)
-			{
-				makeMove(move);
-				beta=Math.min(beta,alphaBeta(game,(byte)(depth-1),alpha,beta,!white));
-				unMakeMove(move);
-				if(alpha>=beta)
-					break;
-			}
-			return beta;
-		}
 	}
 	//------------------------------------------------------------------------------
 	//This sort implementation idea taken from
@@ -205,5 +130,151 @@ public class AI extends Player
 			List<?> l2)
 	{
 		quickSort(comp, l2,(byte)0,(byte)(comp.size()-1));
+	}
+	//-----------------
+	//Sorting ends here
+	//-----------------
+	//alphaBetaPVS based on http://en.wikipedia.org/wiki/Negascout
+	private int alphaBetaPVS(byte depth,int alpha,int beta,
+			ArrayList<Move> localPV)
+	{
+		nodes++;
+		ArrayList<Move> tempMoves=getLegalMoves();
+		if(tempMoves.isEmpty())
+			return game.getGameBoard().getScore(game.isWhiteToMove());
+		else if(depth==0)
+			return quiescenceSearch(alpha,beta);
+		ArrayList<Move> localLine=new ArrayList<Move>();
+	    for(Move move:tempMoves)
+	    {
+	       makeMove(move);
+	       bestScore=-alphaBetaPVS((byte)(depth-1),-beta,-alpha,
+	    			   localLine);
+	       unMakeMove(move);
+	       if(bestScore>=beta)
+	    	   return beta;
+	       else if(bestScore>alpha)
+	       {
+	    	   alpha=bestScore;
+	    	   localPV.clear();
+	    	   localPV.add(move);
+	    	   localPV.addAll(localLine);
+	    	   if(depth==sdepth)
+	    	   {
+	    		   elapsedTime=(System.nanoTime()-startTime)/1000/1000;
+	    		   nps=(int)(nodes*1000/elapsedTime);
+	    		   bestMove=localPV.get(0);
+	    		   if(!uci)
+	    			   System.out.println((sdepth+1)+"\t"+bestScore+"\t"
+	    					   +elapsedTime+"\t"+nodes+"\t"+pv());
+	    		   else
+	    			   System.out.println("info depth "+(sdepth)+" seldepth "
+	   							+sd+" pv "+pv()+"score cp "+bestScore+" nodes "+nodes
+	   							+" time "+elapsedTime+" nps "+nps);
+	    	   }
+	       }
+	    }
+	    return alpha;
+	}
+	private String pv()
+	{
+		String returnString="";
+		if(!principalVariation.isEmpty())
+			for(Move move:principalVariation)
+				returnString+=move.toString()+" ";
+		return returnString;
+	}
+	private ArrayList<Move> getLegalMoves()
+	{
+		ArrayList<Move> returnList=getLegalMoves(game.isWhiteToMove());
+		if(!returnList.isEmpty())
+		{
+			ArrayList<Integer> scores=new ArrayList<Integer>();
+			for(Move move:returnList)
+			{
+				makeMove(move);
+				scores.add(-game.getGameBoard().getMaterialScore(
+						!game.isWhiteToMove()));
+				unMakeMove(move);
+			}
+			quickSort(scores,returnList);
+		}
+		return returnList;
+	}
+	private ArrayList<Move> getGoodCaptures()
+	{
+		ArrayList<Move> returnList=getLegalMoves();
+		int score=0;
+		int oldScore=game.getGameBoard().getMaterialScore(game.isWhiteToMove());
+		if(!returnList.isEmpty())
+		{
+			Move move;
+			byte size=(byte)returnList.size();
+			for(byte i=0;i<size;i++)
+			{
+				move=returnList.get(i);
+				makeMove(move);
+				score=game.getGameBoard().getMaterialScore(!game.isWhiteToMove());
+				unMakeMove(move);
+				if(!((score-oldScore)>PieceValues.bishopValue))
+				{
+					returnList.remove(i);
+					i--;
+					size--;
+				}
+			}
+		}
+		return returnList;
+	}
+	private int quiescenceSearch(int alpha, int beta)
+	{
+		nodes++;
+		game.printStats();
+		ArrayList<Move> tempMoves=getLegalMoves();
+		if(game.getGameBoard().isChecked(game.isWhiteToMove()))
+		{
+			if(tempMoves.size()<3)
+				return alphaBetaPVS((byte)(tempMoves.size()),alpha,beta);
+		}
+		int score=game.getGameBoard().getScore(game.isWhiteToMove());
+	    if(score>=beta)
+	    	return beta;
+	    if(score>alpha)
+	    	alpha=score;
+	    tempMoves=getGoodCaptures();
+	    if(!tempMoves.isEmpty())
+	    	for(Move move:tempMoves)
+	    	{
+	    		makeMove(move);
+	    		score=-quiescenceSearch(-beta,-alpha);
+	    		unMakeMove(move);
+	    		if(score>=beta)
+	    			return beta;
+	    		if(score>alpha)
+	    			alpha=score;
+	    	}
+	    return alpha;
+	}
+	private int alphaBetaPVS(byte depth, int alpha, int beta)
+	{
+		nodes++;
+		ArrayList<Move> tempMoves=getLegalMoves();
+		if(tempMoves.isEmpty())
+			return game.getGameBoard().getScore(game.isWhiteToMove());
+		else if(depth==0)
+			return quiescenceSearch(alpha,beta);
+		ArrayList<Move> localLine=new ArrayList<Move>();
+	    for(Move move:tempMoves)
+	    {
+	       makeMove(move);
+	       bestScore=-alphaBetaPVS((byte)(depth-1),-beta,-alpha,
+	    			   localLine);
+	       unMakeMove(move);
+	       if(bestScore>=beta)
+	    	   return beta;
+	       else if(bestScore>alpha)
+	    	   alpha=bestScore;
+	    }
+	    return alpha;
 	}
 }

@@ -18,6 +18,8 @@
 
 package com.kenny.classiq.console;
 
+import com.kenny.classiq.Main;
+
 /**
  * The <code>GUI</code> class represents a Console which will accept
  * commands from the GUI and send appropriate replies. Hence it implements
@@ -32,7 +34,7 @@ package com.kenny.classiq.console;
  * @author Kenshin Himura  
  *
  */
-public abstract class GUIConsole implements CommunicationProtocol
+public abstract class GUIConsole extends Main implements CommunicationProtocol
 {
 	Command command=new Command();
 	/**

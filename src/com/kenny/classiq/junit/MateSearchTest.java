@@ -19,29 +19,17 @@
 package com.kenny.classiq.junit;
 
 import org.junit.Test;
-
 import com.kenny.classiq.game.Game;
-import com.kenny.classiq.game.Move;
 
-public class PromotionTest
+public class MateSearchTest
 {
 	@Test
 	public void test()
 	{
-		String newFEN="rnb1kbnr/ppp1pppp/8/8/8/5Q2/PPpP1PPP/RNB2RK1 b kq - 0 7";
-		Game chessGame=new Game(newFEN);
+		String FEN="rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq g3 0 2 ";
+		Game chessGame=new Game(FEN);
 		chessGame.printStats();
-		Move moveOne=new Move(chessGame.getGameBoard().getSquare("c2"),
-				chessGame.getGameBoard().getSquare("b1"),"knight");
-		chessGame.getPlayerTwo().makeMove(moveOne);
-		chessGame.printStats();
-		Move moveTwo=new Move(chessGame.getGameBoard().getSquare("a1"),
-				chessGame.getGameBoard().getSquare("b1"));
-		chessGame.getPlayerTwo().makeMove(moveTwo);
-		chessGame.printStats();
-		chessGame.getPlayerTwo().unMakeMove(moveTwo);
-		chessGame.printStats();
-		chessGame.getPlayerTwo().unMakeMove(moveOne);
+		chessGame.getPlayerTwo().getMove();
 		chessGame.printStats();
 	}
 }

@@ -31,7 +31,7 @@ import com.kenny.classiq.game.Game;
  * @author Kenshin Himura  
  * 
  */
-public abstract class Executor implements Runnable
+public abstract class Executor extends Main implements Runnable
 {
 	protected Command command;
 	/**
@@ -76,8 +76,11 @@ public abstract class Executor implements Runnable
 		      System.out.println("Execution failed");
 		      if(chessGame!=null)
 		    	  chessGame.printStats();
-		      if(!Main.protocolType.matches("xboard"))
+		      if(uci)
 		    	  System.out.println("info string engine crashed");
+		      else
+		    	  System.out.println("engine crashed");
+		      ex.printStackTrace();
 		    }
 		}
 	}
