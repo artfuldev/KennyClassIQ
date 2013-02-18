@@ -20,6 +20,7 @@ package com.kenny.classiq.players;
 
 import java.util.ArrayList;
 
+import com.kenny.classiq.Main;
 import com.kenny.classiq.board.Square;
 import com.kenny.classiq.game.Game;
 import com.kenny.classiq.game.Move;
@@ -32,7 +33,7 @@ import com.kenny.classiq.game.Move;
  * @author Kenshin Himura  
  *
  */
-public abstract class Player
+public abstract class Player extends Main
 {
 	/**
 	 * Holds a reference to the game that this player is a part of. Simply
@@ -401,13 +402,13 @@ public abstract class Player
 				getBlackOccupiedSquares();
 		while(!occupiedSquares.isEmpty())
 		{
-			if(occupiedSquares.get(0).getPiece().getMoves()!=null)
+			if(!occupiedSquares.get(0).getPiece().getMoves().isEmpty())
 				allMoves.addAll(occupiedSquares.get(0).
 						getPiece().getMoves());
 			occupiedSquares.remove(0);
 		}
 		boolean inCheck=false,legal;
-		if(game.getGameBoard().isChecked(false))
+		if(game.getGameBoard().isChecked(white))
 			inCheck=true;
 		if(!allMoves.isEmpty())
 		{

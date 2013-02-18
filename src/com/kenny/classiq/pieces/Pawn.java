@@ -94,9 +94,7 @@ public class Pawn extends Piece
 						returnList.add(new Move(square,toSquares.get(i),"knight"));
 					}
 				}
-			if(!returnList.isEmpty())
-				return returnList;
 		}
-		return null;
+		return returnList;
 	}
 }

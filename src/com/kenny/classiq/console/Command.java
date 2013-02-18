@@ -20,6 +20,7 @@ package com.kenny.classiq.console;
 
 import java.util.ArrayList;
 
+
 /**
  * The <code>Command</code> class is used simple to provide for
  * something equivalent to a global variable, whose value can be
