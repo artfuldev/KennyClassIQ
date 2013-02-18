@@ -60,35 +60,107 @@ public class UCIExecutor extends Executor
 			{
 				if(splitString[1].matches("startpos"))
 				{
-					chessGame=new Game(Definitions.startPositionFEN);
 					if(splitString.length>2)
+					{
 						if(splitString[2].matches("moves"))
 						{
-							Move tempMove;
-							for(int i=3;i<splitString.length;i++)
+							int i=0,j=0;
+							boolean newGame=false;
+							if(chessGame!=null)
 							{
-								tempMove=new Move(chessGame.getGameBoard());
-								tempMove.setMoveString(splitString[i]);
-								chessGame.getCurrentPlayer().makeMove(tempMove);
+								if(chessGame.getMoveList().size()<(splitString.length-3))
+								{
+									for(;i<chessGame.getMoveList().size();i++)	
+										if(chessGame.getMoveList().get(i).toString().
+											matches(splitString[i+3]))
+											j++;
+									if(j==(i-1))
+									{
+										Move tempMove;
+										for(;i<splitString.length;i++)
+										{
+											tempMove=new Move(chessGame.getGameBoard());
+											tempMove.setMoveString(splitString[i]);
+											chessGame.getCurrentPlayer().makeMove(tempMove);
+										}
+									}
+									else
+										newGame=true;
+								}
+								else
+									newGame=true;
+							}
+							else
+								newGame=true;
+							if(newGame)
+							{
+								chessGame=new Game(Definitions.startPositionFEN);
+								Move tempMove;
+								for(i=3;i<splitString.length;i++)
+								{
+									tempMove=new Move(chessGame.getGameBoard());
+									tempMove.setMoveString(splitString[i]);
+									chessGame.getCurrentPlayer().makeMove(tempMove);
+								}
 							}
 						}
+					}
+					else
+						chessGame=new Game(Definitions.startPositionFEN);
 				}
 				else if(splitString[1].matches("fen"))
 				{
-					chessGame=new Game(splitString[2]+" "+splitString[3]+" "
+					String fenString=splitString[2]+" "+splitString[3]+" "
 						+splitString[4]+" "+splitString[5]+" "
-						+splitString[6]+" "+splitString[7]);
+						+splitString[6]+" "+splitString[7];
+					System.out.println(fenString);
 					if(splitString.length>8)
+					{
 						if(splitString[8].matches("moves"))
 						{
-							Move tempMove;
-							for(int i=9;i<splitString.length;i++)
+							int i=0,j=0;
+							boolean newGame=false;
+							if(chessGame!=null)
 							{
-								tempMove=new Move(chessGame.getGameBoard());
-								tempMove.setMoveString(splitString[i]);
-								chessGame.getCurrentPlayer().makeMove(tempMove);
+								if(chessGame.getMoveList().size()<(splitString.length-9))
+								{
+									for(;i<chessGame.getMoveList().size();i++)	
+										if(chessGame.getMoveList().get(i).toString().
+											matches(splitString[i+9]))
+											j++;
+									if(j==(i-1))
+									{
+										Move tempMove;
+										for(;i<splitString.length;i++)
+										{
+											tempMove=new Move(chessGame.getGameBoard());
+											tempMove.setMoveString(splitString[i]);
+											chessGame.getCurrentPlayer().makeMove(tempMove);
+										}
+									}
+									else
+										newGame=true;
+								}
+								else
+									newGame=true;
+							}
+							else
+								newGame=true;
+							if(newGame)
+							{
+								chessGame=new Game(fenString);
+								Move tempMove;
+								for(i=3;i<splitString.length;i++)
+								{
+									tempMove=new Move(chessGame.getGameBoard());
+									tempMove.setMoveString(splitString[i]);
+									chessGame.getCurrentPlayer().makeMove(tempMove);
+								}
 							}
 						}
+					}
+					else
+						chessGame=new Game(fenString);
 				}
 			}
 			else if(commandString.startsWith("go"))
