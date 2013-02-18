@@ -28,24 +28,20 @@ public class PromotionTest
 	@Test
 	public void test()
 	{
-		String newFEN="rnbqkbnr/pppPpppp/8/8/8/6p1/PPPPPP1P/RNBQKB1R w KQkq - 0 1";
+		String newFEN="rnb1kbnr/ppp1pppp/8/8/8/5Q2/PPpP1PPP/RNB2RK1 b kq - 0 7";
 		Game chessGame=new Game(newFEN);
-		chessGame.showBoard();
-		System.out.println(chessGame.getGameBoard().getSquare("g3").
-				getPiece().getMoves());
-		System.out.println(chessGame.getGameBoard().getSquare("g3").
-				getPiece().getMoves().get(0).getMoveString());
-		System.out.println(chessGame.getGameBoard().getSquare("d7").
-				getPiece().getMoves());
-		System.out.println(chessGame.getGameBoard().getSquare("d7").
-				getPiece().getMoves().get(0).getMoveString());
-		Move moveToMake=chessGame.getGameBoard().getSquare("d7").
-				getPiece().getMoves().get(0);
-		chessGame.getCurrentPlayer().makeMove(moveToMake);
-		chessGame.showBoard();
-		System.out.println(chessGame.isWhiteToMove());
-		chessGame.getCurrentPlayer().unMakeMove(moveToMake);
-		chessGame.showBoard();
-		System.out.println(chessGame.isWhiteToMove());
+		chessGame.printStats();
+		Move moveOne=new Move(chessGame.getGameBoard().getSquare("c2"),
+				chessGame.getGameBoard().getSquare("b1"),"knight");
+		chessGame.getPlayerTwo().makeMove(moveOne);
+		chessGame.printStats();
+		Move moveTwo=new Move(chessGame.getGameBoard().getSquare("a1"),
+				chessGame.getGameBoard().getSquare("b1"));
+		chessGame.getPlayerTwo().makeMove(moveTwo);
+		chessGame.printStats();
+		chessGame.getPlayerTwo().unMakeMove(moveTwo);
+		chessGame.printStats();
+		chessGame.getPlayerTwo().unMakeMove(moveOne);
+		chessGame.printStats();
 	}
 }
