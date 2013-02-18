@@ -46,11 +46,11 @@ public class Definitions
 	/**
 	 * Holds the main version (MaVN.MiVn) of the engine.
 	 */
-	public static final String engineMainVersion="0.2";
+	public static final String engineMainVersion="0.3";
 	/**
 	 * Holds the sub version (.MaRN.MiRN build BN) of the engine.
 	 */
-	public static final String engineSubVersion=" build 2771";
+	public static final String engineSubVersion=" build 3236";
 	/**
 	 * Holds the complete version of the engine
 	 */

@@ -1,7 +1,7 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
-* Latest Application Version: 0.2 build 2771 *([Version History](Version%20History.md#version-history))*
+* Latest Application Version: 0.3 build 3238 *([Version History](Version%20History.md#version-history))*
 * Latest Stable Version: [0.2](https://www.sourceforge.net/projects/kennyclassiq)
 *([Versioning](Versioning.md#versioning))*
 * ReadMe Version: 2.5
@@ -19,16 +19,16 @@ Having completed it successfully, I've gained the confidence to proceed with Ken
 
 Game-breaking features (why you *can't* play against it now):
 
-* Plays only fixed search depth : 3 half moves mode.
-* Does not know about draws.
-* Does not do search or evaluation properly.
-* Does not know set-up position properly.
+* Plays only fixed search depth : 2 half moves mode.
+* Does not know about draws or 3 move repetitions, but can find mate in 1 (because search depth is only 2, you see).
+* Does not do promotion evaluation and search properly. Engine mostly crashes when thinking about promotions.
 
 Niceties under the hood (why you *should* play against it later):
 
 * Multi-protocol support: *UCI* and *WinBoard*.
-* Lots of things planned! ;)
+* Better, human-like thinking planned, instead of boring, best, engine-like play.
 * Better *Move* system *(Players make Moves in the Game)*.
+* Alpha Beta Principal Variation Search implemented fully. Also collects the PV.
 * Automatic *MoveList* of *Game* updation.
 * Better *printMainLine()* implementation.
 * Better *FEN* implementation.
@@ -48,6 +48,7 @@ Other features yet to come! :D
 * To have a close-to-real-world representation of the game inside the program
 
 ###Short Term
-* To start defining the evaluation function.
-* To add some sort of search.
+* To add king safety.
+* To fix promotion bug.
+* To add timing controls.
 * To finish adding commentary to all uploaded files.

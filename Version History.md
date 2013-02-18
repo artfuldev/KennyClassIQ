@@ -1,11 +1,23 @@
 #Kenny ClassIQ
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
-* Latest Application Version: 0.2 build 2771
+* Latest Application Version: 0.3 build 3238
 * Latest Stable Version: [0.2](https://www.sourceforge.net/projects/kennyclassiq) *([Versioning](Versioning.md#versioning))*
 * Version History Document Version: 1.6
 
 ##Version History
+
+####Version 0.3 (3238)
+* Fixed a lot of issues.
+* Fixed improper PV.
+* Fixed invalid moves being made (white made moves twice consecutively).
+* Corrected problem with *isChecked()*.
+* Corrected error in Quiescence Search where it would call itself repeatedly if score is greater than 300 centipawns after a capture, leading to engine crash.
+* Added proper PV collection, normal alphaBetaPVS and alphaBetaPVS with PV collection and corrected bugs in quiescence search.
+* Reduced fixed search depth to 2 half moves.
+* Added separate getMaterialScore() function to improve move-ordering immediately after generation.
+* AI still buggy when dealing with promotion-related moves, but bug relating to castling where rooks would not be moved in the internal board fixed.
+* Lots of stability improvements and bugfixes, which should have made separate versions (like 0.2.1) have been refined and finally ended up in 0.3
 
 ####Version 0.2 (2771)
 * Lots of bugfixes.

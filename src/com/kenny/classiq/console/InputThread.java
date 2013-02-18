@@ -56,7 +56,7 @@ public class InputThread implements Runnable
 				{
 					if(command.commandArray.isEmpty())
 					{
-						command.commandString=Main.inputStream.nextLine().toLowerCase();
+						command.commandString=Main.inputStream.nextLine();
 						command.newCommand=true;
 					}
 					command.notifyAll();
