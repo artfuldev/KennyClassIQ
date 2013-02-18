@@ -627,44 +627,6 @@ public class Move
 	 */
 	public String toString()
 	{
-		String returnString="";
-		//if the piece moved is a King
-		if((pieceMoved.getShortAlgebraicNotation().matches("K"))&&
-			//for short castle
-			(	moveString.matches("e1g1")||
-				moveString.matches("e8g8")))
-				return "O-O";
-		if((pieceMoved.getShortAlgebraicNotation().matches("K"))&&
-			//for long castle
-			(	moveString.matches("e1c1")||
-				moveString.matches("e8c8")))
-				return "O-O-O";
-		//for pawn and other pieces, as for pawn, it is ""
-		if(!pieceMoved.getShortAlgebraicNotation().matches("P"))
-			returnString=pieceMoved.getShortAlgebraicNotation()+
-				fromSquare.getName();
-		//for captures
-		if(capturedPiece!=null)
-		{
-			//if pawn captures, add file of pawn
-			if(pieceMoved.getShortAlgebraicNotation().matches("P"))
-				returnString+=fromSquare.getFile().getName();
-			returnString+="x";
-		}
-		//add destination square either way
-		returnString+=toSquare.toString();
-		//for promotions
-		if(promotingMove)
-			returnString+="="+promotedPiece.getShortAlgebraicNotation();
-		//for en-passant
-		if(toSquare.equals(enPassantSquare))
-			if(pieceMoved.getShortAlgebraicNotation().matches("P"))
-				returnString+="/ep";
-		//for checking and mating moves
-		if(matingMove)
-			returnString+="#";
-		else if(checkingMove)
-			returnString+="+";
-		return returnString;
+		return moveString;
 	}
 }
