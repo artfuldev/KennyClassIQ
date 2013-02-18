@@ -2,7 +2,7 @@
 * Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
 * Latest Application Version: 0.3 build 3238 *([Version History](Version%20History.md#version-history))*
-* Latest Stable Version: [0.2](https://www.sourceforge.net/projects/kennyclassiq)
+* Latest Stable Version: [0.3](https://www.sourceforge.net/projects/kennyclassiq)
 *([Versioning](Versioning.md#versioning))*
 * ReadMe Version: 2.5
 
