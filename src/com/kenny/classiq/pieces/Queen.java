@@ -104,9 +104,7 @@ public class Queen extends Piece
 			if(!toSquares.isEmpty())
 				for(byte i=0;i<toSquares.size();i++)
 					returnList.add(new Move(square,toSquares.get(i)));
-			if(!returnList.isEmpty())
-				return returnList;
 		}
-		return null;
+		return returnList;
 	}
 }

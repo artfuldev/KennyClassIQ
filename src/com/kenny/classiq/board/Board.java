@@ -403,7 +403,7 @@ public class Board
 		for(byte i=0;i<enemySquares.size();i++)
 		{
 			testMoves=enemySquares.get(i).getPiece().getMoves();
-			if(testMoves!=null)
+			if(!testMoves.isEmpty())
 				for(byte j=0;j<testMoves.size();j++)
 				{
 					Move testMove=testMoves.get(j);
@@ -418,6 +418,15 @@ public class Board
 	}
 	public int getScore(boolean whitePerspective)
 	{
+		if(game.getCurrentPlayer().getLegalMoves(whitePerspective).isEmpty())
+			if(isChecked(whitePerspective))
+				return -PieceValues.kingValue;
+			else return 0;
+		if(game.getCurrentPlayer().getLegalMoves(!whitePerspective).isEmpty())
+			if(isChecked(whitePerspective))
+				return PieceValues.kingValue;
+			else
+				return 0;
 		int score=0,pieceValue;
 		ArrayList<Square> whiteSquares=getWhiteOccupiedSquares();
 		ArrayList<Square> blackSquares=getBlackOccupiedSquares();
@@ -458,15 +467,19 @@ public class Board
 					if(bST.getPiece().getPieceValue()!=PieceValues.kingValue)
 						score+=2*(10-(bST.getPiece().getPieceValue()/100));
 		}
-		if(game.getCurrentPlayer().getLegalMoves(true).isEmpty())
-			if(isChecked(true))
-				return -PieceValues.kingValue;
-			else return 0;
-		if(game.getCurrentPlayer().getLegalMoves(false).isEmpty())
-			if(isChecked(false))
-				return PieceValues.kingValue;
-			else
-				return 0;
+		if(whitePerspective)
+			return score;
+		return -score;
+	}
+	public int getMaterialScore(boolean whitePerspective)
+	{
+		int score=0;
+		ArrayList<Square> whiteSquares=getWhiteOccupiedSquares();
+		ArrayList<Square> blackSquares=getBlackOccupiedSquares();
+		for(Square wS:whiteSquares)
+			score+=wS.getPiece().getPieceValue();
+		for(Square bS:blackSquares)
+			score-=bS.getPiece().getPieceValue();
 		if(whitePerspective)
 			return score;
 		return -score;
