@@ -1,5 +1,5 @@
 #Kenny ClassIQ
-* Author: Kenshin The Battōsai *(Sudarsan Balaji)*
+* Author: Kenshin Himura *(Sudarsan Balaji)*
 * License: *GNU GPL v3* (see COPYING.txt)
 * Versioning Document Version: 1.6
 
